@@ -370,6 +370,94 @@ html(
         background: transparent !important;
     }}
 
+
+    /* ======================================================
+       SIDEBAR FILTERS — FULL LIGHT THEME
+    ====================================================== */
+
+    section[data-testid="stSidebar"] {{
+        background: #FFFFFF !important;
+        border-right: 1px solid #D7E2EC !important;
+    }}
+
+    section[data-testid="stSidebar"] > div {{
+        background: #FFFFFF !important;
+    }}
+
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3,
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] span {{
+        color: #16324F !important;
+        -webkit-text-fill-color: #16324F !important;
+    }}
+
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"]
+    div[data-baseweb="select"] > div {{
+        background: #FFFFFF !important;
+        color: #16324F !important;
+        border: 1px solid #C9D6E2 !important;
+        border-radius: 8px !important;
+        min-height: 42px !important;
+        box-shadow: 0 2px 6px rgba(15,47,79,.04) !important;
+    }}
+
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"]
+    div[data-baseweb="select"] > div * {{
+        background: transparent !important;
+        color: #16324F !important;
+        -webkit-text-fill-color: #16324F !important;
+    }}
+
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] svg {{
+        color: #64748B !important;
+        fill: #64748B !important;
+    }}
+
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"]
+    div[data-baseweb="select"] > div:hover {{
+        border-color: #94B4CE !important;
+    }}
+
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"]
+    div[data-baseweb="select"] > div:focus-within {{
+        border-color: #168CE3 !important;
+        box-shadow: 0 0 0 1px #168CE3 !important;
+    }}
+
+    div[data-baseweb="popover"],
+    div[data-baseweb="menu"],
+    ul[role="listbox"] {{
+        background: #FFFFFF !important;
+        color: #16324F !important;
+        border-color: #D7E2EC !important;
+    }}
+
+    li[role="option"] {{
+        background: #FFFFFF !important;
+        color: #16324F !important;
+        -webkit-text-fill-color: #16324F !important;
+    }}
+
+    li[role="option"] * {{
+        color: #16324F !important;
+        -webkit-text-fill-color: #16324F !important;
+    }}
+
+    li[role="option"]:hover {{
+        background: #EAF5FD !important;
+        color: #145B8F !important;
+        -webkit-text-fill-color: #145B8F !important;
+    }}
+
+    li[role="option"][aria-selected="true"] {{
+        background: #DCEFFD !important;
+        color: #145B8F !important;
+        -webkit-text-fill-color: #145B8F !important;
+    }}
+
     </style>
     """
 )
