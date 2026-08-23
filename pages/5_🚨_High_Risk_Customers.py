@@ -46,8 +46,6 @@ KPI_HEIGHT = 68
 CHART_HEIGHT = 158
 
 CHART_TITLE_SIZE = 12.5
-
-# Consistent readable labels across ALL bar charts
 DATA_LABEL_SIZE = 12.5
 CATEGORY_LABEL_SIZE = 10.2
 AXIS_TITLE_SIZE = 10.5
@@ -61,11 +59,13 @@ ROW_GAP = 5
 # ============================================================
 
 def html(content):
-    st.html(dedent(content).strip())
+    st.html(
+        dedent(content).strip()
+    )
 
 
 # ============================================================
-# CSS — LIGHT THEME ONLY; LAYOUT VALUES PRESERVED
+# CSS
 # ============================================================
 
 html(
@@ -85,181 +85,458 @@ html(
         color: {TEXT} !important;
     }}
 
+
+    /* ======================================================
+       MAIN PAGE
+    ====================================================== */
+
     .block-container {{
         max-width: 1650px !important;
+
         padding-top: 0.02rem !important;
         padding-bottom: 0.02rem !important;
         padding-left: 0.45rem !important;
         padding-right: 0.45rem !important;
     }}
 
+
     header[data-testid="stHeader"] {{
         height: 18px !important;
         min-height: 18px !important;
+
         background: transparent !important;
     }}
+
 
     div[data-testid="stToolbar"] {{
         background: transparent !important;
     }}
 
+
     div[data-testid="stDecoration"] {{
         display: none !important;
     }}
 
+
+    /* ======================================================
+       HERO
+    ====================================================== */
+
     .hero {{
         height: 50px;
+
         box-sizing: border-box;
+
         padding: 5px 12px;
+
         display: flex;
+
         align-items: center;
+
         border: 1px solid {BORDER};
+
         border-radius: 11px;
+
         background: #FFFFFF;
-        box-shadow: 0px 2px 8px rgba(22,50,79,.06);
+
+        box-shadow:
+            0 2px 8px
+            rgba(22,50,79,.06);
+
         margin-bottom: 3px;
     }}
+
 
     .hero-icon {{
         width: 33px;
         height: 33px;
+
         min-width: 33px;
+
         display: flex;
+
         align-items: center;
+
         justify-content: center;
+
         margin-right: 10px;
+
         border-radius: 9px;
+
         font-size: 18px;
-        background: linear-gradient(
-            135deg,
-            rgba(224,82,94,.14),
-            rgba(109,40,217,.10)
-        );
+
+        background:
+            linear-gradient(
+                135deg,
+                rgba(224,82,94,.14),
+                rgba(109,40,217,.10)
+            );
     }}
+
 
     .hero-title {{
         font-size: 20px;
+
         font-weight: 850;
+
         line-height: 1;
+
         color: {TEXT};
     }}
+
 
     .hero-subtitle {{
         margin-top: 4px;
+
         font-size: 7.4px;
+
         letter-spacing: .65px;
+
         color: {MUTED};
     }}
 
+
+    /* ======================================================
+       SECTION TITLE
+    ====================================================== */
+
     .section-title {{
         margin-top: 3px;
+
         margin-bottom: 3px;
+
         font-size: 12px;
+
         font-weight: 850;
+
         line-height: 1;
+
         color: {TEXT};
     }}
+
 
     .row-gap {{
         height: {ROW_GAP}px;
     }}
 
+
+    /* ======================================================
+       KPI CARDS
+    ====================================================== */
+
     .kpi {{
         height: {KPI_HEIGHT}px;
+
         box-sizing: border-box;
+
         padding: 7px 11px;
+
         border: 1px solid {BORDER};
+
         border-radius: 10px;
+
         background: #FFFFFF;
-        box-shadow: 0px 2px 8px rgba(22,50,79,.06);
+
+        box-shadow:
+            0 2px 8px
+            rgba(22,50,79,.06);
     }}
+
 
     .kpi-top {{
         display: flex;
+
         align-items: center;
+
         gap: 9px;
     }}
 
+
     .kpi-icon {{
         width: 25px;
+
         height: 25px;
+
         min-width: 25px;
+
         display: flex;
+
         align-items: center;
+
         justify-content: center;
+
         border-radius: 7px;
+
         font-size: 13px;
-        background: linear-gradient(
-            135deg,
-            rgba(224,82,94,.12),
-            rgba(109,40,217,.10)
-        );
+
+        background:
+            linear-gradient(
+                135deg,
+                rgba(224,82,94,.12),
+                rgba(109,40,217,.10)
+            );
     }}
+
 
     .kpi-value {{
         font-size: 20px;
+
         font-weight: 850;
+
         line-height: 1;
+
         color: {TEXT};
     }}
+
 
     .kpi-label {{
         margin-top: 6px;
+
         font-size: 9.4px;
+
         font-weight: 500;
+
         color: {MUTED};
     }}
 
+
+    /* ======================================================
+       CHART CARDS
+    ====================================================== */
+
     div[data-testid="stPlotlyChart"] {{
         border: 1px solid {BORDER};
+
         border-radius: 10px;
+
         background: #FFFFFF;
+
         overflow: hidden;
-        box-shadow: 0px 2px 8px rgba(22,50,79,.06);
+
+        box-shadow:
+            0 2px 8px
+            rgba(22,50,79,.06);
     }}
+
+
+    /* ======================================================
+       WATCHLIST TITLE
+    ====================================================== */
 
     .watch-title {{
         margin-top: 3px;
+
         margin-bottom: 4px;
+
         font-size: 12px;
+
         font-weight: 850;
+
         color: {TEXT};
     }}
 
+
+    /* ======================================================
+       WATCHLIST DATAFRAME — COMPLETE LIGHT THEME
+    ====================================================== */
+
     div[data-testid="stDataFrame"] {{
-        border: 1px solid {BORDER};
-        border-radius: 10px;
-        overflow: hidden;
         background: #FFFFFF !important;
-        box-shadow: 0px 2px 8px rgba(22,50,79,.06);
+
+        border: 1px solid {BORDER} !important;
+
+        border-radius: 10px !important;
+
+        overflow: hidden !important;
+
+        box-shadow:
+            0 2px 8px
+            rgba(22,50,79,.06) !important;
+
+        color-scheme: light !important;
     }}
+
+
+    /* Outer dataframe wrapper */
+
+    div[data-testid="stDataFrame"] > div {{
+        background: #FFFFFF !important;
+    }}
+
+
+    /* Internal dataframe areas */
+
+    div[data-testid="stDataFrame"] div {{
+        color-scheme: light !important;
+    }}
+
+
+    /* Toolbar */
+
+    div[data-testid="stDataFrame"]
+    [data-testid="stElementToolbar"] {{
+        background: #FFFFFF !important;
+    }}
+
+
+    /* Glide-data-grid canvas container */
+
+    div[data-testid="stDataFrame"]
+    [data-testid="stDataFrameResizable"] {{
+        background: #FFFFFF !important;
+    }}
+
+
+    /* Generic grid wrapper */
+
+    div[data-testid="stDataFrame"]
+    div[role="grid"] {{
+        background: #FFFFFF !important;
+
+        color: {TEXT} !important;
+    }}
+
+
+    /* Grid column headers */
+
+    div[data-testid="stDataFrame"]
+    [role="columnheader"] {{
+        background: #F1F5F9 !important;
+
+        color: {TEXT} !important;
+
+        border-color: #D7E2EC !important;
+
+        font-weight: 700 !important;
+    }}
+
+
+    div[data-testid="stDataFrame"]
+    [role="columnheader"] * {{
+        color: {TEXT} !important;
+
+        -webkit-text-fill-color:
+            {TEXT} !important;
+    }}
+
+
+    /* Grid cells */
+
+    div[data-testid="stDataFrame"]
+    [role="gridcell"] {{
+        background: #FFFFFF !important;
+
+        color: {TEXT} !important;
+
+        border-color: #E2E8F0 !important;
+    }}
+
+
+    div[data-testid="stDataFrame"]
+    [role="gridcell"] * {{
+        color: {TEXT} !important;
+
+        -webkit-text-fill-color:
+            {TEXT} !important;
+    }}
+
+
+    /* Alternating rows where Streamlit exposes row indexes */
+
+    div[data-testid="stDataFrame"]
+    [role="row"]:nth-child(even)
+    [role="gridcell"] {{
+        background: #F8FAFC !important;
+    }}
+
+
+    /* Hover */
+
+    div[data-testid="stDataFrame"]
+    [role="row"]:hover
+    [role="gridcell"] {{
+        background: #EEF6FC !important;
+    }}
+
+
+    /* Selection */
+
+    div[data-testid="stDataFrame"]
+    [aria-selected="true"] {{
+        background: #DCEFFD !important;
+
+        color: {TEXT} !important;
+    }}
+
+
+    /* Dataframe scrollbar */
+
+    div[data-testid="stDataFrame"]
+    ::-webkit-scrollbar {{
+        width: 8px !important;
+
+        height: 8px !important;
+    }}
+
+
+    div[data-testid="stDataFrame"]
+    ::-webkit-scrollbar-track {{
+        background: #F1F5F9 !important;
+    }}
+
+
+    div[data-testid="stDataFrame"]
+    ::-webkit-scrollbar-thumb {{
+        background: #B8C7D9 !important;
+
+        border-radius: 10px !important;
+    }}
+
+
+    div[data-testid="stDataFrame"]
+    ::-webkit-scrollbar-thumb:hover {{
+        background: #94A8BD !important;
+    }}
+
+
+    /* ======================================================
+       PAGE SPACING
+    ====================================================== */
 
     div[data-testid="stVerticalBlock"] {{
         gap: 0.03rem !important;
     }}
 
+
     div[data-testid="stHorizontalBlock"] {{
         gap: 0.62rem !important;
     }}
 
+
     div[data-testid="column"] {{
         padding-left: 0 !important;
+
         padding-right: 0 !important;
     }}
 
-    /* ========================================================
+
+    /* ======================================================
        SIDEBAR
-       ======================================================== */
+    ====================================================== */
 
     section[data-testid="stSidebar"] {{
         color-scheme: light !important;
+
         background: #FFFFFF !important;
+
         border-right: 1px solid {BORDER};
     }}
+
 
     section[data-testid="stSidebar"] > div {{
         background: #FFFFFF !important;
     }}
+
 
     section[data-testid="stSidebar"] h1,
     section[data-testid="stSidebar"] h2,
@@ -268,26 +545,33 @@ html(
     section[data-testid="stSidebar"] label,
     section[data-testid="stSidebar"] span {{
         color: {TEXT} !important;
-        -webkit-text-fill-color: {TEXT} !important;
+
+        -webkit-text-fill-color:
+            {TEXT} !important;
     }}
+
 
     section[data-testid="stSidebar"] a {{
         color: {TEXT} !important;
     }}
 
+
     section[data-testid="stSidebar"] a:hover {{
         background: #F1F5F9 !important;
+
         border-radius: 8px !important;
     }}
 
-    /* ========================================================
-       CLOSED FILTER SELECT BOXES
-       ======================================================== */
+
+    /* ======================================================
+       SIDEBAR SELECTBOXES
+    ====================================================== */
 
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"] {{
         background: transparent !important;
     }}
+
 
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"]
@@ -312,10 +596,10 @@ html(
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"]
     [aria-haspopup="listbox"] {{
-
         color-scheme: light !important;
 
         background: #FFFFFF !important;
+
         background-color: #FFFFFF !important;
 
         color: {TEXT} !important;
@@ -324,10 +608,10 @@ html(
             {TEXT} !important;
     }}
 
+
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div {{
-
         min-height: 30px !important;
 
         border:
@@ -340,78 +624,63 @@ html(
             none !important;
     }}
 
+
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"] span,
 
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"] p {{
-
-        color:
-            {TEXT} !important;
+        color: {TEXT} !important;
 
         -webkit-text-fill-color:
             {TEXT} !important;
     }}
 
+
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"] svg {{
+        fill: {MUTED} !important;
 
-        fill:
-            {MUTED} !important;
-
-        color:
-            {MUTED} !important;
+        color: {MUTED} !important;
     }}
+
 
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div:hover {{
-
-        background:
-            #FFFFFF !important;
-
-        border-color:
-            {CYAN} !important;
+        border-color: {CYAN} !important;
     }}
+
 
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div:focus-within {{
-
-        background:
-            #FFFFFF !important;
-
-        border-color:
-            {CYAN} !important;
+        border-color: {CYAN} !important;
 
         box-shadow:
             0 0 0 1px
             {CYAN} !important;
     }}
 
-    /* ========================================================
+
+    /* ======================================================
        OPEN DROPDOWN
-       ======================================================== */
+    ====================================================== */
 
     div[data-baseweb="popover"],
     div[data-baseweb="menu"],
     ul[role="listbox"] {{
+        color-scheme: light !important;
 
-        color-scheme:
-            light !important;
+        background: #FFFFFF !important;
 
-        background:
-            #FFFFFF !important;
+        background-color: #FFFFFF !important;
 
-        background-color:
-            #FFFFFF !important;
-
-        color:
-            {TEXT} !important;
+        color: {TEXT} !important;
     }}
 
-    ul[role="listbox"] {{
 
+    ul[role="listbox"] {{
         border:
             1px solid {BORDER} !important;
 
@@ -419,67 +688,67 @@ html(
             8px !important;
 
         box-shadow:
-            0px 6px 18px
+            0 6px 18px
             rgba(22,50,79,.12) !important;
     }}
 
+
     li[role="option"],
     li[role="option"] * {{
+        background: #FFFFFF !important;
 
-        background:
-            #FFFFFF !important;
-
-        color:
-            {TEXT} !important;
+        color: {TEXT} !important;
 
         -webkit-text-fill-color:
             {TEXT} !important;
     }}
+
 
     li[role="option"]:hover {{
+        background: #EAF4FB !important;
 
-        background:
-            #EAF4FB !important;
-
-        color:
-            {TEAL} !important;
+        color: {TEAL} !important;
 
         -webkit-text-fill-color:
             {TEAL} !important;
     }}
+
 
     li[role="option"][aria-selected="true"] {{
+        background: #DCEFFD !important;
 
-        background:
-            #DCEFFD !important;
-
-        color:
-            {TEAL} !important;
+        color: {TEAL} !important;
 
         -webkit-text-fill-color:
             {TEAL} !important;
     }}
+
 
     ul[role="listbox"]::-webkit-scrollbar {{
         width: 7px;
     }}
 
+
     ul[role="listbox"]::-webkit-scrollbar-track {{
         background: #F1F5F9;
     }}
 
+
     ul[role="listbox"]::-webkit-scrollbar-thumb {{
         background: #B8C7D9;
+
         border-radius: 10px;
     }}
 
-    ul[role="listbox"]::-webkit-scrollbar-thumb:hover {{
-        background: #94A8BD;
-    }}
+
+    /* ======================================================
+       REMOVE DEFAULT STREAMLIT ELEMENTS
+    ====================================================== */
 
     #MainMenu {{
         visibility: hidden;
     }}
+
 
     footer {{
         visibility: hidden;
@@ -499,15 +768,18 @@ def load_risk_data():
 
     possible_paths = [
         Path("telco_customer_churn_risk.csv"),
+
         Path(
             "Telco_Churn_Project/"
             "telco_customer_churn_risk.csv"
         ),
+
         Path(
             "data/"
             "telco_customer_churn_risk.csv"
         ),
     ]
+
 
     for path in possible_paths:
 
@@ -516,6 +788,7 @@ def load_risk_data():
             return pd.read_csv(
                 path
             )
+
 
     return None
 
@@ -526,7 +799,8 @@ df = load_risk_data()
 if df is None:
 
     st.error(
-        "Could not find telco_customer_churn_risk.csv"
+        "Could not find "
+        "telco_customer_churn_risk.csv"
     )
 
     st.stop()
@@ -697,7 +971,7 @@ for col in [
 
 
 # ============================================================
-# PROBABILITY 0-100
+# PROBABILITY DISPLAY
 # ============================================================
 
 if probability_col:
@@ -775,7 +1049,7 @@ if risk_col is None:
 
 
 # ============================================================
-# ACTION
+# CREATE ACTION IF REQUIRED
 # ============================================================
 
 if action_col is None:
@@ -949,7 +1223,7 @@ filtered_df = sidebar_filter(
 
 
 # ============================================================
-# HIGH RISK DATA
+# HIGH-RISK DATA
 # ============================================================
 
 high_risk_mask = (
@@ -1002,7 +1276,6 @@ if revenue_col:
         .sum()
     )
 
-
 elif monthly_col:
 
     revenue_at_risk = (
@@ -1012,7 +1285,6 @@ elif monthly_col:
         .fillna(0)
         .sum()
     )
-
 
 else:
 
@@ -1299,7 +1571,7 @@ html(
 
 
 # ============================================================
-# CHART ROW 1
+# ROW 1
 # ============================================================
 
 top_left, top_right = (
@@ -1373,20 +1645,8 @@ with top_left:
 
             textfont=dict(
                 size=11.5,
-
-                # White is intentionally used here because
-                # the text sits inside a coral bar.
                 color="#FFFFFF",
-
                 family="Arial"
-            ),
-
-            hovertemplate=(
-                "<b>%{y}</b>"
-                "<br>"
-                "Churn Probability: "
-                "%{x:.1f}%"
-                "<extra></extra>"
             )
         )
 
@@ -1412,36 +1672,7 @@ with top_left:
             ],
 
             title=
-                "Churn Probability (%)",
-
-            tickvals=[
-                0,
-                20,
-                40,
-                60,
-                80,
-                100
-            ]
-        )
-
-
-        fig.update_yaxes(
-
-            tickfont=dict(
-                size=10.8,
-                color=TEXT
-            ),
-
-            automargin=True
-        )
-
-
-        fig.update_layout(
-
-            uniformtext=dict(
-                minsize=11.5,
-                mode="show"
-            )
+                "Churn Probability (%)"
         )
 
 
@@ -1516,15 +1747,7 @@ with top_right:
 
             width=0.38,
 
-            marker_color=TEAL,
-
-            hovertemplate=(
-                "<b>%{x}</b>"
-                "<br>"
-                "Revenue at Risk: "
-                "%{y:,.0f}"
-                "<extra></extra>"
-            )
+            marker_color=TEAL
         )
 
 
@@ -1536,10 +1759,7 @@ with top_right:
         )
 
 
-        if (
-            max_contract_value
-            <= 0
-        ):
+        if max_contract_value <= 0:
 
             max_contract_value = 1
 
@@ -1565,39 +1785,26 @@ with top_right:
             )
 
 
-            y_pos = (
-                value
-                + max_contract_value
-                * 0.045
-
-                if value > 0
-
-                else max_contract_value
-                * 0.04
-            )
-
-
             fig.add_annotation(
 
                 x=row[
                     contract_col
                 ],
 
-                y=y_pos,
+                y=(
+                    value
+                    + max_contract_value
+                    * 0.045
+                ),
 
                 text=
                     f"<b>{label}</b>",
 
                 showarrow=False,
 
-                xanchor="center",
-
-                yanchor="bottom",
-
                 font=dict(
                     size=DATA_LABEL_SIZE,
-                    color=TEXT,
-                    family="Arial"
+                    color=TEXT
                 )
             )
 
@@ -1627,20 +1834,6 @@ with top_right:
         )
 
 
-        fig.update_xaxes(
-
-            categoryorder="array",
-
-            categoryarray=
-                CONTRACT_ORDER,
-
-            tickfont=dict(
-                size=10.3,
-                color=TEXT
-            )
-        )
-
-
         st.plotly_chart(
 
             fig,
@@ -1655,7 +1848,7 @@ with top_right:
 
 
 # ============================================================
-# CHART ROW 2
+# ROW 2
 # ============================================================
 
 html(
@@ -1706,14 +1899,7 @@ with bottom_left:
 
         width=0.45,
 
-        marker_color=CYAN,
-
-        hovertemplate=(
-            "<b>%{y}</b>"
-            "<br>"
-            "Customers: %{x}"
-            "<extra></extra>"
-        )
+        marker_color=CYAN
     )
 
 
@@ -1750,12 +1936,9 @@ with bottom_left:
 
             xanchor="left",
 
-            yanchor="middle",
-
             font=dict(
                 size=DATA_LABEL_SIZE,
-                color=TEXT,
-                family="Arial"
+                color=TEXT
             )
         )
 
@@ -1782,15 +1965,6 @@ with bottom_left:
             max_action
             * 1.13
         ]
-    )
-
-
-    fig.update_yaxes(
-
-        tickfont=dict(
-            size=10.2,
-            color=TEXT
-        )
     )
 
 
@@ -1892,14 +2066,7 @@ with bottom_right:
 
         width=0.42,
 
-        marker_color=colors,
-
-        hovertemplate=(
-            "<b>%{x}</b>"
-            "<br>"
-            "Customers: %{y}"
-            "<extra></extra>"
-        )
+        marker_color=colors
     )
 
 
@@ -1911,9 +2078,7 @@ with bottom_right:
     )
 
 
-    if (
-        max_customers <= 0
-    ):
+    if max_customers <= 0:
 
         max_customers = 1
 
@@ -1945,14 +2110,9 @@ with bottom_right:
 
             showarrow=False,
 
-            xanchor="center",
-
-            yanchor="bottom",
-
             font=dict(
                 size=DATA_LABEL_SIZE,
-                color=TEXT,
-                family="Arial"
+                color=TEXT
             )
         )
 
@@ -1982,21 +2142,6 @@ with bottom_right:
     )
 
 
-    fig.update_xaxes(
-
-        categoryorder=
-            "array",
-
-        categoryarray=
-            RISK_ORDER,
-
-        tickfont=dict(
-            size=10.5,
-            color=TEXT
-        )
-    )
-
-
     st.plotly_chart(
 
         fig,
@@ -2011,7 +2156,7 @@ with bottom_right:
 
 
 # ============================================================
-# WATCHLIST TITLE
+# WATCHLIST
 # ============================================================
 
 html(
