@@ -19,23 +19,23 @@ st.set_page_config(
 
 
 # ============================================================
-# COLORS
+# COLORS — PROFESSIONAL LIGHT THEME
 # ============================================================
 
-BG = "#050E19"
-CARD = "#0E1E34"
-CARD_2 = "#142A46"
-BORDER = "#274361"
+BG = "#F7F9FC"
+CARD = "#FFFFFF"
+CARD_2 = "#F1F5F9"
+BORDER = "#D7E2EC"
 
-CYAN = "#43D4E0"
-TEAL = "#58AAB2"
-PURPLE = "#9364E7"
-ORANGE = "#F47A48"
-RED = "#FF6464"
-GREEN = "#43D29C"
+CYAN = "#168CE3"
+TEAL = "#145B8F"
+PURPLE = "#6D28D9"
+ORANGE = "#E0525E"
+RED = "#E0525E"
+GREEN = "#2A9D8F"
 
-TEXT = "#F8FAFC"
-MUTED = "#A8B6C9"
+TEXT = "#16324F"
+MUTED = "#64748B"
 
 
 # ============================================================
@@ -65,22 +65,24 @@ def html(content):
 
 
 # ============================================================
-# CSS
+# CSS — LIGHT THEME ONLY; LAYOUT VALUES PRESERVED
 # ============================================================
 
 html(
     f"""
     <style>
 
+    :root {{
+        color-scheme: light !important;
+    }}
+
+    html,
+    body,
+    [data-testid="stAppViewContainer"],
     .stApp {{
-        background:
-            radial-gradient(
-                circle at 10% 0%,
-                #12314E 0%,
-                {BG} 32%,
-                #020810 100%
-            );
-        color: {TEXT};
+        color-scheme: light !important;
+        background: {BG} !important;
+        color: {TEXT} !important;
     }}
 
     .block-container {{
@@ -97,6 +99,14 @@ html(
         background: transparent !important;
     }}
 
+    div[data-testid="stToolbar"] {{
+        background: transparent !important;
+    }}
+
+    div[data-testid="stDecoration"] {{
+        display: none !important;
+    }}
+
     .hero {{
         height: 50px;
         box-sizing: border-box;
@@ -105,12 +115,8 @@ html(
         align-items: center;
         border: 1px solid {BORDER};
         border-radius: 11px;
-        background:
-            linear-gradient(
-                120deg,
-                #142A46,
-                #081725
-            );
+        background: #FFFFFF;
+        box-shadow: 0px 2px 8px rgba(22,50,79,.06);
         margin-bottom: 3px;
     }}
 
@@ -124,12 +130,11 @@ html(
         margin-right: 10px;
         border-radius: 9px;
         font-size: 18px;
-        background:
-            linear-gradient(
-                135deg,
-                rgba(255,100,100,.22),
-                rgba(244,122,72,.20)
-            );
+        background: linear-gradient(
+            135deg,
+            rgba(224,82,94,.14),
+            rgba(109,40,217,.10)
+        );
     }}
 
     .hero-title {{
@@ -165,12 +170,8 @@ html(
         padding: 7px 11px;
         border: 1px solid {BORDER};
         border-radius: 10px;
-        background:
-            linear-gradient(
-                145deg,
-                #11253F,
-                #09192B
-            );
+        background: #FFFFFF;
+        box-shadow: 0px 2px 8px rgba(22,50,79,.06);
     }}
 
     .kpi-top {{
@@ -188,12 +189,11 @@ html(
         justify-content: center;
         border-radius: 7px;
         font-size: 13px;
-        background:
-            linear-gradient(
-                135deg,
-                rgba(255,100,100,.18),
-                rgba(147,100,231,.20)
-            );
+        background: linear-gradient(
+            135deg,
+            rgba(224,82,94,.12),
+            rgba(109,40,217,.10)
+        );
     }}
 
     .kpi-value {{
@@ -213,14 +213,9 @@ html(
     div[data-testid="stPlotlyChart"] {{
         border: 1px solid {BORDER};
         border-radius: 10px;
-        background:
-            linear-gradient(
-                145deg,
-                #0F2139,
-                #081729
-            );
+        background: #FFFFFF;
         overflow: hidden;
-        box-shadow: 0px 2px 8px rgba(0,0,0,.10);
+        box-shadow: 0px 2px 8px rgba(22,50,79,.06);
     }}
 
     .watch-title {{
@@ -235,7 +230,8 @@ html(
         border: 1px solid {BORDER};
         border-radius: 10px;
         overflow: hidden;
-        background: #0B1320;
+        background: #FFFFFF !important;
+        box-shadow: 0px 2px 8px rgba(22,50,79,.06);
     }}
 
     div[data-testid="stVerticalBlock"] {{
@@ -251,21 +247,234 @@ html(
         padding-right: 0 !important;
     }}
 
+    /* ========================================================
+       SIDEBAR
+       ======================================================== */
+
     section[data-testid="stSidebar"] {{
-        background:
-            linear-gradient(
-                180deg,
-                #0D1D31,
-                #06111F
-            );
+        color-scheme: light !important;
+        background: #FFFFFF !important;
         border-right: 1px solid {BORDER};
     }}
 
+    section[data-testid="stSidebar"] > div {{
+        background: #FFFFFF !important;
+    }}
+
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3,
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] span {{
+        color: {TEXT} !important;
+        -webkit-text-fill-color: {TEXT} !important;
+    }}
+
+    section[data-testid="stSidebar"] a {{
+        color: {TEXT} !important;
+    }}
+
+    section[data-testid="stSidebar"] a:hover {{
+        background: #F1F5F9 !important;
+        border-radius: 8px !important;
+    }}
+
+    /* ========================================================
+       CLOSED FILTER SELECT BOXES
+       ======================================================== */
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"] {{
+        background: transparent !important;
+    }}
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
+    div[data-baseweb="select"],
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
+    div[data-baseweb="select"] > div,
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
+    div[data-baseweb="select"] > div > div,
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
+    div[data-baseweb="select"] > div > div > div,
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
+    [role="combobox"],
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
+    [aria-haspopup="listbox"] {{
+
+        color-scheme: light !important;
+
+        background: #FFFFFF !important;
+        background-color: #FFFFFF !important;
+
+        color: {TEXT} !important;
+
+        -webkit-text-fill-color:
+            {TEXT} !important;
+    }}
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div {{
+
         min-height: 30px !important;
-        background: #0B1727;
-        border: 1px solid {BORDER};
-        border-radius: 8px;
+
+        border:
+            1px solid #B8C7D9 !important;
+
+        border-radius:
+            8px !important;
+
+        box-shadow:
+            none !important;
+    }}
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"] span,
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"] p {{
+
+        color:
+            {TEXT} !important;
+
+        -webkit-text-fill-color:
+            {TEXT} !important;
+    }}
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"] svg {{
+
+        fill:
+            {MUTED} !important;
+
+        color:
+            {MUTED} !important;
+    }}
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
+    div[data-baseweb="select"] > div:hover {{
+
+        background:
+            #FFFFFF !important;
+
+        border-color:
+            {CYAN} !important;
+    }}
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
+    div[data-baseweb="select"] > div:focus-within {{
+
+        background:
+            #FFFFFF !important;
+
+        border-color:
+            {CYAN} !important;
+
+        box-shadow:
+            0 0 0 1px
+            {CYAN} !important;
+    }}
+
+    /* ========================================================
+       OPEN DROPDOWN
+       ======================================================== */
+
+    div[data-baseweb="popover"],
+    div[data-baseweb="menu"],
+    ul[role="listbox"] {{
+
+        color-scheme:
+            light !important;
+
+        background:
+            #FFFFFF !important;
+
+        background-color:
+            #FFFFFF !important;
+
+        color:
+            {TEXT} !important;
+    }}
+
+    ul[role="listbox"] {{
+
+        border:
+            1px solid {BORDER} !important;
+
+        border-radius:
+            8px !important;
+
+        box-shadow:
+            0px 6px 18px
+            rgba(22,50,79,.12) !important;
+    }}
+
+    li[role="option"],
+    li[role="option"] * {{
+
+        background:
+            #FFFFFF !important;
+
+        color:
+            {TEXT} !important;
+
+        -webkit-text-fill-color:
+            {TEXT} !important;
+    }}
+
+    li[role="option"]:hover {{
+
+        background:
+            #EAF4FB !important;
+
+        color:
+            {TEAL} !important;
+
+        -webkit-text-fill-color:
+            {TEAL} !important;
+    }}
+
+    li[role="option"][aria-selected="true"] {{
+
+        background:
+            #DCEFFD !important;
+
+        color:
+            {TEAL} !important;
+
+        -webkit-text-fill-color:
+            {TEAL} !important;
+    }}
+
+    ul[role="listbox"]::-webkit-scrollbar {{
+        width: 7px;
+    }}
+
+    ul[role="listbox"]::-webkit-scrollbar-track {{
+        background: #F1F5F9;
+    }}
+
+    ul[role="listbox"]::-webkit-scrollbar-thumb {{
+        background: #B8C7D9;
+        border-radius: 10px;
+    }}
+
+    ul[role="listbox"]::-webkit-scrollbar-thumb:hover {{
+        background: #94A8BD;
     }}
 
     #MainMenu {{
@@ -290,24 +499,43 @@ def load_risk_data():
 
     possible_paths = [
         Path("telco_customer_churn_risk.csv"),
-        Path("Telco_Churn_Project/telco_customer_churn_risk.csv"),
-        Path("data/telco_customer_churn_risk.csv"),
+        Path(
+            "Telco_Churn_Project/"
+            "telco_customer_churn_risk.csv"
+        ),
+        Path(
+            "data/"
+            "telco_customer_churn_risk.csv"
+        ),
     ]
 
     for path in possible_paths:
+
         if path.exists():
-            return pd.read_csv(path)
+
+            return pd.read_csv(
+                path
+            )
 
     return None
 
 
 df = load_risk_data()
 
+
 if df is None:
-    st.error("Could not find telco_customer_churn_risk.csv")
+
+    st.error(
+        "Could not find telco_customer_churn_risk.csv"
+    )
+
     st.stop()
 
-df.columns = df.columns.str.strip()
+
+df.columns = (
+    df.columns
+    .str.strip()
+)
 
 
 # ============================================================
@@ -317,12 +545,16 @@ df.columns = df.columns.str.strip()
 def find_column(names):
 
     normalized = {
+
         col.lower()
         .replace("_", "")
         .replace(" ", "")
-        .replace("%", ""): col
+        .replace("%", ""):
+        col
+
         for col in df.columns
     }
+
 
     for name in names:
 
@@ -333,8 +565,11 @@ def find_column(names):
             .replace("%", "")
         )
 
+
         if key in normalized:
+
             return normalized[key]
+
 
     return None
 
@@ -343,67 +578,102 @@ def find_column(names):
 # COLUMN DETECTION
 # ============================================================
 
-customer_col = find_column([
-    "CustomerID",
-    "Customer ID"
-])
+customer_col = find_column(
+    [
+        "CustomerID",
+        "Customer ID"
+    ]
+)
 
-risk_col = find_column([
-    "Risk Level",
-    "RiskLevel"
-])
 
-probability_col = find_column([
-    "Churn Probability",
-    "Churn Probability %",
-    "Probability",
-    "ChurnProbability"
-])
+risk_col = find_column(
+    [
+        "Risk Level",
+        "RiskLevel"
+    ]
+)
 
-contract_col = find_column([
-    "Contract"
-])
 
-internet_col = find_column([
-    "Internet Service",
-    "InternetService"
-])
+probability_col = find_column(
+    [
+        "Churn Probability",
+        "Churn Probability %",
+        "Probability",
+        "ChurnProbability"
+    ]
+)
 
-payment_col = find_column([
-    "Payment Method",
-    "PaymentMethod"
-])
 
-monthly_col = find_column([
-    "Monthly Charges",
-    "MonthlyCharges"
-])
+contract_col = find_column(
+    [
+        "Contract"
+    ]
+)
 
-tenure_col = find_column([
-    "Tenure Months",
-    "Tenure"
-])
 
-cltv_col = find_column([
-    "CLTV",
-    "Customer Lifetime Value"
-])
+internet_col = find_column(
+    [
+        "Internet Service",
+        "InternetService"
+    ]
+)
 
-revenue_col = find_column([
-    "Total Charges",
-    "TotalCharges",
-    "Revenue"
-])
 
-action_col = find_column([
-    "Recommended Action",
-    "RecommendedAction"
-])
+payment_col = find_column(
+    [
+        "Payment Method",
+        "PaymentMethod"
+    ]
+)
 
-online_security_col = find_column([
-    "Online Security",
-    "OnlineSecurity"
-])
+
+monthly_col = find_column(
+    [
+        "Monthly Charges",
+        "MonthlyCharges"
+    ]
+)
+
+
+tenure_col = find_column(
+    [
+        "Tenure Months",
+        "Tenure"
+    ]
+)
+
+
+cltv_col = find_column(
+    [
+        "CLTV",
+        "Customer Lifetime Value"
+    ]
+)
+
+
+revenue_col = find_column(
+    [
+        "Total Charges",
+        "TotalCharges",
+        "Revenue"
+    ]
+)
+
+
+action_col = find_column(
+    [
+        "Recommended Action",
+        "RecommendedAction"
+    ]
+)
+
+
+online_security_col = find_column(
+    [
+        "Online Security",
+        "OnlineSecurity"
+    ]
+)
 
 
 # ============================================================
@@ -417,7 +687,9 @@ for col in [
     cltv_col,
     revenue_col
 ]:
+
     if col:
+
         df[col] = pd.to_numeric(
             df[col],
             errors="coerce"
@@ -430,22 +702,43 @@ for col in [
 
 if probability_col:
 
-    max_probability = df[probability_col].max()
+    max_probability = (
+        df[
+            probability_col
+        ]
+        .max()
+    )
+
 
     if (
         pd.notna(max_probability)
         and max_probability <= 1
     ):
-        df["Probability_Display"] = (
-            df[probability_col] * 100
+
+        df[
+            "Probability_Display"
+        ] = (
+            df[
+                probability_col
+            ]
+            * 100
         )
+
     else:
-        df["Probability_Display"] = (
-            df[probability_col]
+
+        df[
+            "Probability_Display"
+        ] = (
+            df[
+                probability_col
+            ]
         )
 
 else:
-    df["Probability_Display"] = np.nan
+
+    df[
+        "Probability_Display"
+    ] = np.nan
 
 
 # ============================================================
@@ -454,14 +747,21 @@ else:
 
 if risk_col is None:
 
-    df["Generated Risk Level"] = pd.cut(
-        df["Probability_Display"],
+    df[
+        "Generated Risk Level"
+    ] = pd.cut(
+
+        df[
+            "Probability_Display"
+        ],
+
         bins=[
             -np.inf,
             40,
             62,
             np.inf
         ],
+
         labels=[
             "Low Risk",
             "Medium Risk",
@@ -469,7 +769,9 @@ if risk_col is None:
         ]
     )
 
-    risk_col = "Generated Risk Level"
+    risk_col = (
+        "Generated Risk Level"
+    )
 
 
 # ============================================================
@@ -478,9 +780,14 @@ if risk_col is None:
 
 if action_col is None:
 
-    df["Generated Action"] = np.select(
+    df[
+        "Generated Action"
+    ] = np.select(
+
         [
-            df[risk_col]
+            df[
+                risk_col
+            ]
             .astype(str)
             .str.contains(
                 "High",
@@ -488,7 +795,9 @@ if action_col is None:
                 na=False
             ),
 
-            df[risk_col]
+            df[
+                risk_col
+            ]
             .astype(str)
             .str.contains(
                 "Medium",
@@ -496,14 +805,20 @@ if action_col is None:
                 na=False
             )
         ],
+
         [
             "Immediate retention outreach",
             "Targeted retention offer"
         ],
-        default="Standard engagement"
+
+        default=
+            "Standard engagement"
     )
 
-    action_col = "Generated Action"
+
+    action_col = (
+        "Generated Action"
+    )
 
 
 # ============================================================
@@ -524,7 +839,7 @@ html(
 
                 High Risk Customer
 
-                <span style="color:#FF6464;">
+                <span style="color:#E0525E;">
                     Retention Center
                 </span>
 
@@ -554,7 +869,10 @@ st.sidebar.markdown(
     "## 🎯 Risk Filters"
 )
 
-filtered_df = df.copy()
+
+filtered_df = (
+    df.copy()
+)
 
 
 def sidebar_filter(
@@ -564,10 +882,14 @@ def sidebar_filter(
 ):
 
     if column is None:
+
         return data
 
+
     values = (
-        data[column]
+        data[
+            column
+        ]
         .dropna()
         .astype(str)
         .sort_values()
@@ -575,17 +897,25 @@ def sidebar_filter(
         .tolist()
     )
 
-    selected = st.sidebar.selectbox(
-        label,
-        ["All"] + values
+
+    selected = (
+        st.sidebar.selectbox(
+            label,
+            ["All"] + values
+        )
     )
 
+
     if selected != "All":
+
         data = data[
-            data[column]
+            data[
+                column
+            ]
             .astype(str)
             .eq(selected)
         ]
+
 
     return data
 
@@ -596,17 +926,20 @@ filtered_df = sidebar_filter(
     "🚦 Risk Level"
 )
 
+
 filtered_df = sidebar_filter(
     filtered_df,
     contract_col,
     "📄 Contract"
 )
 
+
 filtered_df = sidebar_filter(
     filtered_df,
     internet_col,
     "📡 Internet Service"
 )
+
 
 filtered_df = sidebar_filter(
     filtered_df,
@@ -620,7 +953,9 @@ filtered_df = sidebar_filter(
 # ============================================================
 
 high_risk_mask = (
-    filtered_df[risk_col]
+    filtered_df[
+        risk_col
+    ]
     .astype(str)
     .str.contains(
         "High",
@@ -628,6 +963,7 @@ high_risk_mask = (
         na=False
     )
 )
+
 
 high_risk_df = (
     filtered_df[
@@ -641,9 +977,12 @@ high_risk_df = (
 # KPI CALCULATIONS
 # ============================================================
 
-high_risk_count = len(
-    high_risk_df
+high_risk_count = (
+    len(
+        high_risk_df
+    )
 )
+
 
 avg_probability = (
     high_risk_df[
@@ -651,6 +990,7 @@ avg_probability = (
     ]
     .mean()
 )
+
 
 if revenue_col:
 
@@ -662,6 +1002,7 @@ if revenue_col:
         .sum()
     )
 
+
 elif monthly_col:
 
     revenue_at_risk = (
@@ -672,7 +1013,9 @@ elif monthly_col:
         .sum()
     )
 
+
 else:
+
     revenue_at_risk = 0
 
 
@@ -681,7 +1024,9 @@ avg_cltv_at_risk = (
         cltv_col
     ]
     .mean()
+
     if cltv_col
+
     else 0
 )
 
@@ -731,13 +1076,17 @@ html(
     '</div>'
 )
 
-k1, k2, k3, k4 = st.columns(
-    4,
-    gap="medium"
+
+k1, k2, k3, k4 = (
+    st.columns(
+        4,
+        gap="medium"
+    )
 )
 
 
 with k1:
+
     kpi(
         "👥",
         f"{high_risk_count:,}",
@@ -749,9 +1098,14 @@ with k2:
 
     probability_text = (
         f"{avg_probability:.1f}%"
-        if pd.notna(avg_probability)
+
+        if pd.notna(
+            avg_probability
+        )
+
         else "N/A"
     )
+
 
     kpi(
         "🎯",
@@ -762,20 +1116,32 @@ with k2:
 
 with k3:
 
-    if revenue_at_risk >= 1_000_000:
+    if (
+        revenue_at_risk
+        >= 1_000_000
+    ):
+
         revenue_text = (
             f"{revenue_at_risk / 1_000_000:.2f}M"
         )
 
-    elif revenue_at_risk >= 1000:
+
+    elif (
+        revenue_at_risk
+        >= 1000
+    ):
+
         revenue_text = (
             f"{revenue_at_risk / 1000:.1f}K"
         )
 
+
     else:
+
         revenue_text = (
             f"{revenue_at_risk:.0f}"
         )
+
 
     kpi(
         "💸",
@@ -787,14 +1153,20 @@ with k3:
 with k4:
 
     if (
-        pd.notna(avg_cltv_at_risk)
+        pd.notna(
+            avg_cltv_at_risk
+        )
         and avg_cltv_at_risk > 0
     ):
+
         cltv_text = (
             f"{avg_cltv_at_risk / 1000:.2f}K"
         )
+
     else:
+
         cltv_text = "N/A"
+
 
     kpi(
         "💎",
@@ -820,10 +1192,15 @@ def chart_style(
     fig.update_layout(
 
         title=dict(
+
             text=title,
+
             x=0.5,
+
             xanchor="center",
+
             y=0.96,
+
             font=dict(
                 size=CHART_TITLE_SIZE,
                 color=TEXT
@@ -832,8 +1209,11 @@ def chart_style(
 
         height=height,
 
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor=
+            "rgba(0,0,0,0)",
+
+        plot_bgcolor=
+            "rgba(0,0,0,0)",
 
         margin=dict(
             l=left,
@@ -850,7 +1230,6 @@ def chart_style(
 
         showlegend=False,
 
-        # Prevent Plotly from shrinking trace text inconsistently.
         uniformtext=dict(
             minsize=DATA_LABEL_SIZE,
             mode="show"
@@ -863,8 +1242,11 @@ def chart_style(
         )
     )
 
+
     fig.update_xaxes(
+
         showgrid=False,
+
         zeroline=False,
 
         tickfont=dict(
@@ -877,9 +1259,12 @@ def chart_style(
             size=AXIS_TITLE_SIZE
         )
     )
+
 
     fig.update_yaxes(
+
         showgrid=False,
+
         zeroline=False,
 
         tickfont=dict(
@@ -892,6 +1277,7 @@ def chart_style(
             size=AXIS_TITLE_SIZE
         )
     )
+
 
     return fig
 
@@ -904,6 +1290,7 @@ html(
     '<div class="row-gap"></div>'
 )
 
+
 html(
     '<div class="section-title">'
     '📊 Risk Prioritization'
@@ -915,9 +1302,14 @@ html(
 # CHART ROW 1
 # ============================================================
 
-top_left, top_right = st.columns(
-    [1.3, 1],
-    gap="medium"
+top_left, top_right = (
+    st.columns(
+        [
+            1.3,
+            1
+        ],
+        gap="medium"
+    )
 )
 
 
@@ -932,7 +1324,6 @@ with top_left:
         and not high_risk_df.empty
     ):
 
-        # Keep only top 5 customers so the compact chart remains readable.
         top_risk = (
             high_risk_df
             .sort_values(
@@ -946,26 +1337,32 @@ with top_left:
             )
         )
 
+
         fig = go.Figure()
 
+
         fig.add_bar(
+
             x=top_risk[
                 "Probability_Display"
             ],
+
             y=top_risk[
                 customer_col
             ],
+
             orientation="h",
 
-            # Thicker, evenly spaced bars
             width=0.58,
 
             marker_color=ORANGE,
 
-            # Put labels inside bars so they never overlap outside
             text=[
                 f"{value:.1f}%"
-                for value in top_risk[
+
+                for value in
+
+                top_risk[
                     "Probability_Display"
                 ]
             ],
@@ -976,19 +1373,28 @@ with top_left:
 
             textfont=dict(
                 size=11.5,
-                color=TEXT,
+
+                # White is intentionally used here because
+                # the text sits inside a coral bar.
+                color="#FFFFFF",
+
                 family="Arial"
             ),
 
             hovertemplate=(
                 "<b>%{y}</b>"
-                "<br>Churn Probability: %{x:.1f}%"
+                "<br>"
+                "Churn Probability: "
+                "%{x:.1f}%"
                 "<extra></extra>"
             )
         )
 
+
         fig = chart_style(
+
             fig,
+
             "🎯 Highest Churn Probability Customers",
 
             left=105,
@@ -997,37 +1403,57 @@ with top_left:
             bottom=28
         )
 
-        # Fixed 0–100 scale keeps all percentage labels aligned.
+
         fig.update_xaxes(
+
             range=[
                 0,
                 100
             ],
-            title="Churn Probability (%)",
-            tickvals=[0, 20, 40, 60, 80, 100]
+
+            title=
+                "Churn Probability (%)",
+
+            tickvals=[
+                0,
+                20,
+                40,
+                60,
+                80,
+                100
+            ]
         )
 
+
         fig.update_yaxes(
+
             tickfont=dict(
                 size=10.8,
                 color=TEXT
             ),
+
             automargin=True
         )
 
-        # Prevent Plotly from auto-shrinking the inside labels.
+
         fig.update_layout(
+
             uniformtext=dict(
                 minsize=11.5,
                 mode="show"
             )
         )
 
+
         st.plotly_chart(
+
             fig,
+
             width="stretch",
+
             config={
-                "displayModeBar": False
+                "displayModeBar":
+                    False
             }
         )
 
@@ -1040,9 +1466,12 @@ with top_right:
 
     value_col = (
         revenue_col
+
         if revenue_col
+
         else monthly_col
     )
+
 
     if (
         contract_col
@@ -1055,11 +1484,14 @@ with top_right:
             "Two year"
         ]
 
+
         contract_risk = (
             high_risk_df
             .groupby(
                 contract_col
-            )[value_col]
+            )[
+                value_col
+            ]
             .sum()
             .reindex(
                 CONTRACT_ORDER,
@@ -1068,57 +1500,100 @@ with top_right:
             .reset_index()
         )
 
+
         fig = go.Figure()
 
+
         fig.add_bar(
+
             x=contract_risk[
                 contract_col
             ],
+
             y=contract_risk[
                 value_col
             ],
+
             width=0.38,
+
             marker_color=TEAL,
+
             hovertemplate=(
                 "<b>%{x}</b>"
-                "<br>Revenue at Risk: %{y:,.0f}"
+                "<br>"
+                "Revenue at Risk: "
+                "%{y:,.0f}"
                 "<extra></extra>"
             )
         )
 
+
         max_contract_value = (
             contract_risk[
                 value_col
-            ].max()
+            ]
+            .max()
         )
 
-        if max_contract_value <= 0:
+
+        if (
+            max_contract_value
+            <= 0
+        ):
+
             max_contract_value = 1
 
-        # Fixed readable annotations above bars, including zero.
-        for _, row in contract_risk.iterrows():
 
-            value = row[value_col]
+        for _, row in (
+            contract_risk
+            .iterrows()
+        ):
+
+            value = (
+                row[
+                    value_col
+                ]
+            )
+
 
             label = (
                 f"{value / 1000:.1f}K"
+
                 if value >= 1000
+
                 else f"{value:.0f}"
             )
 
+
             y_pos = (
-                value + max_contract_value * 0.045
+                value
+                + max_contract_value
+                * 0.045
+
                 if value > 0
-                else max_contract_value * 0.04
+
+                else max_contract_value
+                * 0.04
             )
 
+
             fig.add_annotation(
-                x=row[contract_col],
+
+                x=row[
+                    contract_col
+                ],
+
                 y=y_pos,
-                text=f"<b>{label}</b>",
+
+                text=
+                    f"<b>{label}</b>",
+
                 showarrow=False,
+
                 xanchor="center",
+
                 yanchor="bottom",
+
                 font=dict(
                     size=DATA_LABEL_SIZE,
                     color=TEXT,
@@ -1126,26 +1601,38 @@ with top_right:
                 )
             )
 
+
         fig = chart_style(
+
             fig,
+
             "💸 Revenue at Risk by Contract",
+
             left=25,
             right=25,
             top=40,
             bottom=26
         )
 
+
         fig.update_yaxes(
+
             showticklabels=False,
+
             range=[
                 0,
-                max_contract_value * 1.22
+                max_contract_value
+                * 1.22
             ]
         )
 
+
         fig.update_xaxes(
+
             categoryorder="array",
-            categoryarray=CONTRACT_ORDER,
+
+            categoryarray=
+                CONTRACT_ORDER,
 
             tickfont=dict(
                 size=10.3,
@@ -1153,11 +1640,16 @@ with top_right:
             )
         )
 
+
         st.plotly_chart(
+
             fig,
+
             width="stretch",
+
             config={
-                "displayModeBar": False
+                "displayModeBar":
+                    False
             }
         )
 
@@ -1170,9 +1662,15 @@ html(
     '<div class="row-gap"></div>'
 )
 
-bottom_left, bottom_right = st.columns(
-    [1.1, 1],
-    gap="medium"
+
+bottom_left, bottom_right = (
+    st.columns(
+        [
+            1.1,
+            1
+        ],
+        gap="medium"
+    )
 )
 
 
@@ -1194,37 +1692,66 @@ with bottom_left:
         .sort_values()
     )
 
+
     fig = go.Figure()
 
+
     fig.add_bar(
+
         x=action_summary.values,
+
         y=action_summary.index,
+
         orientation="h",
+
         width=0.45,
+
         marker_color=CYAN,
+
         hovertemplate=(
             "<b>%{y}</b>"
-            "<br>Customers: %{x}"
+            "<br>"
+            "Customers: %{x}"
             "<extra></extra>"
         )
     )
 
+
     max_action = (
         action_summary.max()
-        if len(action_summary)
+
+        if len(
+            action_summary
+        )
+
         else 1
     )
 
-    # Fixed annotations instead of trace text.
-    for action_name, value in action_summary.items():
+
+    for (
+        action_name,
+        value
+    ) in action_summary.items():
 
         fig.add_annotation(
-            x=value + max_action * 0.012,
+
+            x=(
+                value
+                + max_action
+                * 0.012
+            ),
+
             y=action_name,
-            text=f"<b>{int(value):,}</b>",
+
+            text=
+                f"<b>{int(value):,}</b>",
+
             showarrow=False,
+
             xanchor="left",
+
             yanchor="middle",
+
             font=dict(
                 size=DATA_LABEL_SIZE,
                 color=TEXT,
@@ -1232,35 +1759,50 @@ with bottom_left:
             )
         )
 
+
     fig = chart_style(
+
         fig,
+
         "🛠 Recommended Retention Actions",
+
         left=190,
         right=55,
         top=40,
         bottom=12
     )
 
+
     fig.update_xaxes(
+
         showticklabels=False,
+
         range=[
             0,
-            max_action * 1.13
+            max_action
+            * 1.13
         ]
     )
 
+
     fig.update_yaxes(
+
         tickfont=dict(
             size=10.2,
             color=TEXT
         )
     )
 
+
     st.plotly_chart(
+
         fig,
+
         width="stretch",
+
         config={
-            "displayModeBar": False
+            "displayModeBar":
+                False
         }
     )
 
@@ -1280,16 +1822,19 @@ with bottom_right:
         .reset_index()
     )
 
+
     risk_summary.columns = [
         "Risk",
         "Customers"
     ]
+
 
     RISK_ORDER = [
         "Low Risk",
         "Medium Risk",
         "High Risk"
     ]
+
 
     risk_summary = (
         risk_summary
@@ -1303,60 +1848,107 @@ with bottom_right:
         .reset_index()
     )
 
+
     color_map = {
-        "Low Risk": GREEN,
-        "Medium Risk": PURPLE,
-        "High Risk": ORANGE
+
+        "Low Risk":
+            GREEN,
+
+        "Medium Risk":
+            PURPLE,
+
+        "High Risk":
+            ORANGE
     }
 
+
     colors = [
+
         color_map.get(
             risk,
             TEAL
         )
+
         for risk in
+
         risk_summary[
             "Risk"
         ]
     ]
 
+
     fig = go.Figure()
 
+
     fig.add_bar(
+
         x=risk_summary[
             "Risk"
         ],
+
         y=risk_summary[
             "Customers"
         ],
+
         width=0.42,
+
         marker_color=colors,
+
         hovertemplate=(
             "<b>%{x}</b>"
-            "<br>Customers: %{y}"
+            "<br>"
+            "Customers: %{y}"
             "<extra></extra>"
         )
     )
 
+
     max_customers = (
         risk_summary[
             "Customers"
-        ].max()
+        ]
+        .max()
     )
 
-    if max_customers <= 0:
+
+    if (
+        max_customers <= 0
+    ):
+
         max_customers = 1
 
-    # Fixed large values above each column.
-    for _, row in risk_summary.iterrows():
+
+    for _, row in (
+        risk_summary
+        .iterrows()
+    ):
 
         fig.add_annotation(
-            x=row["Risk"],
-            y=row["Customers"] + max_customers * 0.035,
-            text=f"<b>{int(row['Customers']):,}</b>",
+
+            x=row[
+                "Risk"
+            ],
+
+            y=(
+                row[
+                    "Customers"
+                ]
+                + max_customers
+                * 0.035
+            ),
+
+            text=(
+                f"<b>"
+                f"{int(row['Customers']):,}"
+                f"</b>"
+            ),
+
             showarrow=False,
+
             xanchor="center",
+
             yanchor="bottom",
+
             font=dict(
                 size=DATA_LABEL_SIZE,
                 color=TEXT,
@@ -1364,26 +1956,39 @@ with bottom_right:
             )
         )
 
+
     fig = chart_style(
+
         fig,
+
         "🚦 Customer Risk Distribution",
+
         left=25,
         right=25,
         top=40,
         bottom=22
     )
 
+
     fig.update_yaxes(
+
         showticklabels=False,
+
         range=[
             0,
-            max_customers * 1.18
+            max_customers
+            * 1.18
         ]
     )
 
+
     fig.update_xaxes(
-        categoryorder="array",
-        categoryarray=RISK_ORDER,
+
+        categoryorder=
+            "array",
+
+        categoryarray=
+            RISK_ORDER,
 
         tickfont=dict(
             size=10.5,
@@ -1391,11 +1996,16 @@ with bottom_right:
         )
     )
 
+
     st.plotly_chart(
+
         fig,
+
         width="stretch",
+
         config={
-            "displayModeBar": False
+            "displayModeBar":
+                False
         }
     )
 
@@ -1407,6 +2017,7 @@ with bottom_right:
 html(
     '<div class="row-gap"></div>'
 )
+
 
 html(
     """
@@ -1423,7 +2034,9 @@ html(
 
 watch_columns = []
 
+
 for col in [
+
     customer_col,
     risk_col,
     probability_col,
@@ -1435,12 +2048,14 @@ for col in [
     cltv_col,
     online_security_col,
     action_col
+
 ]:
 
     if (
         col is not None
         and col not in watch_columns
     ):
+
         watch_columns.append(
             col
         )
@@ -1460,57 +2075,79 @@ watch_df = (
 
 rename_map = {}
 
+
 if customer_col:
+
     rename_map[
         customer_col
     ] = "Customer ID"
 
+
 if risk_col:
+
     rename_map[
         risk_col
     ] = "Risk Level"
 
+
 if probability_col:
+
     rename_map[
         probability_col
     ] = "Churn Probability"
 
+
 if contract_col:
+
     rename_map[
         contract_col
     ] = "Contract"
 
+
 if internet_col:
+
     rename_map[
         internet_col
     ] = "Internet Service"
 
+
 if payment_col:
+
     rename_map[
         payment_col
     ] = "Payment Method"
 
+
 if monthly_col:
+
     rename_map[
         monthly_col
     ] = "Monthly Charges"
 
+
 if tenure_col:
+
     rename_map[
         tenure_col
     ] = "Tenure"
 
+
 if cltv_col:
+
     rename_map[
         cltv_col
     ] = "CLTV"
 
+
 if online_security_col:
+
     rename_map[
         online_security_col
     ] = "Online Security"
 
+
 if action_col:
+
     rename_map[
         action_col
     ] = "Recommended Action"
@@ -1623,9 +2260,12 @@ if (
 
     column_config[
         "Customer ID"
-    ] = st.column_config.TextColumn(
-        "Customer ID",
-        width="small"
+    ] = (
+        st.column_config
+        .TextColumn(
+            "Customer ID",
+            width="small"
+        )
     )
 
 
@@ -1636,9 +2276,12 @@ if (
 
     column_config[
         "Risk Level"
-    ] = st.column_config.TextColumn(
-        "Risk Level",
-        width="small"
+    ] = (
+        st.column_config
+        .TextColumn(
+            "Risk Level",
+            width="small"
+        )
     )
 
 
@@ -1649,12 +2292,20 @@ if (
 
     column_config[
         "Churn Probability"
-    ] = st.column_config.ProgressColumn(
-        "Churn Probability",
-        min_value=0,
-        max_value=100,
-        format="%.1f%%",
-        width="medium"
+    ] = (
+        st.column_config
+        .ProgressColumn(
+
+            "Churn Probability",
+
+            min_value=0,
+
+            max_value=100,
+
+            format="%.1f%%",
+
+            width="medium"
+        )
     )
 
 
@@ -1665,9 +2316,12 @@ if (
 
     column_config[
         "Contract"
-    ] = st.column_config.TextColumn(
-        "Contract",
-        width="small"
+    ] = (
+        st.column_config
+        .TextColumn(
+            "Contract",
+            width="small"
+        )
     )
 
 
@@ -1678,9 +2332,12 @@ if (
 
     column_config[
         "Internet Service"
-    ] = st.column_config.TextColumn(
-        "Internet Service",
-        width="small"
+    ] = (
+        st.column_config
+        .TextColumn(
+            "Internet Service",
+            width="small"
+        )
     )
 
 
@@ -1691,9 +2348,12 @@ if (
 
     column_config[
         "Payment Method"
-    ] = st.column_config.TextColumn(
-        "Payment Method",
-        width="medium"
+    ] = (
+        st.column_config
+        .TextColumn(
+            "Payment Method",
+            width="medium"
+        )
     )
 
 
@@ -1704,10 +2364,16 @@ if (
 
     column_config[
         "Monthly Charges"
-    ] = st.column_config.NumberColumn(
-        "Monthly Charges",
-        format="$%.2f",
-        width="small"
+    ] = (
+        st.column_config
+        .NumberColumn(
+
+            "Monthly Charges",
+
+            format="$%.2f",
+
+            width="small"
+        )
     )
 
 
@@ -1718,9 +2384,12 @@ if (
 
     column_config[
         "Tenure"
-    ] = st.column_config.NumberColumn(
-        "Tenure",
-        width="small"
+    ] = (
+        st.column_config
+        .NumberColumn(
+            "Tenure",
+            width="small"
+        )
     )
 
 
@@ -1731,10 +2400,16 @@ if (
 
     column_config[
         "CLTV"
-    ] = st.column_config.NumberColumn(
-        "CLTV",
-        format="%d",
-        width="small"
+    ] = (
+        st.column_config
+        .NumberColumn(
+
+            "CLTV",
+
+            format="%d",
+
+            width="small"
+        )
     )
 
 
@@ -1745,9 +2420,14 @@ if (
 
     column_config[
         "Online Security"
-    ] = st.column_config.TextColumn(
-        "Online Security",
-        width="small"
+    ] = (
+        st.column_config
+        .TextColumn(
+
+            "Online Security",
+
+            width="small"
+        )
     )
 
 
@@ -1758,9 +2438,14 @@ if (
 
     column_config[
         "Recommended Action"
-    ] = st.column_config.TextColumn(
-        "Recommended Action",
-        width="large"
+    ] = (
+        st.column_config
+        .TextColumn(
+
+            "Recommended Action",
+
+            width="large"
+        )
     )
 
 
@@ -1769,9 +2454,16 @@ if (
 # ============================================================
 
 st.dataframe(
+
     watch_df,
+
     width="stretch",
-    height=WATCHLIST_HEIGHT,
+
+    height=
+        WATCHLIST_HEIGHT,
+
     hide_index=True,
-    column_config=column_config
+
+    column_config=
+        column_config
 )
