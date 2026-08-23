@@ -41,8 +41,14 @@ def load_model_components():
         )
 
     model = joblib.load(MODEL_PATH)
-    preprocessor = joblib.load(PREPROCESSOR_PATH)
-    threshold = joblib.load(THRESHOLD_PATH)
+
+    preprocessor = joblib.load(
+        PREPROCESSOR_PATH
+    )
+
+    threshold = joblib.load(
+        THRESHOLD_PATH
+    )
 
     threshold = float(
         np.asarray(threshold).squeeze()
@@ -69,147 +75,190 @@ except Exception as e:
 
 
 # ============================================================
-# PROFESSIONAL LIGHT DASHBOARD THEME
+# COLOR SYSTEM
+# ============================================================
+
+BG = "#F7F9FC"
+
+CARD = "#FFFFFF"
+
+BORDER = "#D7E2EC"
+
+TEXT = "#16324F"
+
+MUTED = "#64748B"
+
+BLUE = "#168CE3"
+
+NAVY = "#145B8F"
+
+PURPLE = "#6D28D9"
+
+CORAL = "#E0525E"
+
+GREEN = "#2A9D8F"
+
+
+# ============================================================
+# COMPLETE LIGHT THEME
 # ============================================================
 
 st.markdown(
-    """
+    f"""
 <style>
 
-/* ==========================================================
-   MASTER COLOR SYSTEM
-========================================================== */
-
-:root {
-
-    --page-bg: #F7F9FC;
-    --card-bg: #FFFFFF;
-
-    --navy: #103A5E;
-    --text: #16324F;
-    --muted: #526579;
-
-    --blue: #145B8F;
-    --blue-hover: #0E4B78;
-    --bright-blue: #168CE3;
-
-    --border: #C9D6E2;
-    --light-border: #DCE5EE;
-
-}
-
 
 /* ==========================================================
-   ENTIRE APP
+   FORCE LIGHT COLOR SCHEME
 ========================================================== */
+
+:root {{
+
+    color-scheme: light !important;
+
+}}
+
 
 html,
 body,
 [data-testid="stAppViewContainer"],
-.stApp {
+.stApp {{
 
-    background: var(--page-bg) !important;
+    color-scheme: light !important;
 
-    color: var(--text) !important;
-}
+    background: {BG} !important;
 
+    color: {TEXT} !important;
 
-/* ==========================================================
-   REMOVE TOP STREAMLIT BAR
-========================================================== */
-
-header[data-testid="stHeader"] {
-
-    background: transparent !important;
-}
-
-div[data-testid="stToolbar"] {
-
-    visibility: hidden !important;
-    height: 0 !important;
-}
-
-div[data-testid="stDecoration"] {
-
-    display: none !important;
-}
-
-div[data-testid="stStatusWidget"] {
-
-    visibility: hidden !important;
-}
+}}
 
 
 /* ==========================================================
-   PAGE CONTAINER
+   MAIN APPLICATION
 ========================================================== */
 
-.block-container {
+.stApp {{
 
-    padding-top: 1.4rem !important;
-    padding-bottom: 3rem !important;
+    background-color: {BG} !important;
+
+    color: {TEXT} !important;
+
+}}
+
+
+.block-container {{
 
     max-width: 1200px;
-}
+
+    padding-top: 1.2rem !important;
+
+    padding-bottom: 3rem !important;
+
+}}
+
+
+/* ==========================================================
+   STREAMLIT TOP HEADER
+========================================================== */
+
+header[data-testid="stHeader"] {{
+
+    background: transparent !important;
+
+}}
+
+
+div[data-testid="stToolbar"] {{
+
+    visibility: hidden !important;
+
+    height: 0 !important;
+
+}}
+
+
+div[data-testid="stDecoration"] {{
+
+    display: none !important;
+
+}}
+
+
+div[data-testid="stStatusWidget"] {{
+
+    visibility: hidden !important;
+
+}}
 
 
 /* ==========================================================
    SIDEBAR
 ========================================================== */
 
-section[data-testid="stSidebar"] {
+section[data-testid="stSidebar"] {{
+
+    color-scheme: light !important;
 
     background: #FFFFFF !important;
 
-    border-right:
-        1px solid var(--light-border) !important;
-}
+    border-right: 1px solid {BORDER} !important;
 
-section[data-testid="stSidebar"] > div {
+}}
+
+
+section[data-testid="stSidebar"] > div {{
 
     background: #FFFFFF !important;
-}
 
-section[data-testid="stSidebar"] * {
+}}
 
-    color: var(--text);
-}
+
+section[data-testid="stSidebar"] * {{
+
+    color: {TEXT};
+
+}}
 
 
 /* ==========================================================
-   TYPOGRAPHY
+   PAGE TITLES
 ========================================================== */
 
-h1 {
+h1 {{
 
-    color: var(--navy) !important;
+    color: #103A5E !important;
 
     font-weight: 750 !important;
 
     letter-spacing: -0.5px;
-}
+
+}}
+
 
 h2,
-h3 {
+h3 {{
 
-    color: var(--navy) !important;
+    color: #103A5E !important;
 
     font-weight: 700 !important;
-}
 
-p {
+}}
 
-    color: var(--muted);
-}
+
+p {{
+
+    color: {MUTED};
+
+}}
 
 
 /* ==========================================================
-   SECTION LABELS
+   SMALL SECTION LABELS
 ========================================================== */
 
-.section-label {
+.section-label {{
 
-    color: var(--bright-blue);
+    color: {BLUE};
 
     font-size: 0.76rem;
 
@@ -222,20 +271,21 @@ p {
     margin-top: 12px;
 
     margin-bottom: 3px;
-}
+
+}}
 
 
 /* ==========================================================
-   BADGE
+   PAGE BADGE
 ========================================================== */
 
-.prediction-badge {
+.prediction-badge {{
 
     display: inline-block;
 
     background: #EAF5FD;
 
-    color: var(--blue);
+    color: {NAVY};
 
     border: 1px solid #CDE6FA;
 
@@ -247,266 +297,113 @@ p {
 
     font-weight: 650;
 
-    margin-bottom: 10px;
-}
+    margin-bottom: 8px;
+
+}}
 
 
 /* ==========================================================
    INTRO CARD
 ========================================================== */
 
-.prediction-intro {
+.prediction-intro {{
 
     background: #FFFFFF;
 
     border: 1px solid #D8E2EC;
 
-    border-left: 5px solid var(--bright-blue);
+    border-left: 5px solid {BLUE};
 
     border-radius: 10px;
 
     padding: 20px 24px;
 
-    margin-top: 12px;
+    margin-top: 10px;
 
     margin-bottom: 28px;
 
     box-shadow:
         0 5px 15px
-        rgba(15, 47, 79, 0.07);
-}
+        rgba(15,47,79,.07);
 
-.prediction-intro p {
+}}
 
-    color: var(--muted);
+
+.prediction-intro p {{
+
+    color: {MUTED};
+
+    margin: 0;
 
     line-height: 1.7;
 
-    margin: 0;
-}
+}}
 
 
 /* ==========================================================
-   WIDGET LABELS
+   FORM LABELS
 ========================================================== */
 
 label,
 [data-testid="stWidgetLabel"],
-[data-testid="stWidgetLabel"] p {
+[data-testid="stWidgetLabel"] p {{
 
-    color: var(--muted) !important;
+    color: {TEXT} !important;
+
+    -webkit-text-fill-color:
+        {TEXT} !important;
 
     font-weight: 600 !important;
-}
+
+}}
 
 
 /* ==========================================================
-   SELECT BOX — COMPLETE LIGHT OVERRIDE
+   TEXT INPUTS
 ========================================================== */
 
-/* Outer container */
+[data-testid="stTextInput"]
+div[data-baseweb="input"] {{
 
-[data-testid="stSelectbox"]
-div[data-baseweb="select"] {
+    color-scheme: light !important;
 
-    background: transparent !important;
-}
+    background: #FFFFFF !important;
 
-
-/* Actual selected-value box */
-
-[data-testid="stSelectbox"]
-div[data-baseweb="select"] > div {
-
-    background-color: #FFFFFF !important;
-
-    color: var(--text) !important;
-
-    border:
-        1px solid var(--border) !important;
+    border: 1px solid #B8C7D9 !important;
 
     border-radius: 8px !important;
 
+}}
+
+
+[data-testid="stTextInput"] input {{
+
+    color-scheme: light !important;
+
+    background: #FFFFFF !important;
+
+    color: {TEXT} !important;
+
+    -webkit-text-fill-color:
+        {TEXT} !important;
+
     min-height: 44px !important;
 
-    box-shadow: none !important;
-}
+    border: none !important;
 
-
-/* Every child inside select */
-
-[data-testid="stSelectbox"]
-div[data-baseweb="select"] > div * {
-
-    color: var(--text) !important;
-
-    background-color: transparent !important;
-
-    -webkit-text-fill-color:
-        var(--text) !important;
-}
-
-
-/* Selected text */
-
-[data-testid="stSelectbox"]
-span {
-
-    color: var(--text) !important;
-
-    -webkit-text-fill-color:
-        var(--text) !important;
-}
-
-
-/* Arrow */
-
-[data-testid="stSelectbox"] svg {
-
-    fill: var(--muted) !important;
-
-    color: var(--muted) !important;
-}
-
-
-/* Hover */
-
-[data-testid="stSelectbox"]
-div[data-baseweb="select"] > div:hover {
-
-    border-color:
-        #8CA9BE !important;
-}
-
-
-/* Focus */
-
-[data-testid="stSelectbox"]
-div[data-baseweb="select"] > div:focus-within {
-
-    border-color:
-        var(--bright-blue) !important;
-
-    box-shadow:
-        0 0 0 1px
-        var(--bright-blue) !important;
-}
-
-
-/* ==========================================================
-   DROPDOWN / POPOVER
-========================================================== */
-
-div[data-baseweb="popover"],
-div[data-baseweb="menu"],
-ul[role="listbox"] {
-
-    background-color:
-        #FFFFFF !important;
-
-    color:
-        var(--text) !important;
-}
-
-
-/* Individual options */
-
-li[role="option"] {
-
-    background-color:
-        #FFFFFF !important;
-
-    color:
-        var(--text) !important;
-
-    -webkit-text-fill-color:
-        var(--text) !important;
-}
-
-
-/* Option text */
-
-li[role="option"] * {
-
-    color:
-        var(--text) !important;
-
-    -webkit-text-fill-color:
-        var(--text) !important;
-}
-
-
-/* Option hover */
-
-li[role="option"]:hover {
-
-    background-color:
-        #EAF5FD !important;
-
-    color:
-        var(--blue) !important;
-}
-
-
-/* Selected dropdown value */
-
-li[aria-selected="true"] {
-
-    background-color:
-        #DCEFFD !important;
-
-    color:
-        var(--blue) !important;
-}
-
-
-/* ==========================================================
-   TEXT INPUT
-========================================================== */
-
-[data-testid="stTextInput"]
-div[data-baseweb="input"] {
-
-    background-color:
-        #FFFFFF !important;
-
-    border:
-        1px solid var(--border) !important;
-
-    border-radius:
-        8px !important;
-}
-
-
-[data-testid="stTextInput"] input {
-
-    background-color:
-        #FFFFFF !important;
-
-    color:
-        var(--text) !important;
-
-    -webkit-text-fill-color:
-        var(--text) !important;
-
-    min-height:
-        44px !important;
-
-    border:
-        none !important;
-}
+}}
 
 
 [data-testid="stTextInput"]
-div[data-baseweb="input"]:focus-within {
+div[data-baseweb="input"]:focus-within {{
 
-    border-color:
-        var(--bright-blue) !important;
+    border-color: {BLUE} !important;
 
     box-shadow:
         0 0 0 1px
-        var(--bright-blue) !important;
-}
+        {BLUE} !important;
+
+}}
 
 
 /* ==========================================================
@@ -514,90 +411,438 @@ div[data-baseweb="input"]:focus-within {
 ========================================================== */
 
 [data-testid="stNumberInput"]
-div[data-baseweb="input"] {
+div[data-baseweb="input"] {{
 
-    background-color:
-        #FFFFFF !important;
+    color-scheme: light !important;
 
-    border:
-        1px solid var(--border) !important;
+    background: #FFFFFF !important;
 
-    border-radius:
-        8px !important;
+    border: 1px solid #B8C7D9 !important;
 
-    overflow:
-        hidden !important;
-}
+    border-radius: 8px !important;
+
+    overflow: hidden !important;
+
+}}
 
 
-[data-testid="stNumberInput"] input {
+[data-testid="stNumberInput"] input {{
 
-    background-color:
-        #FFFFFF !important;
+    color-scheme: light !important;
 
-    color:
-        var(--text) !important;
+    background: #FFFFFF !important;
+
+    color: {TEXT} !important;
 
     -webkit-text-fill-color:
-        var(--text) !important;
+        {TEXT} !important;
 
-    border:
-        none !important;
+    border: none !important;
 
-    min-height:
-        44px !important;
-}
+    min-height: 44px !important;
 
-
-/* Increment/decrement buttons */
-
-[data-testid="stNumberInput"] button {
-
-    background-color:
-        var(--blue) !important;
-
-    color:
-        #FFFFFF !important;
-
-    border:
-        none !important;
-}
+}}
 
 
-[data-testid="stNumberInput"] button:hover {
+/* NUMBER +/- BUTTONS */
 
-    background-color:
-        var(--blue-hover) !important;
-}
+[data-testid="stNumberInput"] button {{
+
+    background: {NAVY} !important;
+
+    color: #FFFFFF !important;
+
+    border: none !important;
+
+}}
 
 
-/* Plus/minus icons */
+[data-testid="stNumberInput"] button:hover {{
 
-[data-testid="stNumberInput"] button svg {
+    background: #0E4E80 !important;
 
-    color:
-        #FFFFFF !important;
+}}
 
-    fill:
-        #FFFFFF !important;
-}
+
+[data-testid="stNumberInput"] button svg {{
+
+    color: #FFFFFF !important;
+
+    fill: #FFFFFF !important;
+
+}}
+
+
+/* ==========================================================
+   SELECTBOXES
+   THIS FIXES THE DARK FIELDS IN YOUR SCREENSHOT
+========================================================== */
+
+[data-testid="stSelectbox"] {{
+
+    color-scheme: light !important;
+
+    background: transparent !important;
+
+}}
+
+
+[data-testid="stSelectbox"]
+div[data-baseweb="select"] {{
+
+    color-scheme: light !important;
+
+    background: #FFFFFF !important;
+
+}}
+
+
+/* Main visible dropdown */
+
+[data-testid="stSelectbox"]
+div[data-baseweb="select"] > div {{
+
+    color-scheme: light !important;
+
+    background: #FFFFFF !important;
+
+    background-color: #FFFFFF !important;
+
+    color: {TEXT} !important;
+
+    border: 1px solid #B8C7D9 !important;
+
+    border-radius: 8px !important;
+
+    min-height: 44px !important;
+
+    box-shadow: none !important;
+
+}}
+
+
+/* Inner Streamlit/BaseWeb layers */
+
+[data-testid="stSelectbox"]
+div[data-baseweb="select"] > div > div {{
+
+    background: #FFFFFF !important;
+
+    background-color: #FFFFFF !important;
+
+}}
+
+
+[data-testid="stSelectbox"]
+div[data-baseweb="select"] > div > div > div {{
+
+    background: #FFFFFF !important;
+
+    background-color: #FFFFFF !important;
+
+}}
+
+
+/* Actual combobox */
+
+[data-testid="stSelectbox"]
+[role="combobox"] {{
+
+    color-scheme: light !important;
+
+    background: #FFFFFF !important;
+
+    background-color: #FFFFFF !important;
+
+    color: {TEXT} !important;
+
+    -webkit-text-fill-color:
+        {TEXT} !important;
+
+}}
+
+
+/* Additional Streamlit fallback */
+
+[data-testid="stSelectbox"]
+[aria-haspopup="listbox"] {{
+
+    color-scheme: light !important;
+
+    background: #FFFFFF !important;
+
+    background-color: #FFFFFF !important;
+
+    color: {TEXT} !important;
+
+    -webkit-text-fill-color:
+        {TEXT} !important;
+
+}}
+
+
+/* Selected text */
+
+[data-testid="stSelectbox"] span,
+
+[data-testid="stSelectbox"] p {{
+
+    color: {TEXT} !important;
+
+    -webkit-text-fill-color:
+        {TEXT} !important;
+
+}}
+
+
+/* Dropdown arrow */
+
+[data-testid="stSelectbox"] svg {{
+
+    color: {MUTED} !important;
+
+    fill: {MUTED} !important;
+
+}}
+
+
+/* Hover */
+
+[data-testid="stSelectbox"]
+div[data-baseweb="select"] > div:hover {{
+
+    background: #FFFFFF !important;
+
+    border-color: #94B4CE !important;
+
+}}
+
+
+/* Focus */
+
+[data-testid="stSelectbox"]
+div[data-baseweb="select"] > div:focus-within {{
+
+    background: #FFFFFF !important;
+
+    border-color: {BLUE} !important;
+
+    box-shadow:
+        0 0 0 1px
+        {BLUE} !important;
+
+}}
+
+
+/* ==========================================================
+   OPEN DROPDOWN MENU
+========================================================== */
+
+div[data-baseweb="popover"],
+
+div[data-baseweb="menu"],
+
+ul[role="listbox"] {{
+
+    color-scheme: light !important;
+
+    background: #FFFFFF !important;
+
+    background-color: #FFFFFF !important;
+
+    color: {TEXT} !important;
+
+}}
+
+
+ul[role="listbox"] {{
+
+    border: 1px solid {BORDER} !important;
+
+    border-radius: 8px !important;
+
+    box-shadow:
+        0 6px 18px
+        rgba(22,50,79,.12) !important;
+
+}}
+
+
+/* DROPDOWN OPTIONS */
+
+li[role="option"] {{
+
+    background: #FFFFFF !important;
+
+    color: {TEXT} !important;
+
+    -webkit-text-fill-color:
+        {TEXT} !important;
+
+}}
+
+
+li[role="option"] * {{
+
+    color: {TEXT} !important;
+
+    -webkit-text-fill-color:
+        {TEXT} !important;
+
+}}
+
+
+li[role="option"]:hover {{
+
+    background: #EAF4FB !important;
+
+    color: {NAVY} !important;
+
+    -webkit-text-fill-color:
+        {NAVY} !important;
+
+}}
+
+
+li[role="option"][aria-selected="true"] {{
+
+    background: #DCEFFD !important;
+
+    color: {NAVY} !important;
+
+    -webkit-text-fill-color:
+        {NAVY} !important;
+
+}}
+
+
+/* ==========================================================
+   LIGHT DROPDOWN SCROLLBARS
+========================================================== */
+
+ul[role="listbox"]::-webkit-scrollbar {{
+
+    width: 7px !important;
+
+}}
+
+
+ul[role="listbox"]::-webkit-scrollbar-track {{
+
+    background: #F1F5F9 !important;
+
+    border-radius: 8px;
+
+}}
+
+
+ul[role="listbox"]::-webkit-scrollbar-thumb {{
+
+    background: #B8C7D9 !important;
+
+    border-radius: 10px;
+
+}}
+
+
+ul[role="listbox"]::-webkit-scrollbar-thumb:hover {{
+
+    background: #94A8BD !important;
+
+}}
+
+
+/* ==========================================================
+   PAGE SCROLLBAR
+========================================================== */
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.stApp::-webkit-scrollbar,
+[data-testid="stAppViewContainer"]::-webkit-scrollbar {{
+
+    width: 9px !important;
+
+}}
+
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+.stApp::-webkit-scrollbar-track,
+[data-testid="stAppViewContainer"]::-webkit-scrollbar-track {{
+
+    background: #F1F5F9 !important;
+
+}}
+
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+.stApp::-webkit-scrollbar-thumb,
+[data-testid="stAppViewContainer"]::-webkit-scrollbar-thumb {{
+
+    background: #C2CFDC !important;
+
+    border-radius: 10px !important;
+
+}}
+
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+.stApp::-webkit-scrollbar-thumb:hover,
+[data-testid="stAppViewContainer"]::-webkit-scrollbar-thumb:hover {{
+
+    background: #9FB1C3 !important;
+
+}}
+
+
+/* ==========================================================
+   STREAMLIT INTERNAL SCROLLABLE AREAS
+========================================================== */
+
+[data-testid="stSidebar"] ::-webkit-scrollbar,
+[data-testid="stVerticalBlock"] ::-webkit-scrollbar {{
+
+    width: 7px !important;
+
+    height: 7px !important;
+
+}}
+
+
+[data-testid="stSidebar"] ::-webkit-scrollbar-track,
+[data-testid="stVerticalBlock"] ::-webkit-scrollbar-track {{
+
+    background: #F1F5F9 !important;
+
+}}
+
+
+[data-testid="stSidebar"] ::-webkit-scrollbar-thumb,
+[data-testid="stVerticalBlock"] ::-webkit-scrollbar-thumb {{
+
+    background: #BCCBDA !important;
+
+    border-radius: 10px !important;
+
+}}
 
 
 /* ==========================================================
    DIVIDERS
 ========================================================== */
 
-hr {
+hr {{
 
-    border-color:
-        var(--light-border) !important;
+    border-color: #DCE5EE !important;
 
-    margin-top:
-        1.8rem !important;
+    margin-top: 1.8rem !important;
 
-    margin-bottom:
-        1.8rem !important;
-}
+    margin-bottom: 1.8rem !important;
+
+}}
 
 
 /* ==========================================================
@@ -605,287 +850,258 @@ hr {
 ========================================================== */
 
 [data-testid="stButton"] > button,
-div.stButton > button {
+div.stButton > button {{
 
-    background:
-        var(--blue) !important;
+    width: 100% !important;
 
-    border:
-        1px solid var(--blue) !important;
+    min-height: 52px !important;
 
-    border-radius:
-        8px !important;
+    background: {NAVY} !important;
 
-    min-height:
-        52px !important;
+    border: 1px solid {NAVY} !important;
 
-    width:
-        100% !important;
+    border-radius: 8px !important;
 
     box-shadow:
         0 4px 12px
-        rgba(20, 91, 143, 0.20);
+        rgba(20,91,143,.20);
 
     transition:
-        all 0.2s ease;
-}
+        all .2s ease;
+
+}}
 
 
-/* Force ALL button text white */
+/* WHITE BUTTON TEXT */
 
-[data-testid="stButton"] > button *,
-div.stButton > button *,
 [data-testid="stButton"] > button,
-div.stButton > button {
+[data-testid="stButton"] > button *,
+div.stButton > button,
+div.stButton > button * {{
 
-    color:
-        #FFFFFF !important;
+    color: #FFFFFF !important;
 
     -webkit-text-fill-color:
         #FFFFFF !important;
 
-    font-weight:
-        700 !important;
-}
+    font-weight: 700 !important;
 
+}}
 
-/* Hover */
 
 [data-testid="stButton"] > button:hover,
-div.stButton > button:hover {
+div.stButton > button:hover {{
 
-    background:
-        var(--blue-hover) !important;
+    background: #0E4E80 !important;
 
-    border-color:
-        var(--blue-hover) !important;
+    border-color: #0E4E80 !important;
 
-    transform:
-        translateY(-1px);
+    transform: translateY(-1px);
 
     box-shadow:
         0 6px 16px
-        rgba(20, 91, 143, 0.28);
-}
+        rgba(20,91,143,.28);
+
+}}
 
 
 /* ==========================================================
    METRIC CARDS
 ========================================================== */
 
-[data-testid="stMetric"] {
+[data-testid="stMetric"] {{
 
-    background:
-        #FFFFFF !important;
+    background: #FFFFFF !important;
 
-    border:
-        1px solid #D8E2EC;
+    border: 1px solid #D8E2EC;
 
-    border-radius:
-        10px;
+    border-radius: 10px;
 
-    padding:
-        20px 22px;
+    padding: 20px 22px;
 
-    min-height:
-        120px;
+    min-height: 120px;
 
     box-shadow:
         0 5px 14px
-        rgba(15, 47, 79, 0.08);
-}
+        rgba(15,47,79,.08);
+
+}}
 
 
 [data-testid="stMetricLabel"],
-[data-testid="stMetricLabel"] * {
+[data-testid="stMetricLabel"] * {{
 
-    color:
-        var(--muted) !important;
-}
+    color: {MUTED} !important;
+
+}}
 
 
 [data-testid="stMetricValue"],
-[data-testid="stMetricValue"] * {
+[data-testid="stMetricValue"] * {{
 
-    color:
-        var(--blue) !important;
+    color: {NAVY} !important;
 
-    font-weight:
-        750 !important;
-}
+    font-weight: 750 !important;
+
+}}
 
 
 /* ==========================================================
    HIGH RISK
 ========================================================== */
 
-.high-risk-box {
+.high-risk-box {{
 
-    background:
-        #FFF1F2;
+    background: #FFF1F2;
 
-    border:
-        1px solid #F5C2C7;
+    border: 1px solid #F5C2C7;
 
-    border-left:
-        5px solid #D94452;
+    border-left: 5px solid {CORAL};
 
-    color:
-        #9F1D2B;
+    color: #9F1D2B;
 
-    padding:
-        16px 18px;
+    padding: 16px 18px;
 
-    border-radius:
-        8px;
+    border-radius: 8px;
 
-    font-weight:
-        650;
+    font-weight: 650;
 
-    margin:
-        15px 0 20px;
-}
+    margin: 15px 0 20px;
+
+}}
 
 
 /* ==========================================================
    MEDIUM RISK
 ========================================================== */
 
-.medium-risk-box {
+.medium-risk-box {{
 
-    background:
-        #FFF7E6;
+    background: #FFF7E6;
 
-    border:
-        1px solid #F7D89A;
+    border: 1px solid #F7D89A;
 
-    border-left:
-        5px solid #F59E0B;
+    border-left: 5px solid #F59E0B;
 
-    color:
-        #92400E;
+    color: #92400E;
 
-    padding:
-        16px 18px;
+    padding: 16px 18px;
 
-    border-radius:
-        8px;
+    border-radius: 8px;
 
-    font-weight:
-        650;
+    font-weight: 650;
 
-    margin:
-        15px 0 20px;
-}
+    margin: 15px 0 20px;
+
+}}
 
 
 /* ==========================================================
    LOW RISK
 ========================================================== */
 
-.low-risk-box {
+.low-risk-box {{
 
-    background:
-        #ECFDF5;
+    background: #ECFDF5;
 
-    border:
-        1px solid #B7E8D2;
+    border: 1px solid #B7E8D2;
 
-    border-left:
-        5px solid #10B981;
+    border-left: 5px solid {GREEN};
 
-    color:
-        #066045;
+    color: #066045;
 
-    padding:
-        16px 18px;
+    padding: 16px 18px;
 
-    border-radius:
-        8px;
+    border-radius: 8px;
 
-    font-weight:
-        650;
+    font-weight: 650;
 
-    margin:
-        15px 0 20px;
-}
+    margin: 15px 0 20px;
+
+}}
 
 
 /* ==========================================================
-   RECOMMENDATION CARD
+   RECOMMENDATION
 ========================================================== */
 
-.recommendation-box {
+.recommendation-box {{
 
-    background:
-        #EDF6FD;
+    background: #EDF6FD;
 
-    border:
-        1px solid #CDE4F5;
+    border: 1px solid #CDE4F5;
 
-    border-left:
-        5px solid var(--blue);
+    border-left: 5px solid {NAVY};
 
-    color:
-        var(--text);
+    color: {TEXT};
 
-    padding:
-        18px 20px;
+    padding: 18px 20px;
 
-    border-radius:
-        8px;
+    border-radius: 8px;
 
-    margin:
-        8px 0 22px;
+    margin: 8px 0 22px;
 
     box-shadow:
         0 3px 10px
-        rgba(15, 47, 79, 0.05);
-}
+        rgba(15,47,79,.05);
+
+}}
 
 
 /* ==========================================================
    DATAFRAME
 ========================================================== */
 
-[data-testid="stDataFrame"] {
+[data-testid="stDataFrame"] {{
 
-    background:
-        #FFFFFF !important;
+    background: #FFFFFF !important;
 
-    border:
-        1px solid #D8E2EC;
+    border: 1px solid #D8E2EC;
 
-    border-radius:
-        10px;
+    border-radius: 10px;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
     box-shadow:
         0 4px 12px
-        rgba(15, 47, 79, 0.07);
-}
+        rgba(15,47,79,.07);
+
+}}
 
 
 /* ==========================================================
    FOOTER
 ========================================================== */
 
-.footer-text {
+.footer-text {{
 
-    text-align:
-        center;
+    text-align: center;
 
-    color:
-        #8797A8;
+    color: #8797A8;
 
-    font-size:
-        0.82rem;
+    font-size: .82rem;
 
-    margin-top:
-        25px;
-}
+    margin-top: 25px;
+
+}}
+
+
+/* ==========================================================
+   REMOVE STREAMLIT DEFAULT ITEMS
+========================================================== */
+
+#MainMenu {{
+
+    visibility: hidden;
+
+}}
+
+
+footer {{
+
+    visibility: hidden;
+
+}}
 
 </style>
 """,
@@ -894,7 +1110,7 @@ div.stButton > button:hover {
 
 
 # ============================================================
-# TITLE
+# PAGE TITLE
 # ============================================================
 
 st.markdown(
@@ -906,20 +1122,26 @@ Predictive Customer Intelligence
     unsafe_allow_html=True
 )
 
+
 st.title(
     "Customer Churn Prediction"
 )
 
+
 st.markdown(
     """
 <div class="prediction-intro">
+
 <p>
+
 Predict customer churn probability using the trained
 <strong>Logistic Regression model</strong>.
 Enter customer demographic, account and service information
-to estimate churn risk and generate a targeted
-retention recommendation.
+to estimate churn risk and generate a targeted retention
+recommendation.
+
 </p>
+
 </div>
 """,
     unsafe_allow_html=True
@@ -935,9 +1157,11 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+
 st.subheader(
     "👤 Customer Information"
 )
+
 
 col1, col2, col3 = st.columns(3)
 
@@ -951,17 +1175,20 @@ with col1:
         value=12
     )
 
+
     monthly_charges = st.number_input(
         "Monthly Charges",
         min_value=0.0,
         value=70.0
     )
 
+
     total_charges = st.number_input(
         "Total Charges",
         min_value=0.0,
         value=840.0
     )
+
 
     cltv = st.number_input(
         "CLTV",
@@ -980,6 +1207,7 @@ with col2:
         ]
     )
 
+
     senior_citizen = st.selectbox(
         "Senior Citizen",
         [
@@ -988,6 +1216,7 @@ with col2:
         ]
     )
 
+
     partner = st.selectbox(
         "Partner",
         [
@@ -995,6 +1224,7 @@ with col2:
             "Yes"
         ]
     )
+
 
     dependents = st.selectbox(
         "Dependents",
@@ -1016,6 +1246,7 @@ with col3:
         ]
     )
 
+
     internet_service = st.selectbox(
         "Internet Service",
         [
@@ -1024,6 +1255,7 @@ with col3:
             "No"
         ]
     )
+
 
     payment_method = st.selectbox(
         "Payment Method",
@@ -1034,6 +1266,7 @@ with col3:
             "Credit card (automatic)"
         ]
     )
+
 
     paperless_billing = st.selectbox(
         "Paperless Billing",
@@ -1053,9 +1286,11 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+
 st.subheader(
     "🌐 Service Information"
 )
+
 
 col1, col2, col3 = st.columns(3)
 
@@ -1069,6 +1304,7 @@ with col1:
             "Yes"
         ]
     )
+
 
     multiple_lines = st.selectbox(
         "Multiple Lines",
@@ -1091,6 +1327,7 @@ with col2:
         ]
     )
 
+
     online_backup = st.selectbox(
         "Online Backup",
         [
@@ -1112,6 +1349,7 @@ with col3:
         ]
     )
 
+
     tech_support = st.selectbox(
         "Tech Support",
         [
@@ -1131,9 +1369,11 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+
 st.subheader(
     "📺 Entertainment Services"
 )
+
 
 col1, col2 = st.columns(2)
 
@@ -1171,9 +1411,11 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+
 st.subheader(
     "📍 Customer Location"
 )
+
 
 col1, col2, col3, col4 = st.columns(4)
 
@@ -1218,6 +1460,7 @@ with col4:
 
 st.divider()
 
+
 predict_button = st.button(
     "Predict Churn Risk",
     width="stretch"
@@ -1232,40 +1475,103 @@ if predict_button:
 
     input_data = pd.DataFrame(
         {
-            "Latitude": [latitude],
-            "Longitude": [longitude],
 
-            "Country": [country],
-            "State": [state],
+            "Latitude": [
+                latitude
+            ],
 
-            "Gender": [gender],
-            "Senior Citizen": [senior_citizen],
-            "Partner": [partner],
-            "Dependents": [dependents],
+            "Longitude": [
+                longitude
+            ],
 
-            "Tenure Months": [tenure],
+            "Country": [
+                country
+            ],
 
-            "Phone Service": [phone_service],
-            "Multiple Lines": [multiple_lines],
+            "State": [
+                state
+            ],
 
-            "Internet Service": [internet_service],
+            "Gender": [
+                gender
+            ],
 
-            "Online Security": [online_security],
-            "Online Backup": [online_backup],
-            "Device Protection": [device_protection],
-            "Tech Support": [tech_support],
+            "Senior Citizen": [
+                senior_citizen
+            ],
 
-            "Streaming TV": [streaming_tv],
-            "Streaming Movies": [streaming_movies],
+            "Partner": [
+                partner
+            ],
 
-            "Contract": [contract],
-            "Paperless Billing": [paperless_billing],
-            "Payment Method": [payment_method],
+            "Dependents": [
+                dependents
+            ],
 
-            "Monthly Charges": [monthly_charges],
-            "Total Charges": [total_charges],
+            "Tenure Months": [
+                tenure
+            ],
 
-            "CLTV": [cltv]
+            "Phone Service": [
+                phone_service
+            ],
+
+            "Multiple Lines": [
+                multiple_lines
+            ],
+
+            "Internet Service": [
+                internet_service
+            ],
+
+            "Online Security": [
+                online_security
+            ],
+
+            "Online Backup": [
+                online_backup
+            ],
+
+            "Device Protection": [
+                device_protection
+            ],
+
+            "Tech Support": [
+                tech_support
+            ],
+
+            "Streaming TV": [
+                streaming_tv
+            ],
+
+            "Streaming Movies": [
+                streaming_movies
+            ],
+
+            "Contract": [
+                contract
+            ],
+
+            "Paperless Billing": [
+                paperless_billing
+            ],
+
+            "Payment Method": [
+                payment_method
+            ],
+
+            "Monthly Charges": [
+                monthly_charges
+            ],
+
+            "Total Charges": [
+                total_charges
+            ],
+
+            "CLTV": [
+                cltv
+            ]
+
         }
     )
 
@@ -1282,11 +1588,13 @@ if predict_button:
             )
         )
 
+
         churn_probability = (
             model.predict_proba(
                 X_processed
             )[0][1]
         )
+
 
     except Exception as e:
 
@@ -1308,25 +1616,30 @@ if predict_button:
         >= threshold
     )
 
+
     probability_percent = (
-        churn_probability * 100
+        churn_probability
+        * 100
     )
 
 
     # ========================================================
-    # RESULT
+    # RESULTS
     # ========================================================
 
     st.divider()
+
 
     st.markdown(
         '<div class="section-label">Model Output</div>',
         unsafe_allow_html=True
     )
 
+
     st.subheader(
         "Prediction Result"
     )
+
 
     result_col1, result_col2, result_col3 = (
         st.columns(3)
@@ -1372,17 +1685,23 @@ if predict_button:
 
     if probability_percent >= 70:
 
-        risk_level = "High Risk"
+        risk_level = (
+            "High Risk"
+        )
+
 
         recommendation = (
             "Contract upgrade + "
             "security/service retention offer"
         )
 
+
         st.markdown(
             """
 <div class="high-risk-box">
+
 🔴 High Risk — Immediate retention action recommended.
+
 </div>
 """,
             unsafe_allow_html=True
@@ -1391,17 +1710,23 @@ if predict_button:
 
     elif probability_percent >= 40:
 
-        risk_level = "Medium Risk"
+        risk_level = (
+            "Medium Risk"
+        )
+
 
         recommendation = (
-            "Targeted retention campaign and "
-            "monitor customer behavior"
+            "Targeted retention campaign "
+            "and monitor customer behavior"
         )
+
 
         st.markdown(
             """
 <div class="medium-risk-box">
+
 🟠 Medium Risk — Customer should be monitored closely.
+
 </div>
 """,
             unsafe_allow_html=True
@@ -1410,14 +1735,22 @@ if predict_button:
 
     else:
 
-        risk_level = "Low Risk"
+        risk_level = (
+            "Low Risk"
+        )
 
-        recommendation = "Monitor"
+
+        recommendation = (
+            "Monitor"
+        )
+
 
         st.markdown(
             """
 <div class="low-risk-box">
+
 🟢 Low Risk — No immediate retention action required.
+
 </div>
 """,
             unsafe_allow_html=True
@@ -1432,10 +1765,15 @@ if predict_button:
         "💡 Recommended Action"
     )
 
+
     st.markdown(
         f"""
 <div class="recommendation-box">
-<strong>{recommendation}</strong>
+
+<strong>
+{recommendation}
+</strong>
+
 </div>
 """,
         unsafe_allow_html=True
@@ -1450,36 +1788,64 @@ if predict_button:
         "📋 Customer Summary"
     )
 
+
     summary = pd.DataFrame(
         {
+
             "Feature": [
+
                 "Contract",
+
                 "Internet Service",
+
                 "Tenure Months",
+
                 "Monthly Charges",
+
                 "Online Security",
+
                 "Tech Support",
+
                 "Payment Method",
+
                 "Risk Level"
+
             ],
 
+
             "Value": [
+
                 contract,
+
                 internet_service,
+
                 tenure,
+
                 f"${monthly_charges:.2f}",
+
                 online_security,
+
                 tech_support,
+
                 payment_method,
+
                 risk_level
+
             ]
+
         }
     )
 
-    summary["Value"] = (
-        summary["Value"]
+
+    summary[
+        "Value"
+    ] = (
+        summary[
+            "Value"
+        ]
         .astype(str)
     )
+
 
     st.dataframe(
         summary,
@@ -1494,9 +1860,11 @@ if predict_button:
 
 st.divider()
 
+
 st.markdown(
     """
 <div class="footer-text">
+
 Telco Churn Intelligence Platform
 &nbsp; • &nbsp;
 Python
@@ -1506,6 +1874,7 @@ Streamlit
 Logistic Regression
 &nbsp; • &nbsp;
 Predictive Analytics
+
 </div>
 """,
     unsafe_allow_html=True
