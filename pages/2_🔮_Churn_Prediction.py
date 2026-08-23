@@ -52,7 +52,10 @@ def load_model_components():
 
 
 try:
-    model, preprocessor, threshold = load_model_components()
+
+    model, preprocessor, threshold = (
+        load_model_components()
+    )
 
 except Exception as e:
 
@@ -61,11 +64,12 @@ except Exception as e:
     )
 
     st.exception(e)
+
     st.stop()
 
 
 # ============================================================
-# PROFESSIONAL LIGHT THEME
+# PROFESSIONAL LIGHT DASHBOARD THEME
 # ============================================================
 
 st.markdown(
@@ -73,40 +77,79 @@ st.markdown(
 <style>
 
 /* ==========================================================
-   MAIN APPLICATION
+   MASTER COLOR SYSTEM
 ========================================================== */
 
-.stApp {
-    background-color: #F7F9FC;
-    color: #16324F;
-}
+:root {
 
-.block-container {
-    padding-top: 1.5rem !important;
-    padding-bottom: 3rem !important;
-    max-width: 1200px;
+    --page-bg: #F7F9FC;
+    --card-bg: #FFFFFF;
+
+    --navy: #103A5E;
+    --text: #16324F;
+    --muted: #526579;
+
+    --blue: #145B8F;
+    --blue-hover: #0E4B78;
+    --bright-blue: #168CE3;
+
+    --border: #C9D6E2;
+    --light-border: #DCE5EE;
+
 }
 
 
 /* ==========================================================
-   REMOVE STREAMLIT TOP HEADER / TOOLBAR
+   ENTIRE APP
+========================================================== */
+
+html,
+body,
+[data-testid="stAppViewContainer"],
+.stApp {
+
+    background: var(--page-bg) !important;
+
+    color: var(--text) !important;
+}
+
+
+/* ==========================================================
+   REMOVE TOP STREAMLIT BAR
 ========================================================== */
 
 header[data-testid="stHeader"] {
+
     background: transparent !important;
 }
 
 div[data-testid="stToolbar"] {
+
     visibility: hidden !important;
     height: 0 !important;
 }
 
 div[data-testid="stDecoration"] {
+
     display: none !important;
 }
 
 div[data-testid="stStatusWidget"] {
+
     visibility: hidden !important;
+}
+
+
+/* ==========================================================
+   PAGE CONTAINER
+========================================================== */
+
+.block-container {
+
+    padding-top: 1.4rem !important;
+    padding-bottom: 3rem !important;
+
+    max-width: 1200px;
 }
 
 
@@ -115,62 +158,84 @@ div[data-testid="stStatusWidget"] {
 ========================================================== */
 
 section[data-testid="stSidebar"] {
-    background-color: #FFFFFF !important;
-    border-right: 1px solid #DCE5EE;
+
+    background: #FFFFFF !important;
+
+    border-right:
+        1px solid var(--light-border) !important;
+}
+
+section[data-testid="stSidebar"] > div {
+
+    background: #FFFFFF !important;
 }
 
 section[data-testid="stSidebar"] * {
-    color: #16324F;
+
+    color: var(--text);
 }
 
 
 /* ==========================================================
-   TITLES
+   TYPOGRAPHY
 ========================================================== */
 
 h1 {
-    color: #103A5E !important;
+
+    color: var(--navy) !important;
+
     font-weight: 750 !important;
+
     letter-spacing: -0.5px;
 }
 
 h2,
 h3 {
-    color: #103A5E !important;
+
+    color: var(--navy) !important;
+
     font-weight: 700 !important;
 }
 
 p {
-    color: #526579;
+
+    color: var(--muted);
 }
 
 
 /* ==========================================================
-   SECTION LABEL
+   SECTION LABELS
 ========================================================== */
 
 .section-label {
-    color: #168CE3;
+
+    color: var(--bright-blue);
+
     font-size: 0.76rem;
+
     font-weight: 750;
+
     text-transform: uppercase;
+
     letter-spacing: 0.08em;
+
     margin-top: 12px;
+
     margin-bottom: 3px;
 }
 
 
 /* ==========================================================
-   INTRO BADGE
+   BADGE
 ========================================================== */
 
 .prediction-badge {
 
     display: inline-block;
 
-    background-color: #EAF5FD;
+    background: #EAF5FD;
 
-    color: #12558D;
+    color: var(--blue);
 
     border: 1px solid #CDE6FA;
 
@@ -192,11 +257,11 @@ p {
 
 .prediction-intro {
 
-    background-color: #FFFFFF;
+    background: #FFFFFF;
 
     border: 1px solid #D8E2EC;
 
-    border-left: 5px solid #168CE3;
+    border-left: 5px solid var(--bright-blue);
 
     border-radius: 10px;
 
@@ -212,37 +277,53 @@ p {
 }
 
 .prediction-intro p {
-    color: #526579;
-    margin: 0;
+
+    color: var(--muted);
+
     line-height: 1.7;
+
+    margin: 0;
 }
 
 
 /* ==========================================================
-   ALL INPUT LABELS
+   WIDGET LABELS
 ========================================================== */
 
 label,
-div[data-testid="stWidgetLabel"] p {
+[data-testid="stWidgetLabel"],
+[data-testid="stWidgetLabel"] p {
 
-    color: #526579 !important;
+    color: var(--muted) !important;
 
     font-weight: 600 !important;
-
-    font-size: 0.92rem !important;
 }
 
 
 /* ==========================================================
-   SELECTBOXES
-   WHITE BACKGROUND FOR ALL FILTER VALUES
+   SELECT BOX — COMPLETE LIGHT OVERRIDE
 ========================================================== */
 
+/* Outer container */
+
+[data-testid="stSelectbox"]
+div[data-baseweb="select"] {
+
+    background: transparent !important;
+}
+
+
+/* Actual selected-value box */
+
+[data-testid="stSelectbox"]
 div[data-baseweb="select"] > div {
 
     background-color: #FFFFFF !important;
 
-    border: 1px solid #AEBECC !important;
+    color: var(--text) !important;
+
+    border:
+        1px solid var(--border) !important;
 
     border-radius: 8px !important;
 
@@ -252,63 +333,130 @@ div[data-baseweb="select"] > div {
 }
 
 
-/* Selectbox selected value */
+/* Every child inside select */
 
-div[data-baseweb="select"] span {
+[data-testid="stSelectbox"]
+div[data-baseweb="select"] > div * {
 
-    color: #16324F !important;
+    color: var(--text) !important;
 
-    font-weight: 500 !important;
+    background-color: transparent !important;
+
+    -webkit-text-fill-color:
+        var(--text) !important;
 }
 
 
-/* Selectbox arrow */
+/* Selected text */
 
-div[data-baseweb="select"] svg {
+[data-testid="stSelectbox"]
+span {
 
-    fill: #526579 !important;
+    color: var(--text) !important;
 
-    color: #526579 !important;
+    -webkit-text-fill-color:
+        var(--text) !important;
 }
 
 
-/* Selectbox focus */
+/* Arrow */
 
+[data-testid="stSelectbox"] svg {
+
+    fill: var(--muted) !important;
+
+    color: var(--muted) !important;
+}
+
+
+/* Hover */
+
+[data-testid="stSelectbox"]
+div[data-baseweb="select"] > div:hover {
+
+    border-color:
+        #8CA9BE !important;
+}
+
+
+/* Focus */
+
+[data-testid="stSelectbox"]
 div[data-baseweb="select"] > div:focus-within {
 
-    border-color: #168CE3 !important;
+    border-color:
+        var(--bright-blue) !important;
 
     box-shadow:
-        0 0 0 1px #168CE3 !important;
+        0 0 0 1px
+        var(--bright-blue) !important;
 }
 
 
 /* ==========================================================
-   SELECTBOX DROPDOWN MENU
+   DROPDOWN / POPOVER
 ========================================================== */
 
-div[data-baseweb="popover"] {
+div[data-baseweb="popover"],
+div[data-baseweb="menu"],
+ul[role="listbox"] {
 
-    background-color: #FFFFFF !important;
+    background-color:
+        #FFFFFF !important;
+
+    color:
+        var(--text) !important;
 }
 
-div[data-baseweb="popover"] ul {
 
-    background-color: #FFFFFF !important;
+/* Individual options */
+
+li[role="option"] {
+
+    background-color:
+        #FFFFFF !important;
+
+    color:
+        var(--text) !important;
+
+    -webkit-text-fill-color:
+        var(--text) !important;
 }
 
-div[data-baseweb="popover"] li {
 
-    background-color: #FFFFFF !important;
+/* Option text */
 
-    color: #16324F !important;
+li[role="option"] * {
+
+    color:
+        var(--text) !important;
+
+    -webkit-text-fill-color:
+        var(--text) !important;
 }
 
-div[data-baseweb="popover"] li:hover {
 
-    background-color: #EAF5FD !important;
+/* Option hover */
 
-    color: #12558D !important;
+li[role="option"]:hover {
+
+    background-color:
+        #EAF5FD !important;
+
+    color:
+        var(--blue) !important;
+}
+
+
+/* Selected dropdown value */
+
+li[aria-selected="true"] {
+
+    background-color:
+        #DCEFFD !important;
+
+    color:
+        var(--blue) !important;
 }
 
 
@@ -316,27 +464,48 @@ div[data-baseweb="popover"] li:hover {
    TEXT INPUT
 ========================================================== */
 
-div[data-testid="stTextInput"] input {
+[data-testid="stTextInput"]
+div[data-baseweb="input"] {
 
-    background-color: #FFFFFF !important;
+    background-color:
+        #FFFFFF !important;
 
-    color: #16324F !important;
+    border:
+        1px solid var(--border) !important;
 
-    border: 1px solid #AEBECC !important;
-
-    border-radius: 8px !important;
-
-    min-height: 44px !important;
-
-    box-shadow: none !important;
+    border-radius:
+        8px !important;
 }
 
-div[data-testid="stTextInput"] input:focus {
 
-    border-color: #168CE3 !important;
+[data-testid="stTextInput"] input {
+
+    background-color:
+        #FFFFFF !important;
+
+    color:
+        var(--text) !important;
+
+    -webkit-text-fill-color:
+        var(--text) !important;
+
+    min-height:
+        44px !important;
+
+    border:
+        none !important;
+}
+
+
+[data-testid="stTextInput"]
+div[data-baseweb="input"]:focus-within {
+
+    border-color:
+        var(--bright-blue) !important;
 
     box-shadow:
-        0 0 0 1px #168CE3 !important;
+        0 0 0 1px
+        var(--bright-blue) !important;
 }
 
 
@@ -344,50 +513,73 @@ div[data-testid="stTextInput"] input:focus {
    NUMBER INPUT
 ========================================================== */
 
-div[data-testid="stNumberInput"] input {
-
-    background-color: #FFFFFF !important;
-
-    color: #16324F !important;
-
-    border-top: 1px solid #AEBECC !important;
-
-    border-bottom: 1px solid #AEBECC !important;
-
-    min-height: 44px !important;
-}
-
-
-/* Number input outer container */
-
-div[data-testid="stNumberInput"]
+[data-testid="stNumberInput"]
 div[data-baseweb="input"] {
 
-    background-color: #FFFFFF !important;
+    background-color:
+        #FFFFFF !important;
 
-    border-radius: 8px !important;
+    border:
+        1px solid var(--border) !important;
+
+    border-radius:
+        8px !important;
+
+    overflow:
+        hidden !important;
 }
 
 
-/* +/- BUTTONS */
+[data-testid="stNumberInput"] input {
 
-div[data-testid="stNumberInput"] button {
+    background-color:
+        #FFFFFF !important;
 
-    background-color: #12558D !important;
+    color:
+        var(--text) !important;
 
-    color: #FFFFFF !important;
+    -webkit-text-fill-color:
+        var(--text) !important;
 
-    border-color: #12558D !important;
+    border:
+        none !important;
+
+    min-height:
+        44px !important;
 }
 
 
-/* +/- icons */
+/* Increment/decrement buttons */
 
-div[data-testid="stNumberInput"] button svg {
+[data-testid="stNumberInput"] button {
 
-    fill: #FFFFFF !important;
+    background-color:
+        var(--blue) !important;
 
-    color: #FFFFFF !important;
+    color:
+        #FFFFFF !important;
+
+    border:
+        none !important;
+}
+
+
+[data-testid="stNumberInput"] button:hover {
+
+    background-color:
+        var(--blue-hover) !important;
+}
+
+
+/* Plus/minus icons */
+
+[data-testid="stNumberInput"] button svg {
+
+    color:
+        #FFFFFF !important;
+
+    fill:
+        #FFFFFF !important;
 }
 
 
@@ -397,89 +589,83 @@ div[data-testid="stNumberInput"] button svg {
 
 hr {
 
-    border-color: #DCE5EE !important;
+    border-color:
+        var(--light-border) !important;
 
-    margin-top: 1.8rem !important;
+    margin-top:
+        1.8rem !important;
 
-    margin-bottom: 1.8rem !important;
+    margin-bottom:
+        1.8rem !important;
 }
 
 
 /* ==========================================================
-   PREDICT BUTTON
+   PREDICTION BUTTON
 ========================================================== */
 
+[data-testid="stButton"] > button,
 div.stButton > button {
 
-    width: 100% !important;
+    background:
+        var(--blue) !important;
 
-    min-height: 52px !important;
+    border:
+        1px solid var(--blue) !important;
 
-    background-color: #125F98 !important;
+    border-radius:
+        8px !important;
 
-    border: 1px solid #125F98 !important;
+    min-height:
+        52px !important;
 
-    border-radius: 8px !important;
+    width:
+        100% !important;
 
     box-shadow:
         0 4px 12px
-        rgba(18, 95, 152, 0.20);
+        rgba(20, 91, 143, 0.20);
 
     transition:
-        background-color 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
+        all 0.2s ease;
 }
 
 
-/* IMPORTANT:
-   FORCE BUTTON TEXT TO WHITE
-*/
+/* Force ALL button text white */
 
-div.stButton > button,
-div.stButton > button p,
-div.stButton > button span {
+[data-testid="stButton"] > button *,
+div.stButton > button *,
+[data-testid="stButton"] > button,
+div.stButton > button {
 
-    color: #FFFFFF !important;
+    color:
+        #FFFFFF !important;
 
-    font-weight: 700 !important;
+    -webkit-text-fill-color:
+        #FFFFFF !important;
+
+    font-weight:
+        700 !important;
 }
 
 
-/* Button hover */
+/* Hover */
 
+[data-testid="stButton"] > button:hover,
 div.stButton > button:hover {
 
-    background-color: #0E4E80 !important;
+    background:
+        var(--blue-hover) !important;
 
-    border-color: #0E4E80 !important;
+    border-color:
+        var(--blue-hover) !important;
+
+    transform:
+        translateY(-1px);
 
     box-shadow:
         0 6px 16px
-        rgba(18, 95, 152, 0.27);
-
-    transform: translateY(-1px);
-}
-
-
-/* Keep white text on hover */
-
-div.stButton > button:hover p,
-div.stButton > button:hover span {
-
-    color: #FFFFFF !important;
-}
-
-
-/* Button active */
-
-div.stButton > button:active {
-
-    background-color: #0A416D !important;
-
-    color: #FFFFFF !important;
-
-    transform: translateY(0);
+        rgba(20, 91, 143, 0.28);
 }
 
 
@@ -487,17 +673,22 @@ div.stButton > button:active {
    METRIC CARDS
 ========================================================== */
 
-div[data-testid="stMetric"] {
+[data-testid="stMetric"] {
 
-    background-color: #FFFFFF;
+    background:
+        #FFFFFF !important;
 
-    border: 1px solid #D8E2EC;
+    border:
+        1px solid #D8E2EC;
 
-    border-radius: 10px;
+    border-radius:
+        10px;
 
-    padding: 20px 22px;
+    padding:
+        20px 22px;
 
-    min-height: 120px;
+    min-height:
+        120px;
 
     box-shadow:
         0 5px 14px
@@ -505,19 +696,22 @@ div[data-testid="stMetric"] {
 }
 
 
-div[data-testid="stMetricLabel"] {
+[data-testid="stMetricLabel"],
+[data-testid="stMetricLabel"] * {
 
-    color: #526579 !important;
-
-    font-weight: 600 !important;
+    color:
+        var(--muted) !important;
 }
 
 
-div[data-testid="stMetricValue"] {
+[data-testid="stMetricValue"],
+[data-testid="stMetricValue"] * {
 
-    color: #12558D !important;
+    color:
+        var(--blue) !important;
 
-    font-weight: 750 !important;
+    font-weight:
+        750 !important;
 }
 
 
@@ -527,23 +721,29 @@ div[data-testid="stMetricValue"] {
 
 .high-risk-box {
 
-    background-color: #FFF1F2;
+    background:
+        #FFF1F2;
 
-    border: 1px solid #F5C2C7;
+    border:
+        1px solid #F5C2C7;
 
-    border-left: 5px solid #D94452;
+    border-left:
+        5px solid #D94452;
 
-    color: #9F1D2B;
+    color:
+        #9F1D2B;
 
-    padding: 16px 18px;
+    padding:
+        16px 18px;
 
-    border-radius: 8px;
+    border-radius:
+        8px;
 
-    font-weight: 650;
+    font-weight:
+        650;
 
-    margin-top: 15px;
-
-    margin-bottom: 20px;
+    margin:
+        15px 0 20px;
 }
 
 
@@ -553,23 +753,29 @@ div[data-testid="stMetricValue"] {
 
 .medium-risk-box {
 
-    background-color: #FFF7E6;
+    background:
+        #FFF7E6;
 
-    border: 1px solid #F7D89A;
+    border:
+        1px solid #F7D89A;
 
-    border-left: 5px solid #F59E0B;
+    border-left:
+        5px solid #F59E0B;
 
-    color: #92400E;
+    color:
+        #92400E;
 
-    padding: 16px 18px;
+    padding:
+        16px 18px;
 
-    border-radius: 8px;
+    border-radius:
+        8px;
 
-    font-weight: 650;
+    font-weight:
+        650;
 
-    margin-top: 15px;
-
-    margin-bottom: 20px;
+    margin:
+        15px 0 20px;
 }
 
 
@@ -579,23 +785,29 @@ div[data-testid="stMetricValue"] {
 
 .low-risk-box {
 
-    background-color: #ECFDF5;
+    background:
+        #ECFDF5;
 
-    border: 1px solid #B7E8D2;
+    border:
+        1px solid #B7E8D2;
 
-    border-left: 5px solid #10B981;
+    border-left:
+        5px solid #10B981;
 
-    color: #066045;
+    color:
+        #066045;
 
-    padding: 16px 18px;
+    padding:
+        16px 18px;
 
-    border-radius: 8px;
+    border-radius:
+        8px;
 
-    font-weight: 650;
+    font-weight:
+        650;
 
-    margin-top: 15px;
-
-    margin-bottom: 20px;
+    margin:
+        15px 0 20px;
 }
 
 
@@ -605,21 +817,26 @@ div[data-testid="stMetricValue"] {
 
 .recommendation-box {
 
-    background-color: #EDF6FD;
+    background:
+        #EDF6FD;
 
-    border: 1px solid #CDE4F5;
+    border:
+        1px solid #CDE4F5;
 
-    border-left: 5px solid #12558D;
+    border-left:
+        5px solid var(--blue);
 
-    color: #16324F;
+    color:
+        var(--text);
 
-    padding: 18px 20px;
+    padding:
+        18px 20px;
 
-    border-radius: 8px;
+    border-radius:
+        8px;
 
-    margin-top: 8px;
-
-    margin-bottom: 22px;
+    margin:
+        8px 0 22px;
 
     box-shadow:
         0 3px 10px
@@ -631,15 +848,19 @@ div[data-testid="stMetricValue"] {
    DATAFRAME
 ========================================================== */
 
-div[data-testid="stDataFrame"] {
+[data-testid="stDataFrame"] {
 
-    background-color: #FFFFFF;
+    background:
+        #FFFFFF !important;
 
-    border: 1px solid #D8E2EC;
+    border:
+        1px solid #D8E2EC;
 
-    border-radius: 10px;
+    border-radius:
+        10px;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
     box-shadow:
         0 4px 12px
@@ -653,13 +874,17 @@ div[data-testid="stDataFrame"] {
 
 .footer-text {
 
-    text-align: center;
+    text-align:
+        center;
 
-    color: #8797A8;
+    color:
+        #8797A8;
 
-    font-size: 0.82rem;
+    font-size:
+        0.82rem;
 
-    margin-top: 25px;
+    margin-top:
+        25px;
 }
 
 </style>
@@ -669,7 +894,7 @@ div[data-testid="stDataFrame"] {
 
 
 # ============================================================
-# PAGE TITLE
+# TITLE
 # ============================================================
 
 st.markdown(
@@ -688,14 +913,13 @@ st.title(
 st.markdown(
     """
 <div class="prediction-intro">
-
 <p>
 Predict customer churn probability using the trained
-<strong>Logistic Regression model</strong>. Enter customer
-demographic, account and service information to estimate
-churn risk and generate a targeted retention recommendation.
+<strong>Logistic Regression model</strong>.
+Enter customer demographic, account and service information
+to estimate churn risk and generate a targeted
+retention recommendation.
 </p>
-
 </div>
 """,
     unsafe_allow_html=True
@@ -1052,13 +1276,17 @@ if predict_button:
 
     try:
 
-        X_processed = preprocessor.transform(
-            input_data
+        X_processed = (
+            preprocessor.transform(
+                input_data
+            )
         )
 
-        churn_probability = model.predict_proba(
-            X_processed
-        )[0][1]
+        churn_probability = (
+            model.predict_proba(
+                X_processed
+            )[0][1]
+        )
 
     except Exception as e:
 
@@ -1076,7 +1304,8 @@ if predict_button:
     # ========================================================
 
     prediction = int(
-        churn_probability >= threshold
+        churn_probability
+        >= threshold
     )
 
     probability_percent = (
@@ -1085,7 +1314,7 @@ if predict_button:
 
 
     # ========================================================
-    # PREDICTION RESULT
+    # RESULT
     # ========================================================
 
     st.divider()
@@ -1138,7 +1367,7 @@ if predict_button:
 
 
     # ========================================================
-    # RISK SEGMENTATION
+    # RISK LEVEL
     # ========================================================
 
     if probability_percent >= 70:
@@ -1248,7 +1477,8 @@ if predict_button:
     )
 
     summary["Value"] = (
-        summary["Value"].astype(str)
+        summary["Value"]
+        .astype(str)
     )
 
     st.dataframe(
