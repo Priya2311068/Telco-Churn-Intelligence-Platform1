@@ -326,49 +326,49 @@ html(
        LIGHT THEME CONSISTENCY OVERRIDES
     ====================================================== */
 
-    html, body, [data-testid="stAppViewContainer"] {
+    html, body, [data-testid="stAppViewContainer"] {{
         background: #F7F9FC !important;
         color: #16324F !important;
-    }
+    }}
 
-    section[data-testid="stSidebar"] * {
+    section[data-testid="stSidebar"] * {{
         color: #16324F !important;
-    }
+    }}
 
     section[data-testid="stSidebar"] div[data-baseweb="select"] > div,
-    div[data-baseweb="select"] > div {
+    div[data-baseweb="select"] > div {{
         background: #FFFFFF !important;
         color: #16324F !important;
         border: 1px solid #C9D6E2 !important;
-    }
+    }}
 
     div[data-baseweb="select"] span,
-    div[data-baseweb="select"] svg {
+    div[data-baseweb="select"] svg {{
         color: #16324F !important;
         fill: #64748B !important;
-    }
+    }}
 
     div[data-baseweb="popover"],
     div[data-baseweb="menu"],
     ul[role="listbox"],
-    li[role="option"] {
+    li[role="option"] {{
         background: #FFFFFF !important;
         color: #16324F !important;
-    }
+    }}
 
-    li[role="option"]:hover {
+    li[role="option"]:hover {{
         background: #EAF5FD !important;
         color: #145B8F !important;
-    }
+    }}
 
     .hero, .kpi, .recommend,
-    div[data-testid="stPlotlyChart"] {
+    div[data-testid="stPlotlyChart"] {{
         color: #16324F !important;
-    }
+    }}
 
-    header[data-testid="stHeader"] {
+    header[data-testid="stHeader"] {{
         background: transparent !important;
-    }
+    }}
 
     </style>
     """
