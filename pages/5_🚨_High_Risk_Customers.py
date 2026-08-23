@@ -40,7 +40,8 @@ MUTED = "#64748B"
 
 
 # ============================================================
-# DASHBOARD SETTINGS
+# ORIGINAL DASHBOARD SETTINGS
+# KEEP THESE VALUES FOR YOUR EARLIER TEXT / LAYOUT STYLE
 # ============================================================
 
 KPI_HEIGHT = 68
@@ -79,7 +80,7 @@ html(
 
 
     /* ======================================================
-       MAIN APP
+       MAIN APPLICATION
     ====================================================== */
 
     html,
@@ -151,7 +152,6 @@ html(
     .hero-icon {{
         width: 33px;
         height: 33px;
-
         min-width: 33px;
 
         display: flex;
@@ -252,7 +252,6 @@ html(
     .kpi-icon {{
         width: 25px;
         height: 25px;
-
         min-width: 25px;
 
         display: flex;
@@ -295,7 +294,7 @@ html(
 
 
     /* ======================================================
-       CHART CARDS
+       PLOTLY CHARTS
     ====================================================== */
 
     div[data-testid="stPlotlyChart"] {{
@@ -330,8 +329,8 @@ html(
 
 
     /* ======================================================
-       LIGHT WATCHLIST TABLE
-       ONLY THIS SECTION IS DIFFERENT
+       LIGHT WATCHLIST
+       ONLY THE TABLE THEME IS CHANGED
     ====================================================== */
 
     .watchlist-shell {{
@@ -339,7 +338,8 @@ html(
 
         height: {WATCHLIST_HEIGHT}px;
 
-        overflow: auto;
+        overflow-x: auto;
+        overflow-y: auto;
 
         background: #FFFFFF;
 
@@ -356,7 +356,7 @@ html(
     .watchlist-table {{
         width: 100%;
 
-        min-width: 1350px;
+        min-width: 1380px;
 
         border-collapse: separate;
         border-spacing: 0;
@@ -365,11 +365,13 @@ html(
 
         color: {TEXT};
 
-        font-family:
-            Arial,
-            sans-serif;
+        font-family: Arial, sans-serif;
 
-        font-size: 11.7px;
+        /*
+        This stays close to the original dataframe
+        text size/readability.
+        */
+        font-size: 11.5px;
     }}
 
 
@@ -378,22 +380,24 @@ html(
 
         top: 0;
 
-        z-index: 10;
+        z-index: 20;
     }}
 
 
     .watchlist-table th {{
         background: #F1F5F9;
 
-        color: #334E68;
+        color: #4B5F73;
 
-        font-weight: 700;
+        font-size: 11.2px;
+
+        font-weight: 600;
 
         text-align: left;
 
         white-space: nowrap;
 
-        padding: 10px 9px;
+        padding: 9px 9px;
 
         border-bottom:
             1px solid #D7E2EC;
@@ -404,7 +408,7 @@ html(
 
 
     .watchlist-table th:first-child {{
-        padding-left: 12px;
+        padding-left: 11px;
     }}
 
 
@@ -414,28 +418,32 @@ html(
 
 
     .watchlist-table td {{
-        color: {TEXT};
-
         background: #FFFFFF;
 
-        padding: 9px;
+        color: {TEXT};
+
+        font-size: 11.5px;
+
+        font-weight: 500;
 
         white-space: nowrap;
+
+        vertical-align: middle;
+
+        padding: 8px 9px;
 
         border-bottom:
             1px solid #E8EEF4;
 
         border-right:
             1px solid #EEF2F6;
-
-        vertical-align: middle;
     }}
 
 
     .watchlist-table td:first-child {{
-        padding-left: 12px;
+        padding-left: 11px;
 
-        font-weight: 650;
+        font-weight: 600;
     }}
 
 
@@ -444,107 +452,101 @@ html(
     }}
 
 
+    /* Alternate row — very subtle */
+
     .watchlist-table tbody tr:nth-child(even) td {{
         background: #F8FAFC;
     }}
 
+
+    /* Row hover */
 
     .watchlist-table tbody tr:hover td {{
         background: #EEF6FC;
     }}
 
 
-    /* High Risk badge */
+    /* ======================================================
+       HIGH-RISK TEXT
+    ====================================================== */
 
-    .risk-badge {{
-        display: inline-block;
-
-        padding: 3px 8px;
-
-        border-radius: 999px;
-
-        background: #FFF0F1;
-
+    .risk-text {{
         color: #B42332;
 
-        border:
-            1px solid #F5CCD1;
-
-        font-size: 10.5px;
-
-        font-weight: 750;
+        font-weight: 650;
     }}
 
 
-    /* Probability wrapper */
+    /* ======================================================
+       CHURN PROBABILITY BAR
+    ====================================================== */
 
-    .prob-wrap {{
+    .probability-wrap {{
         display: flex;
 
         align-items: center;
 
-        gap: 8px;
+        gap: 7px;
 
-        min-width: 165px;
+        width: 175px;
     }}
 
 
-    .prob-track {{
-        width: 112px;
+    .probability-track {{
+        width: 118px;
 
-        height: 8px;
-
-        overflow: hidden;
+        height: 7px;
 
         border-radius: 999px;
+
+        overflow: hidden;
 
         background: #E5EAF0;
     }}
 
 
-    .prob-fill {{
+    .probability-fill {{
         height: 100%;
 
         border-radius: 999px;
 
-        background:
-            linear-gradient(
-                90deg,
-                #E0525E,
-                #EF6772
-            );
+        background: #E0525E;
     }}
 
 
-    .prob-text {{
-        min-width: 42px;
+    .probability-text {{
+        width: 43px;
 
-        color: #B42332;
+        color: {TEXT};
 
-        font-size: 11px;
+        font-size: 11.3px;
 
-        font-weight: 750;
+        font-weight: 600;
 
         text-align: right;
     }}
 
 
-    .money-cell {{
-        font-weight: 650;
+    /* ======================================================
+       MONEY / ACTION CELLS
+    ====================================================== */
 
-        color: {NAVY};
+    .money-cell {{
+        color: {TEAL};
+
+        font-weight: 600;
     }}
 
 
     .action-cell {{
-        color: #334E68;
+        color: {TEXT};
 
-        font-weight: 550;
+        font-weight: 500;
     }}
 
 
     /* ======================================================
-       WATCHLIST SCROLLBARS
+       LIGHT TABLE SCROLLBARS
     ====================================================== */
 
     .watchlist-shell::-webkit-scrollbar {{
@@ -564,8 +566,6 @@ html(
         background: #B7C6D5;
 
         border-radius: 10px;
-
-        border: 2px solid #F1F5F9;
     }}
 
 
@@ -575,7 +575,7 @@ html(
 
 
     /* ======================================================
-       PAGE SPACING
+       ORIGINAL PAGE SPACING
     ====================================================== */
 
     div[data-testid="stVerticalBlock"] {{
@@ -639,7 +639,7 @@ html(
 
 
     /* ======================================================
-       LIGHT SIDEBAR FILTERS
+       SIDEBAR SELECTBOX
     ====================================================== */
 
     section[data-testid="stSidebar"]
@@ -744,7 +744,7 @@ html(
 
 
     /* ======================================================
-       DROPDOWN MENU
+       OPEN SELECT DROPDOWN
     ====================================================== */
 
     div[data-baseweb="popover"],
@@ -843,8 +843,7 @@ df = load_risk_data()
 if df is None:
 
     st.error(
-        "Could not find "
-        "telco_customer_churn_risk.csv"
+        "Could not find telco_customer_churn_risk.csv"
     )
 
     st.stop()
@@ -1219,9 +1218,11 @@ def sidebar_filter(
     )
 
 
-    selected = st.sidebar.selectbox(
-        label,
-        ["All"] + values
+    selected = (
+        st.sidebar.selectbox(
+            label,
+            ["All"] + values
+        )
     )
 
 
@@ -1395,9 +1396,11 @@ html(
 )
 
 
-k1, k2, k3, k4 = st.columns(
-    4,
-    gap="medium"
+k1, k2, k3, k4 = (
+    st.columns(
+        4,
+        gap="medium"
+    )
 )
 
 
@@ -1433,14 +1436,20 @@ with k2:
 
 with k3:
 
-    if revenue_at_risk >= 1_000_000:
+    if (
+        revenue_at_risk
+        >= 1_000_000
+    ):
 
         revenue_text = (
             f"{revenue_at_risk / 1_000_000:.2f}M"
         )
 
 
-    elif revenue_at_risk >= 1000:
+    elif (
+        revenue_at_risk
+        >= 1000
+    ):
 
         revenue_text = (
             f"{revenue_at_risk / 1000:.1f}K"
@@ -1613,17 +1622,19 @@ html(
 # CHART ROW 1
 # ============================================================
 
-top_left, top_right = st.columns(
-    [
-        1.3,
-        1
-    ],
-    gap="medium"
+top_left, top_right = (
+    st.columns(
+        [
+            1.3,
+            1
+        ],
+        gap="medium"
+    )
 )
 
 
 # ============================================================
-# TOP HIGH-RISK CUSTOMERS
+# HIGHEST CHURN PROBABILITY
 # ============================================================
 
 with top_left:
@@ -1712,7 +1723,16 @@ with top_left:
             ],
 
             title=
-                "Churn Probability (%)"
+                "Churn Probability (%)",
+
+            tickvals=[
+                0,
+                20,
+                40,
+                60,
+                80,
+                100
+            ]
         )
 
 
@@ -1804,7 +1824,10 @@ with top_right:
         )
 
 
-        if max_contract_value <= 0:
+        if (
+            max_contract_value
+            <= 0
+        ):
 
             max_contract_value = 1
 
@@ -1839,6 +1862,7 @@ with top_right:
 
                 y=(
                     value
+
                     + max_contract_value
                     * 0.045
                 ),
@@ -1847,6 +1871,8 @@ with top_right:
                     f"<b>{label}</b>",
 
                 showarrow=False,
+
+                xanchor="center",
 
                 font=dict(
                     size=DATA_LABEL_SIZE,
@@ -1874,9 +1900,19 @@ with top_right:
 
             range=[
                 0,
+
                 max_contract_value
                 * 1.22
             ]
+        )
+
+
+        fig.update_xaxes(
+
+            categoryorder="array",
+
+            categoryarray=
+                CONTRACT_ORDER
         )
 
 
@@ -1902,12 +1938,14 @@ html(
 )
 
 
-bottom_left, bottom_right = st.columns(
-    [
-        1.1,
-        1
-    ],
-    gap="medium"
+bottom_left, bottom_right = (
+    st.columns(
+        [
+            1.1,
+            1
+        ],
+        gap="medium"
+    )
 )
 
 
@@ -1973,6 +2011,7 @@ with bottom_left:
 
             x=(
                 value
+
                 + max_action
                 * 0.012
             ),
@@ -2012,6 +2051,7 @@ with bottom_left:
 
         range=[
             0,
+
             max_action
             * 1.13
         ]
@@ -2081,7 +2121,7 @@ with bottom_right:
     )
 
 
-    color_map = {{
+    color_map = {
 
         "Low Risk":
             GREEN,
@@ -2091,14 +2131,6 @@ with bottom_right:
 
         "High Risk":
             ORANGE
-    }}
-
-
-    # Correct dict syntax outside f-string
-    color_map = {
-        "Low Risk": GREEN,
-        "Medium Risk": PURPLE,
-        "High Risk": ORANGE
     }
 
 
@@ -2144,7 +2176,10 @@ with bottom_right:
     )
 
 
-    if max_customers <= 0:
+    if (
+        max_customers
+        <= 0
+    ):
 
         max_customers = 1
 
@@ -2203,9 +2238,19 @@ with bottom_right:
 
         range=[
             0,
+
             max_customers
             * 1.18
         ]
+    )
+
+
+    fig.update_xaxes(
+
+        categoryorder="array",
+
+        categoryarray=
+            RISK_ORDER
     )
 
 
@@ -2223,7 +2268,7 @@ with bottom_right:
 
 
 # ============================================================
-# WATCHLIST
+# HIGH RISK CUSTOMER WATCHLIST
 # ============================================================
 
 html(
@@ -2282,7 +2327,7 @@ watch_df = (
 
 
 # ============================================================
-# RENAME WATCHLIST
+# RENAME WATCHLIST COLUMNS
 # ============================================================
 
 rename_map = {}
@@ -2374,7 +2419,7 @@ watch_df = (
 
 
 # ============================================================
-# CLEAN WATCHLIST
+# REPLACE CHURN PROBABILITY WITH CORRECT DISPLAY VALUE
 # ============================================================
 
 if probability_col:
@@ -2389,6 +2434,10 @@ if probability_col:
     )
 
 
+# ============================================================
+# CLEAN NUMERIC COLUMNS
+# ============================================================
+
 if (
     "Monthly Charges"
     in watch_df.columns
@@ -2397,9 +2446,12 @@ if (
     watch_df[
         "Monthly Charges"
     ] = (
-        watch_df[
-            "Monthly Charges"
-        ]
+        pd.to_numeric(
+            watch_df[
+                "Monthly Charges"
+            ],
+            errors="coerce"
+        )
         .round(2)
     )
 
@@ -2412,9 +2464,12 @@ if (
     watch_df[
         "CLTV"
     ] = (
-        watch_df[
-            "CLTV"
-        ]
+        pd.to_numeric(
+            watch_df[
+                "CLTV"
+            ],
+            errors="coerce"
+        )
         .round(0)
     )
 
@@ -2427,9 +2482,12 @@ if (
     watch_df[
         "Tenure"
     ] = (
-        watch_df[
-            "Tenure"
-        ]
+        pd.to_numeric(
+            watch_df[
+                "Tenure"
+            ],
+            errors="coerce"
+        )
         .round(0)
     )
 
@@ -2458,12 +2516,13 @@ if (
 
 
 # ============================================================
-# FORMAT HELPER
+# SAFE TEXT HELPER
 # ============================================================
 
 def safe_text(value):
 
     if pd.isna(value):
+
         return ""
 
     return escape(
@@ -2472,10 +2531,11 @@ def safe_text(value):
 
 
 # ============================================================
-# BUILD LIGHT HTML WATCHLIST
+# BUILD HTML WATCHLIST
 # ============================================================
 
 table_html = """
+
 <div class="watchlist-shell">
 
 <table class="watchlist-table">
@@ -2483,11 +2543,12 @@ table_html = """
 <thead>
 
 <tr>
+
 """
 
 
 # ============================================================
-# HEADERS
+# TABLE HEADER
 # ============================================================
 
 for column in watch_df.columns:
@@ -2498,16 +2559,18 @@ for column in watch_df.columns:
 
 
 table_html += """
+
 </tr>
 
 </thead>
 
 <tbody>
+
 """
 
 
 # ============================================================
-# ROWS
+# TABLE ROWS
 # ============================================================
 
 for _, row in watch_df.iterrows():
@@ -2524,11 +2587,14 @@ for _, row in watch_df.iterrows():
         # RISK LEVEL
         # ----------------------------------------------------
 
-        if column == "Risk Level":
+        if (
+            column
+            == "Risk Level"
+        ):
 
             table_html += (
                 '<td>'
-                '<span class="risk-badge">'
+                '<span class="risk-text">'
                 f'{safe_text(value)}'
                 '</span>'
                 '</td>'
@@ -2539,7 +2605,10 @@ for _, row in watch_df.iterrows():
         # CHURN PROBABILITY
         # ----------------------------------------------------
 
-        elif column == "Churn Probability":
+        elif (
+            column
+            == "Churn Probability"
+        ):
 
             if pd.isna(value):
 
@@ -2547,7 +2616,9 @@ for _, row in watch_df.iterrows():
 
             else:
 
-                probability = float(value)
+                probability = float(
+                    value
+                )
 
 
             probability = max(
@@ -2560,26 +2631,30 @@ for _, row in watch_df.iterrows():
 
 
             table_html += f"""
+
             <td>
 
-                <div class="prob-wrap">
+                <div class="probability-wrap">
 
-                    <div class="prob-track">
+                    <div class="probability-track">
 
                         <div
-                            class="prob-fill"
+                            class="probability-fill"
                             style="width:{probability:.1f}%;">
                         </div>
 
                     </div>
 
-                    <div class="prob-text">
+                    <div class="probability-text">
+
                         {probability:.1f}%
+
                     </div>
 
                 </div>
 
             </td>
+
             """
 
 
@@ -2587,22 +2662,25 @@ for _, row in watch_df.iterrows():
         # MONTHLY CHARGES
         # ----------------------------------------------------
 
-        elif column == "Monthly Charges":
+        elif (
+            column
+            == "Monthly Charges"
+        ):
 
             if pd.isna(value):
 
-                display_value = ""
+                formatted_value = ""
 
             else:
 
-                display_value = (
+                formatted_value = (
                     f"${float(value):,.2f}"
                 )
 
 
             table_html += (
                 '<td class="money-cell">'
-                f'{display_value}'
+                f'{formatted_value}'
                 '</td>'
             )
 
@@ -2611,22 +2689,25 @@ for _, row in watch_df.iterrows():
         # CLTV
         # ----------------------------------------------------
 
-        elif column == "CLTV":
+        elif (
+            column
+            == "CLTV"
+        ):
 
             if pd.isna(value):
 
-                display_value = ""
+                formatted_value = ""
 
             else:
 
-                display_value = (
+                formatted_value = (
                     f"{float(value):,.0f}"
                 )
 
 
             table_html += (
                 '<td>'
-                f'{display_value}'
+                f'{formatted_value}'
                 '</td>'
             )
 
@@ -2635,22 +2716,25 @@ for _, row in watch_df.iterrows():
         # TENURE
         # ----------------------------------------------------
 
-        elif column == "Tenure":
+        elif (
+            column
+            == "Tenure"
+        ):
 
             if pd.isna(value):
 
-                display_value = ""
+                formatted_value = ""
 
             else:
 
-                display_value = (
+                formatted_value = (
                     f"{float(value):.0f}"
                 )
 
 
             table_html += (
                 '<td>'
-                f'{display_value}'
+                f'{formatted_value}'
                 '</td>'
             )
 
@@ -2659,7 +2743,10 @@ for _, row in watch_df.iterrows():
         # RECOMMENDED ACTION
         # ----------------------------------------------------
 
-        elif column == "Recommended Action":
+        elif (
+            column
+            == "Recommended Action"
+        ):
 
             table_html += (
                 '<td class="action-cell">'
@@ -2669,7 +2756,7 @@ for _, row in watch_df.iterrows():
 
 
         # ----------------------------------------------------
-        # NORMAL TEXT
+        # ALL OTHER COLUMNS
         # ----------------------------------------------------
 
         else:
@@ -2695,11 +2782,12 @@ table_html += """
 </table>
 
 </div>
+
 """
 
 
 # ============================================================
-# DISPLAY LIGHT WATCHLIST
+# DISPLAY WATCHLIST
 # ============================================================
 
 html(
