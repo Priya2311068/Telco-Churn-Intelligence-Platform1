@@ -22,19 +22,20 @@ st.set_page_config(
 # COLORS
 # ============================================================
 
-BG = "#050E19"
-CARD = "#0E1E34"
-CARD_2 = "#142A46"
-BORDER = "#274361"
+BG = "#F7F9FC"
+CARD = "#FFFFFF"
+CARD_2 = "#F1F5F9"
+BORDER = "#D7E2EC"
 
-CYAN = "#43D4E0"
-TEAL = "#58AAB2"
-PURPLE = "#9364E7"
-ORANGE = "#F47A48"
-GREEN = "#43D29C"
+CYAN = "#168CE3"
+TEAL = "#145B8F"
+PURPLE = "#6D28D9"
+ORANGE = "#E0525E"
+GREEN = "#2A9D8F"
 
-TEXT = "#F8FAFC"
-MUTED = "#A8B6C9"
+TEXT = "#16324F"
+MUTED = "#64748B"
+
 
 
 # ============================================================
