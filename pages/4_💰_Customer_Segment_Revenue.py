@@ -37,7 +37,6 @@ TEXT = "#16324F"
 MUTED = "#64748B"
 
 
-
 # ============================================================
 # VISUAL SETTINGS
 # ============================================================
@@ -73,16 +72,19 @@ html(
     f"""
     <style>
 
+    /* ======================================================
+       MAIN APP
+    ====================================================== */
+
     .stApp {{
-        background:
-            radial-gradient(
-                circle at 10% 0%,
-                #12314E 0%,
-                {BG} 32%,
-                #020810 100%
-            );
+        background: {BG};
         color: {TEXT};
     }}
+
+
+    /* ======================================================
+       PRESERVE ORIGINAL PAGE LAYOUT
+    ====================================================== */
 
     .block-container {{
         max-width: 1650px !important;
@@ -92,11 +94,21 @@ html(
         padding-right: 0.42rem !important;
     }}
 
+
+    /* ======================================================
+       STREAMLIT HEADER
+    ====================================================== */
+
     header[data-testid="stHeader"] {{
         height: 20px !important;
         min-height: 20px !important;
         background: transparent !important;
     }}
+
+
+    /* ======================================================
+       DASHBOARD HERO
+    ====================================================== */
 
     .hero {{
         height: 50px;
@@ -109,15 +121,15 @@ html(
         border: 1px solid {BORDER};
         border-radius: 11px;
 
-        background:
-            linear-gradient(
-                120deg,
-                #122844,
-                #09182A
-            );
+        background: #FFFFFF;
+
+        box-shadow:
+            0px 2px 8px
+            rgba(22,50,79,.06);
 
         margin-bottom: 2px;
     }}
+
 
     .hero-icon {{
         height: 32px;
@@ -137,59 +149,81 @@ html(
         background:
             linear-gradient(
                 135deg,
-                rgba(67,212,224,.23),
-                rgba(147,100,231,.22)
+                rgba(22,140,227,.12),
+                rgba(109,40,217,.10)
             );
     }}
+
 
     .hero-title {{
         font-size: 20px;
         font-weight: 850;
         line-height: 1;
+
         color: {TEXT};
     }}
+
 
     .hero-subtitle {{
         margin-top: 3px;
+
         font-size: 7.2px;
         letter-spacing: .65px;
+
         color: {MUTED};
     }}
 
+
+    /* ======================================================
+       SECTION TITLE
+    ====================================================== */
+
     .section-title {{
         color: {TEXT};
+
         font-size: 11.5px;
         font-weight: 800;
         line-height: 1;
+
         margin-top: 2px;
         margin-bottom: 2px;
     }}
+
 
     .row-gap {{
         height: {ROW_GAP}px;
     }}
 
+
+    /* ======================================================
+       KPI CARDS
+    ====================================================== */
+
     .kpi {{
         height: {KPI_HEIGHT}px;
+
         box-sizing: border-box;
+
         padding: 7px 11px;
 
         border: 1px solid {BORDER};
         border-radius: 10px;
 
-        background:
-            linear-gradient(
-                145deg,
-                #11253F,
-                #09192B
-            );
+        background: #FFFFFF;
+
+        box-shadow:
+            0px 2px 8px
+            rgba(22,50,79,.06);
     }}
+
 
     .kpi-top {{
         display: flex;
         align-items: center;
+
         gap: 9px;
     }}
+
 
     .kpi-icon {{
         width: 25px;
@@ -201,31 +235,43 @@ html(
         justify-content: center;
 
         border-radius: 7px;
+
         font-size: 13px;
 
         background:
             linear-gradient(
                 135deg,
-                rgba(67,212,224,.22),
-                rgba(147,100,231,.20)
+                rgba(22,140,227,.12),
+                rgba(109,40,217,.10)
             );
     }}
+
 
     .kpi-value {{
         font-size: 19px;
         font-weight: 850;
         line-height: 1;
+
         color: {TEXT};
     }}
 
+
     .kpi-label {{
         margin-top: 7px;
+
         font-size: 9.4px;
+
         color: {MUTED};
     }}
 
+
+    /* ======================================================
+       BOTTOM CARDS
+    ====================================================== */
+
     .bottom-card {{
         height: {BOTTOM_HEIGHT}px;
+
         box-sizing: border-box;
 
         padding: 9px 13px;
@@ -233,90 +279,259 @@ html(
         border: 1px solid {BORDER};
         border-radius: 10px;
 
-        background:
-            linear-gradient(
-                145deg,
-                #102138,
-                #091728
-            );
+        background: #FFFFFF;
+
+        box-shadow:
+            0px 2px 8px
+            rgba(22,50,79,.06);
 
         overflow: hidden;
     }}
 
+
     .bottom-heading {{
         margin-bottom: 5px;
+
         font-size: 11.7px;
         font-weight: 850;
     }}
 
+
     .bottom-text {{
         font-size: 12px;
         line-height: 1.20;
+
         color: {TEXT};
     }}
+
 
     .insight-line {{
         margin-bottom: 3px;
     }}
 
+
     .highlight {{
         color: {CYAN};
+
         font-weight: 850;
     }}
+
+
+    /* ======================================================
+       PLOTLY CHART CARDS
+    ====================================================== */
 
     div[data-testid="stPlotlyChart"] {{
         border: 1px solid {BORDER};
         border-radius: 10px;
 
-        background:
-            linear-gradient(
-                145deg,
-                #0F2139,
-                #081729
-            );
+        background: #FFFFFF;
 
         overflow: hidden;
-        box-shadow: 0px 2px 8px rgba(0,0,0,.10);
+
+        box-shadow:
+            0px 2px 8px
+            rgba(22,50,79,.06);
     }}
+
+
+    /* ======================================================
+       PRESERVE EXISTING SPACING
+    ====================================================== */
 
     div[data-testid="stVerticalBlock"] {{
         gap: 0.03rem !important;
     }}
 
+
     div[data-testid="stHorizontalBlock"] {{
         gap: 0.65rem !important;
     }}
+
 
     div[data-testid="column"] {{
         padding-left: 0px !important;
         padding-right: 0px !important;
     }}
 
+
+    /* ======================================================
+       SIDEBAR
+    ====================================================== */
+
     section[data-testid="stSidebar"] {{
-        background:
-            linear-gradient(
-                180deg,
-                #0D1D31,
-                #06111F
-            );
+        background: #FFFFFF !important;
 
-        border-right: 1px solid {BORDER};
+        border-right:
+            1px solid {BORDER};
     }}
 
+
+    section[data-testid="stSidebar"] > div {{
+        background: #FFFFFF !important;
+    }}
+
+
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3,
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] span {{
+
+        color: {TEXT} !important;
+
+        -webkit-text-fill-color:
+            {TEXT} !important;
+    }}
+
+
+    /* ======================================================
+       FILTER SELECTBOXES
+    ====================================================== */
+
+    section[data-testid="stSidebar"]
     div[data-baseweb="select"] > div {{
-        min-height: 30px !important;
-        background: #0B1727;
-        border: 1px solid {BORDER};
-        border-radius: 8px;
+
+        min-height:
+            30px !important;
+
+        background:
+            #FFFFFF !important;
+
+        color:
+            {TEXT} !important;
+
+        border:
+            1px solid #B8C7D9 !important;
+
+        border-radius:
+            8px !important;
+
+        box-shadow:
+            none !important;
     }}
+
+
+    section[data-testid="stSidebar"]
+    [role="combobox"] {{
+
+        background:
+            #FFFFFF !important;
+
+        color:
+            {TEXT} !important;
+
+        -webkit-text-fill-color:
+            {TEXT} !important;
+    }}
+
+
+    section[data-testid="stSidebar"]
+    div[data-baseweb="select"] span {{
+
+        color:
+            {TEXT} !important;
+
+        -webkit-text-fill-color:
+            {TEXT} !important;
+    }}
+
+
+    section[data-testid="stSidebar"]
+    div[data-baseweb="select"] svg {{
+
+        fill:
+            {MUTED} !important;
+
+        color:
+            {MUTED} !important;
+    }}
+
+
+    section[data-testid="stSidebar"]
+    div[data-baseweb="select"] > div:hover {{
+
+        border-color:
+            {CYAN} !important;
+    }}
+
+
+    section[data-testid="stSidebar"]
+    div[data-baseweb="select"] > div:focus-within {{
+
+        border-color:
+            {CYAN} !important;
+
+        box-shadow:
+            0 0 0 1px
+            {CYAN} !important;
+    }}
+
+
+    /* ======================================================
+       OPEN FILTER DROPDOWN
+    ====================================================== */
+
+    div[data-baseweb="popover"],
+    div[data-baseweb="menu"],
+    ul[role="listbox"] {{
+
+        background:
+            #FFFFFF !important;
+
+        color:
+            {TEXT} !important;
+    }}
+
+
+    li[role="option"],
+    li[role="option"] * {{
+
+        background:
+            #FFFFFF !important;
+
+        color:
+            {TEXT} !important;
+
+        -webkit-text-fill-color:
+            {TEXT} !important;
+    }}
+
+
+    li[role="option"]:hover {{
+
+        background:
+            #EAF4FB !important;
+
+        color:
+            {TEAL} !important;
+    }}
+
+
+    li[role="option"][aria-selected="true"] {{
+
+        background:
+            #EAF4FB !important;
+
+        color:
+            {TEAL} !important;
+    }}
+
+
+    /* ======================================================
+       HIDE DEFAULT STREAMLIT ELEMENTS
+    ====================================================== */
 
     #MainMenu {{
         visibility: hidden;
     }}
 
+
     footer {{
         visibility: hidden;
     }}
+
 
     </style>
     """
@@ -332,24 +547,44 @@ def load_data():
 
     paths = [
         Path("telco_customer_churn.csv"),
-        Path("Telco_Churn_Project/telco_customer_churn.csv"),
-        Path("data/telco_customer_churn.csv"),
+        Path(
+            "Telco_Churn_Project/"
+            "telco_customer_churn.csv"
+        ),
+        Path(
+            "data/"
+            "telco_customer_churn.csv"
+        ),
     ]
 
     for path in paths:
+
         if path.exists():
-            return pd.read_csv(path)
+
+            return pd.read_csv(
+                path
+            )
 
     return None
 
 
 df = load_data()
 
+
 if df is None:
-    st.error("Could not find telco_customer_churn.csv")
+
+    st.error(
+        "Could not find "
+        "telco_customer_churn.csv"
+    )
+
     st.stop()
 
-df.columns = df.columns.str.strip()
+
+df.columns = (
+    df.columns
+    .str.strip()
+)
 
 
 # ============================================================
@@ -359,11 +594,15 @@ df.columns = df.columns.str.strip()
 def find_column(names):
 
     normalized = {
+
         col.lower()
         .replace("_", "")
-        .replace(" ", ""): col
+        .replace(" ", ""):
+        col
+
         for col in df.columns
     }
+
 
     for name in names:
 
@@ -373,66 +612,101 @@ def find_column(names):
             .replace(" ", "")
         )
 
+
         if key in normalized:
+
             return normalized[key]
+
 
     return None
 
 
-churn_col = find_column([
-    "Churn",
-    "Churn Label",
-    "Churn Value",
-    "Customer Status"
-])
+churn_col = find_column(
+    [
+        "Churn",
+        "Churn Label",
+        "Churn Value",
+        "Customer Status"
+    ]
+)
 
-monthly_col = find_column([
-    "MonthlyCharges",
-    "Monthly Charges"
-])
 
-total_col = find_column([
-    "TotalCharges",
-    "Total Charges"
-])
+monthly_col = find_column(
+    [
+        "MonthlyCharges",
+        "Monthly Charges"
+    ]
+)
 
-cltv_col = find_column([
-    "CLTV",
-    "Customer Lifetime Value"
-])
 
-payment_col = find_column([
-    "PaymentMethod",
-    "Payment Method"
-])
+total_col = find_column(
+    [
+        "TotalCharges",
+        "Total Charges"
+    ]
+)
 
-contract_col = find_column([
-    "Contract"
-])
 
-internet_col = find_column([
-    "InternetService",
-    "Internet Service"
-])
+cltv_col = find_column(
+    [
+        "CLTV",
+        "Customer Lifetime Value"
+    ]
+)
 
-gender_col = find_column([
-    "Gender"
-])
 
-tenure_col = find_column([
-    "Tenure",
-    "Tenure Months"
-])
+payment_col = find_column(
+    [
+        "PaymentMethod",
+        "Payment Method"
+    ]
+)
 
-dependents_col = find_column([
-    "Dependents"
-])
 
-senior_col = find_column([
-    "Senior Citizen",
-    "SeniorCitizen",
-    "Senior Citizen Status"
-])
+contract_col = find_column(
+    [
+        "Contract"
+    ]
+)
+
+
+internet_col = find_column(
+    [
+        "InternetService",
+        "Internet Service"
+    ]
+)
+
+
+gender_col = find_column(
+    [
+        "Gender"
+    ]
+)
+
+
+tenure_col = find_column(
+    [
+        "Tenure",
+        "Tenure Months"
+    ]
+)
+
+
+dependents_col = find_column(
+    [
+        "Dependents"
+    ]
+)
+
+
+senior_col = find_column(
+    [
+        "Senior Citizen",
+        "SeniorCitizen",
+        "Senior Citizen Status"
+    ]
+)
 
 
 # ============================================================
@@ -440,13 +714,16 @@ senior_col = find_column([
 # ============================================================
 
 for col in [
+
     monthly_col,
     total_col,
     cltv_col,
     tenure_col
+
 ]:
 
     if col:
+
         df[col] = pd.to_numeric(
             df[col],
             errors="coerce"
@@ -460,68 +737,103 @@ for col in [
 def create_churn_flag(data):
 
     if churn_col is None:
+
         return pd.Series(
             0,
             index=data.index
         )
 
+
     values = (
+
         data[churn_col]
+
         .astype(str)
+
         .str.lower()
+
         .str.strip()
     )
 
-    return values.isin([
-        "yes",
-        "churned",
-        "1",
-        "true"
-    ]).astype(int)
+
+    return values.isin(
+        [
+            "yes",
+            "churned",
+            "1",
+            "true"
+        ]
+    ).astype(int)
 
 
-df["Churn_Flag"] = create_churn_flag(df)
+df["Churn_Flag"] = (
+    create_churn_flag(df)
+)
 
 
 # ============================================================
 # SIDEBAR FILTERS
 # ============================================================
 
-st.sidebar.markdown("## 🔎 Filters")
+st.sidebar.markdown(
+    "## 🔎 Filters"
+)
+
 
 st.sidebar.caption(
     "Explore customer segments and revenue interactively."
 )
 
+
 filtered_df = df.copy()
 
 
-def add_filter(data, column, label):
+def add_filter(
+    data,
+    column,
+    label
+):
 
     if column is None:
+
         return data
 
+
     options = (
+
         data[column]
+
         .dropna()
+
         .astype(str)
+
         .sort_values()
+
         .unique()
+
         .tolist()
     )
 
-    selected = st.sidebar.selectbox(
-        label,
-        ["All"] + options
+
+    selected = (
+        st.sidebar.selectbox(
+            label,
+            ["All"] + options
+        )
     )
+
 
     if selected != "All":
 
         data = data[
+
             data[column]
+
             .astype(str)
+
             .eq(selected)
         ]
+
 
     return data
 
@@ -532,17 +844,20 @@ filtered_df = add_filter(
     "📡 Internet Service"
 )
 
+
 filtered_df = add_filter(
     filtered_df,
     payment_col,
     "💳 Payment Method"
 )
 
+
 filtered_df = add_filter(
     filtered_df,
     contract_col,
     "📄 Contract"
 )
+
 
 filtered_df = add_filter(
     filtered_df,
@@ -569,15 +884,15 @@ html(
 
                 Telco Customer
 
-                <span style="color:#43D4E0;">
+                <span style="color:#168CE3;">
                     Segment
                 </span>
 
-                <span style="color:#F47A48;">
+                <span style="color:#E0525E;">
                     &
                 </span>
 
-                <span style="color:#9364E7;">
+                <span style="color:#6D28D9;">
                     Revenue Analysis
                 </span>
 
@@ -604,26 +919,59 @@ html(
 # ============================================================
 
 total_revenue = (
-    filtered_df[total_col].fillna(0).sum()
+
+    filtered_df[
+        total_col
+    ]
+
+    .fillna(0)
+
+    .sum()
+
     if total_col
+
     else 0
 )
+
 
 avg_total_charges = (
-    filtered_df[total_col].mean()
+
+    filtered_df[
+        total_col
+    ]
+
+    .mean()
+
     if total_col
+
     else 0
 )
+
 
 avg_monthly_charges = (
-    filtered_df[monthly_col].mean()
+
+    filtered_df[
+        monthly_col
+    ]
+
+    .mean()
+
     if monthly_col
+
     else 0
 )
 
+
 avg_cltv = (
-    filtered_df[cltv_col].mean()
+
+    filtered_df[
+        cltv_col
+    ]
+
+    .mean()
+
     if cltv_col
+
     else 0
 )
 
@@ -632,7 +980,11 @@ avg_cltv = (
 # KPI COMPONENT
 # ============================================================
 
-def kpi(icon, value, label):
+def kpi(
+    icon,
+    value,
+    label
+):
 
     html(
         f"""
@@ -678,8 +1030,11 @@ def style_chart(
     fig.update_layout(
 
         title=dict(
+
             text=title,
+
             x=0.5,
+
             xanchor="center",
 
             font=dict(
@@ -690,8 +1045,11 @@ def style_chart(
 
         height=height,
 
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor=
+            "rgba(0,0,0,0)",
+
+        plot_bgcolor=
+            "rgba(0,0,0,0)",
 
         margin=dict(
             l=left,
@@ -717,27 +1075,38 @@ def style_chart(
         )
     )
 
+
     fig.update_xaxes(
+
         showgrid=False,
+
         zeroline=False,
-        showticklabels=show_x,
+
+        showticklabels=
+            show_x,
 
         tickfont=dict(
             size=CATEGORY_LABEL_SIZE,
             color=TEXT
         )
     )
+
 
     fig.update_yaxes(
+
         showgrid=False,
+
         zeroline=False,
-        showticklabels=show_y,
+
+        showticklabels=
+            show_y,
 
         tickfont=dict(
             size=CATEGORY_LABEL_SIZE,
             color=TEXT
         )
     )
+
 
     return fig
 
@@ -753,33 +1122,43 @@ html(
 )
 
 
-k1, k2, k3, k4 = st.columns(
-    4,
-    gap="medium"
+k1, k2, k3, k4 = (
+    st.columns(
+        4,
+        gap="medium"
+    )
 )
 
+
 with k1:
+
     kpi(
         "💰",
         f"{total_revenue / 1_000_000:.2f}M",
         "Total Revenue"
     )
 
+
 with k2:
+
     kpi(
         "💳",
         f"{avg_total_charges / 1000:.2f}K",
         "Average Total Charges"
     )
 
+
 with k3:
+
     kpi(
         "🧾",
         f"${avg_monthly_charges:.2f}",
         "Average Monthly Charges"
     )
 
+
 with k4:
+
     kpi(
         "💎",
         f"{avg_cltv / 1000:.2f}K",
@@ -791,11 +1170,16 @@ with k4:
 # ROW 2
 # ============================================================
 
-html('<div class="row-gap"></div>')
+html(
+    '<div class="row-gap"></div>'
+)
 
-revenue_box, dependent_box, senior_box = st.columns(
-    3,
-    gap="medium"
+
+revenue_box, dependent_box, senior_box = (
+    st.columns(
+        3,
+        gap="medium"
+    )
 )
 
 
@@ -808,35 +1192,65 @@ with revenue_box:
     if total_col:
 
         revenue_status = (
+
             filtered_df
-            .groupby("Churn_Flag")[total_col]
+
+            .groupby(
+                "Churn_Flag"
+            )[total_col]
+
             .mean()
+
             .reset_index()
         )
 
-        revenue_status["Status"] = (
-            revenue_status["Churn_Flag"]
-            .map({
-                0: "No",
-                1: "Yes"
-            })
+
+        revenue_status[
+            "Status"
+        ] = (
+
+            revenue_status[
+                "Churn_Flag"
+            ]
+
+            .map(
+                {
+                    0: "No",
+                    1: "Yes"
+                }
+            )
         )
+
 
         fig = go.Figure()
 
+
         fig.add_bar(
-            x=revenue_status["Status"],
-            y=revenue_status[total_col],
+
+            x=revenue_status[
+                "Status"
+            ],
+
+            y=revenue_status[
+                total_col
+            ],
 
             width=MINI_BAR_WIDTH,
+
             marker_color=TEAL,
 
             text=[
                 f"{x / 1000:.1f}K"
-                for x in revenue_status[total_col]
+
+                for x in
+
+                revenue_status[
+                    total_col
+                ]
             ],
 
-            textposition="outside",
+            textposition=
+                "outside",
 
             textfont=dict(
                 size=DATA_LABEL_SIZE,
@@ -846,9 +1260,13 @@ with revenue_box:
             cliponaxis=False
         )
 
+
         fig = style_chart(
+
             fig,
+
             "💵 Average Revenue by Churn Status",
+
             MINI_HEIGHT,
 
             show_y=False,
@@ -859,17 +1277,30 @@ with revenue_box:
             bottom=8
         )
 
+
         fig.update_yaxes(
+
             range=[
                 0,
-                revenue_status[total_col].max() * 1.34
+
+                revenue_status[
+                    total_col
+                ].max()
+                * 1.34
             ]
         )
 
+
         st.plotly_chart(
+
             fig,
+
             width="stretch",
-            config={"displayModeBar": False}
+
+            config={
+                "displayModeBar":
+                    False
+            }
         )
 
 
@@ -882,28 +1313,52 @@ with dependent_box:
     if dependents_col:
 
         dep_data = (
+
             filtered_df
-            .groupby(dependents_col)["Churn_Flag"]
+
+            .groupby(
+                dependents_col
+            )[
+                "Churn_Flag"
+            ]
+
             .mean()
+
             .mul(100)
+
             .reset_index()
         )
 
+
         fig = go.Figure()
 
+
         fig.add_bar(
-            x=dep_data[dependents_col],
-            y=dep_data["Churn_Flag"],
+
+            x=dep_data[
+                dependents_col
+            ],
+
+            y=dep_data[
+                "Churn_Flag"
+            ],
 
             width=MINI_BAR_WIDTH,
+
             marker_color=TEAL,
 
             text=[
                 f"{x:.2f}%"
-                for x in dep_data["Churn_Flag"]
+
+                for x in
+
+                dep_data[
+                    "Churn_Flag"
+                ]
             ],
 
-            textposition="outside",
+            textposition=
+                "outside",
 
             textfont=dict(
                 size=DATA_LABEL_SIZE,
@@ -913,9 +1368,13 @@ with dependent_box:
             cliponaxis=False
         )
 
+
         fig = style_chart(
+
             fig,
+
             "👨‍👩‍👧 Churn Rate by Dependents",
+
             MINI_HEIGHT,
 
             show_y=False,
@@ -926,20 +1385,34 @@ with dependent_box:
             bottom=8
         )
 
+
         fig.update_yaxes(
+
             range=[
                 0,
+
                 max(
                     40,
-                    dep_data["Churn_Flag"].max() * 1.32
+
+                    dep_data[
+                        "Churn_Flag"
+                    ].max()
+                    * 1.32
                 )
             ]
         )
 
+
         st.plotly_chart(
+
             fig,
+
             width="stretch",
-            config={"displayModeBar": False}
+
+            config={
+                "displayModeBar":
+                    False
+            }
         )
 
 
@@ -952,39 +1425,73 @@ with senior_box:
     if senior_col:
 
         senior_data = (
+
             filtered_df
-            .groupby(senior_col)["Churn_Flag"]
+
+            .groupby(
+                senior_col
+            )[
+                "Churn_Flag"
+            ]
+
             .mean()
+
             .mul(100)
+
             .reset_index()
         )
 
-        senior_data["Status"] = (
-            senior_data[senior_col]
+
+        senior_data[
+            "Status"
+        ] = (
+
+            senior_data[
+                senior_col
+            ]
+
             .astype(str)
-            .replace({
-                "1": "Yes",
-                "0": "No",
-                "1.0": "Yes",
-                "0.0": "No"
-            })
+
+            .replace(
+                {
+                    "1": "Yes",
+                    "0": "No",
+                    "1.0": "Yes",
+                    "0.0": "No"
+                }
+            )
         )
+
 
         fig = go.Figure()
 
+
         fig.add_bar(
-            x=senior_data["Status"],
-            y=senior_data["Churn_Flag"],
+
+            x=senior_data[
+                "Status"
+            ],
+
+            y=senior_data[
+                "Churn_Flag"
+            ],
 
             width=MINI_BAR_WIDTH,
+
             marker_color=PURPLE,
 
             text=[
                 f"{x:.2f}%"
-                for x in senior_data["Churn_Flag"]
+
+                for x in
+
+                senior_data[
+                    "Churn_Flag"
+                ]
             ],
 
-            textposition="outside",
+            textposition=
+                "outside",
 
             textfont=dict(
                 size=DATA_LABEL_SIZE,
@@ -994,9 +1501,13 @@ with senior_box:
             cliponaxis=False
         )
 
+
         fig = style_chart(
+
             fig,
+
             "👴 Churn Rate by Senior Citizen",
+
             MINI_HEIGHT,
 
             show_y=False,
@@ -1007,20 +1518,34 @@ with senior_box:
             bottom=8
         )
 
+
         fig.update_yaxes(
+
             range=[
                 0,
+
                 max(
                     55,
-                    senior_data["Churn_Flag"].max() * 1.30
+
+                    senior_data[
+                        "Churn_Flag"
+                    ].max()
+                    * 1.30
                 )
             ]
         )
 
+
         st.plotly_chart(
+
             fig,
+
             width="stretch",
-            config={"displayModeBar": False}
+
+            config={
+                "displayModeBar":
+                    False
+            }
         )
 
 
@@ -1028,11 +1553,19 @@ with senior_box:
 # ROW 3
 # ============================================================
 
-html('<div class="row-gap"></div>')
+html(
+    '<div class="row-gap"></div>'
+)
 
-payment_box, cltv_box = st.columns(
-    [1.55, 1],
-    gap="medium"
+
+payment_box, cltv_box = (
+    st.columns(
+        [
+            1.55,
+            1
+        ],
+        gap="medium"
+    )
 )
 
 
@@ -1045,39 +1578,77 @@ with payment_box:
     if payment_col:
 
         payment_data = (
+
             filtered_df
-            .groupby(payment_col)["Churn_Flag"]
+
+            .groupby(
+                payment_col
+            )[
+                "Churn_Flag"
+            ]
+
             .mean()
+
             .mul(100)
+
             .reset_index()
+
             .sort_values(
                 "Churn_Flag",
                 ascending=True
             )
         )
 
+
         fig = go.Figure()
 
+
         fig.add_bar(
-            x=payment_data["Churn_Flag"],
-            y=payment_data[payment_col],
+
+            x=payment_data[
+                "Churn_Flag"
+            ],
+
+            y=payment_data[
+                payment_col
+            ],
 
             orientation="h",
+
             width=0.38,
+
             marker_color=TEAL
         )
 
-        max_payment = payment_data["Churn_Flag"].max()
 
-        for _, row in payment_data.iterrows():
+        max_payment = (
+
+            payment_data[
+                "Churn_Flag"
+            ]
+
+            .max()
+        )
+
+
+        for _, row in (
+            payment_data.iterrows()
+        ):
 
             fig.add_annotation(
+
                 x=(
-                    row["Churn_Flag"]
-                    + max_payment * 0.018
+                    row[
+                        "Churn_Flag"
+                    ]
+
+                    + max_payment
+                    * 0.018
                 ),
 
-                y=row[payment_col],
+                y=row[
+                    payment_col
+                ],
 
                 text=(
                     f"<b>"
@@ -1086,6 +1657,7 @@ with payment_box:
                 ),
 
                 showarrow=False,
+
                 xanchor="left",
 
                 font=dict(
@@ -1094,9 +1666,13 @@ with payment_box:
                 )
             )
 
+
         fig = style_chart(
+
             fig,
+
             "💳 Churn Rate by Payment Method",
+
             MAIN_HEIGHT,
 
             show_x=False,
@@ -1107,17 +1683,27 @@ with payment_box:
             bottom=6
         )
 
+
         fig.update_xaxes(
+
             range=[
                 0,
-                max_payment * 1.17
+                max_payment
+                * 1.17
             ]
         )
 
+
         st.plotly_chart(
+
             fig,
+
             width="stretch",
-            config={"displayModeBar": False}
+
+            config={
+                "displayModeBar":
+                    False
+            }
         )
 
 
@@ -1129,10 +1715,18 @@ with cltv_box:
 
     if tenure_col and cltv_col:
 
-        temp = filtered_df.copy()
+        temp = (
+            filtered_df.copy()
+        )
 
-        temp["Tenure Group"] = pd.cut(
-            temp[tenure_col],
+
+        temp[
+            "Tenure Group"
+        ] = pd.cut(
+
+            temp[
+                tenure_col
+            ],
 
             bins=[
                 -1,
@@ -1150,42 +1744,78 @@ with cltv_box:
             ]
         )
 
+
         cltv_data = (
+
             temp
+
             .groupby(
                 "Tenure Group",
                 observed=False
-            )[cltv_col]
+            )[
+                cltv_col
+            ]
+
             .mean()
+
             .reset_index()
+
             .sort_values(
                 cltv_col,
                 ascending=True
             )
         )
 
+
         fig = go.Figure()
 
+
         fig.add_bar(
-            x=cltv_data[cltv_col],
-            y=cltv_data["Tenure Group"],
+
+            x=cltv_data[
+                cltv_col
+            ],
+
+            y=cltv_data[
+                "Tenure Group"
+            ],
 
             orientation="h",
+
             width=0.38,
+
             marker_color=PURPLE
         )
 
-        max_cltv = cltv_data[cltv_col].max()
 
-        for _, row in cltv_data.iterrows():
+        max_cltv = (
+
+            cltv_data[
+                cltv_col
+            ]
+
+            .max()
+        )
+
+
+        for _, row in (
+            cltv_data.iterrows()
+        ):
 
             fig.add_annotation(
+
                 x=(
-                    row[cltv_col]
-                    + max_cltv * 0.018
+                    row[
+                        cltv_col
+                    ]
+
+                    + max_cltv
+                    * 0.018
                 ),
 
-                y=row["Tenure Group"],
+                y=row[
+                    "Tenure Group"
+                ],
 
                 text=(
                     f"<b>"
@@ -1194,6 +1824,7 @@ with cltv_box:
                 ),
 
                 showarrow=False,
+
                 xanchor="left",
 
                 font=dict(
@@ -1202,9 +1833,13 @@ with cltv_box:
                 )
             )
 
+
         fig = style_chart(
+
             fig,
+
             "⏳ Average CLTV by Tenure Group",
+
             MAIN_HEIGHT,
 
             show_x=False,
@@ -1215,17 +1850,27 @@ with cltv_box:
             bottom=6
         )
 
+
         fig.update_xaxes(
+
             range=[
                 0,
-                max_cltv * 1.17
+                max_cltv
+                * 1.17
             ]
         )
 
+
         st.plotly_chart(
+
             fig,
+
             width="stretch",
-            config={"displayModeBar": False}
+
+            config={
+                "displayModeBar":
+                    False
+            }
         )
 
 
@@ -1233,29 +1878,42 @@ with cltv_box:
 # ROW 4 — FULL WIDTH MATRIX
 # ============================================================
 
-html('<div class="row-gap"></div>')
+html(
+    '<div class="row-gap"></div>'
+)
 
 
 if contract_col and payment_col:
 
     matrix_data = (
+
         filtered_df
+
         .groupby(
             [
                 contract_col,
                 payment_col
             ]
-        )["Churn_Flag"]
+        )[
+            "Churn_Flag"
+        ]
+
         .mean()
+
         .mul(100)
+
         .reset_index()
     )
 
-    pivot = matrix_data.pivot(
-        index=contract_col,
-        columns=payment_col,
-        values="Churn_Flag"
+
+    pivot = (
+        matrix_data.pivot(
+            index=contract_col,
+            columns=payment_col,
+            values="Churn_Flag"
+        )
     )
+
 
     preferred_contract_order = [
         "Month-to-month",
@@ -1263,26 +1921,48 @@ if contract_col and payment_col:
         "Two year"
     ]
 
+
     available = [
+
         x
-        for x in preferred_contract_order
-        if x in pivot.index
+
+        for x in
+        preferred_contract_order
+
+        if x in
+        pivot.index
     ]
+
 
     if available:
-        pivot = pivot.loc[available]
+
+        pivot = (
+            pivot.loc[
+                available
+            ]
+        )
+
 
     matrix_text = [
+
         [
+
             (
                 f"{value:.2f}%"
+
                 if pd.notna(value)
+
                 else ""
             )
+
             for value in row
+
         ]
-        for row in pivot.values
+
+        for row in
+        pivot.values
     ]
+
 
     fig = go.Figure(
 
@@ -1291,10 +1971,13 @@ if contract_col and payment_col:
             z=pivot.values,
 
             x=pivot.columns,
+
             y=pivot.index,
 
             text=matrix_text,
-            texttemplate="%{text}",
+
+            texttemplate=
+                "%{text}",
 
             textfont=dict(
                 size=12,
@@ -1302,9 +1985,18 @@ if contract_col and payment_col:
             ),
 
             colorscale=[
-                [0, "#102138"],
-                [0.50, TEAL],
-                [1, ORANGE]
+                [
+                    0,
+                    "#EAF4FB"
+                ],
+                [
+                    0.50,
+                    "#7DBCE8"
+                ],
+                [
+                    1,
+                    ORANGE
+                ]
             ],
 
             showscale=False,
@@ -1323,9 +2015,16 @@ if contract_col and payment_col:
         )
     )
 
+
     fig = style_chart(
+
         fig,
-        "🧩 Churn Rate by Contract & Payment Method",
+
+        (
+            "🧩 Churn Rate by Contract "
+            "& Payment Method"
+        ),
+
         MATRIX_HEIGHT,
 
         left=105,
@@ -1334,7 +2033,9 @@ if contract_col and payment_col:
         bottom=30
     )
 
+
     fig.update_xaxes(
+
         side="bottom",
 
         tickfont=dict(
@@ -1345,7 +2046,9 @@ if contract_col and payment_col:
         automargin=True
     )
 
+
     fig.update_yaxes(
+
         autorange="reversed",
 
         tickfont=dict(
@@ -1356,10 +2059,17 @@ if contract_col and payment_col:
         automargin=True
     )
 
+
     st.plotly_chart(
+
         fig,
+
         width="stretch",
-        config={"displayModeBar": False}
+
+        config={
+            "displayModeBar":
+                False
+        }
     )
 
 
@@ -1368,32 +2078,58 @@ if contract_col and payment_col:
 # ============================================================
 
 highest_payment_name = "N/A"
+
 highest_payment_rate = 0
+
 
 if payment_col:
 
     pay_summary = (
+
         filtered_df
-        .groupby(payment_col)["Churn_Flag"]
+
+        .groupby(
+            payment_col
+        )[
+            "Churn_Flag"
+        ]
+
         .mean()
+
         .mul(100)
     )
 
+
     if not pay_summary.empty:
 
-        highest_payment_name = pay_summary.idxmax()
-        highest_payment_rate = pay_summary.max()
+        highest_payment_name = (
+            pay_summary.idxmax()
+        )
+
+        highest_payment_rate = (
+            pay_summary.max()
+        )
 
 
 best_cltv_group = "N/A"
+
 best_cltv_value = 0
+
 
 if tenure_col and cltv_col:
 
-    insight_temp = filtered_df.copy()
+    insight_temp = (
+        filtered_df.copy()
+    )
 
-    insight_temp["Tenure Group"] = pd.cut(
-        insight_temp[tenure_col],
+
+    insight_temp[
+        "Tenure Group"
+    ] = pd.cut(
+
+        insight_temp[
+            tenure_col
+        ],
 
         bins=[
             -1,
@@ -1411,14 +2147,21 @@ if tenure_col and cltv_col:
         ]
     )
 
+
     cltv_summary = (
+
         insight_temp
+
         .groupby(
             "Tenure Group",
             observed=False
-        )[cltv_col]
+        )[
+            cltv_col
+        ]
+
         .mean()
     )
+
 
     if not cltv_summary.empty:
 
@@ -1435,11 +2178,16 @@ if tenure_col and cltv_col:
 # BOTTOM ROW
 # ============================================================
 
-html('<div class="row-gap"></div>')
+html(
+    '<div class="row-gap"></div>'
+)
 
-insight_box, recommendation_box = st.columns(
-    2,
-    gap="medium"
+
+insight_box, recommendation_box = (
+    st.columns(
+        2,
+        gap="medium"
+    )
 )
 
 
@@ -1453,30 +2201,52 @@ with insight_box:
                 class="bottom-heading"
                 style="color:{ORANGE};"
             >
+
                 💡 KEY INSIGHTS
+
             </div>
 
             <div class="bottom-text">
 
                 <div class="insight-line">
+
                     <span class="highlight">
+
                         {highest_payment_rate:.2f}%
+
                     </span>
+
                     — <b>{highest_payment_name}</b>
-                    has the highest payment-method churn.
+
+                    has the highest
+                    payment-method churn.
+
                 </div>
 
+
                 <div class="insight-line">
+
                     <span class="highlight">
+
                         {best_cltv_value / 1000:.2f}K
+
                     </span>
+
                     — <b>{best_cltv_group}</b>
-                    generates the highest average CLTV.
+
+                    generates the highest
+                    average CLTV.
+
                 </div>
 
+
                 <div class="insight-line">
-                    Longer-tenure customers provide stronger
-                    lifetime value and retention opportunities.
+
+                    Longer-tenure customers
+                    provide stronger lifetime
+                    value and retention
+                    opportunities.
+
                 </div>
 
             </div>
@@ -1496,32 +2266,53 @@ with recommendation_box:
                 class="bottom-heading"
                 style="color:{CYAN};"
             >
+
                 🎯 RECOMMENDATIONS
+
             </div>
 
             <div class="bottom-text">
 
                 <div class="insight-line">
+
                     <b style="color:{CYAN};">
+
                         RETAIN
+
                     </b>
-                    — Target vulnerable high-value customers.
+
+                    — Target vulnerable
+                    high-value customers.
+
                 </div>
 
+
                 <div class="insight-line">
+
                     <b style="color:{ORANGE};">
+
                         CONVERT
+
                     </b>
-                    — Move high-risk month-to-month customers
+
+                    — Move high-risk
+                    month-to-month customers
                     toward annual contracts.
+
                 </div>
 
+
                 <div class="insight-line">
+
                     <b style="color:{PURPLE};">
+
                         GROW
+
                     </b>
-                    — Use loyalty and tenure incentives
-                    to increase CLTV.
+
+                    — Use loyalty and tenure
+                    incentives to increase CLTV.
+
                 </div>
 
             </div>
