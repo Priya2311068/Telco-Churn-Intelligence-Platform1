@@ -1,8 +1,8 @@
 import streamlit as st
 
-# --------------------------------------------------
+# ==========================================================
 # PAGE CONFIGURATION
-# --------------------------------------------------
+# ==========================================================
 
 st.set_page_config(
     page_title="Telco Churn Intelligence",
@@ -11,22 +11,64 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --------------------------------------------------
-# LIGHT PROFESSIONAL THEME
-# --------------------------------------------------
+
+# ==========================================================
+# PROFESSIONAL LIGHT THEME
+# ==========================================================
 
 st.markdown("""
 <style>
 
-/* Main app background */
+/* ==========================================================
+   MAIN APPLICATION
+========================================================== */
+
 .stApp {
     background-color: #F7F9FC;
     color: #172033;
 }
 
-/* Sidebar */
+
+/* ==========================================================
+   REMOVE / BLEND STREAMLIT TOP HEADER
+========================================================== */
+
+/* Make Streamlit header transparent */
+header[data-testid="stHeader"] {
+    background-color: transparent !important;
+}
+
+/* Hide top-right Streamlit toolbar */
+div[data-testid="stToolbar"] {
+    visibility: hidden !important;
+    height: 0px !important;
+    position: fixed !important;
+}
+
+/* Remove Streamlit decoration */
+div[data-testid="stDecoration"] {
+    display: none !important;
+}
+
+/* Hide deployment/status controls if present */
+div[data-testid="stStatusWidget"] {
+    visibility: hidden !important;
+}
+
+/* Reduce unnecessary space at top */
+.block-container {
+    padding-top: 1.5rem !important;
+    padding-bottom: 3rem !important;
+    max-width: 1200px;
+}
+
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
 section[data-testid="stSidebar"] {
-    background-color: #FFFFFF;
+    background-color: #FFFFFF !important;
     border-right: 1px solid #E2E8F0;
 }
 
@@ -35,237 +77,410 @@ section[data-testid="stSidebar"] * {
     color: #172033;
 }
 
-/* Main container spacing */
-.block-container {
-    padding-top: 2rem;
-    padding-bottom: 3rem;
-    max-width: 1200px;
+/* Sidebar navigation links */
+section[data-testid="stSidebar"] a {
+    color: #172033 !important;
 }
 
-/* Main title */
+/* Sidebar navigation hover */
+section[data-testid="stSidebar"] a:hover {
+    background-color: #F1F5F9 !important;
+    border-radius: 8px;
+}
+
+
+/* ==========================================================
+   TYPOGRAPHY
+========================================================== */
+
 h1 {
     color: #172033 !important;
     font-weight: 700 !important;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.6px;
 }
 
-/* Subheadings */
-h2, h3 {
+h2 {
     color: #172033 !important;
+    font-weight: 700 !important;
 }
 
-/* Paragraph text */
-p, li {
+h3 {
+    color: #172033 !important;
+    font-weight: 600 !important;
+}
+
+p {
     color: #475569;
 }
 
-/* Divider */
+li {
+    color: #475569;
+}
+
+
+/* ==========================================================
+   DIVIDERS
+========================================================== */
+
 hr {
     border-color: #E2E8F0 !important;
 }
 
-/* Metric cards */
+
+/* ==========================================================
+   METRIC CARDS
+========================================================== */
+
 div[data-testid="stMetric"] {
     background-color: #FFFFFF;
     border: 1px solid #E2E8F0;
     border-radius: 14px;
-    padding: 18px 20px;
-    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    padding: 20px 22px;
+    box-shadow: 0px 4px 14px rgba(15, 23, 42, 0.06);
+    min-height: 120px;
 }
 
-/* Metric labels */
+/* Metric label */
 div[data-testid="stMetricLabel"] {
-    color: #64748B;
+    color: #64748B !important;
+    font-weight: 500;
 }
 
-/* Metric values */
+/* Metric value */
 div[data-testid="stMetricValue"] {
-    color: #172033;
-    font-weight: 700;
+    color: #172033 !important;
+    font-weight: 700 !important;
 }
 
-/* Module cards */
-.module-card {
-    background-color: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 16px;
-    padding: 22px;
-    margin-bottom: 18px;
-    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
-    min-height: 175px;
+/* Reduce metric value slightly to avoid truncation */
+div[data-testid="stMetricValue"] > div {
+    font-size: 2rem !important;
 }
 
-/* Accent title */
-.accent-title {
-    color: #0EA5A8;
-    font-weight: 700;
-}
 
-/* Hero badge */
+/* ==========================================================
+   HERO BADGE
+========================================================== */
+
 .hero-badge {
     display: inline-block;
     background-color: #E6FFFB;
     color: #0F766E;
-    padding: 6px 12px;
+    padding: 7px 14px;
     border-radius: 999px;
     font-size: 0.85rem;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
-/* Intro box */
+
+/* ==========================================================
+   INTRODUCTION CARD
+========================================================== */
+
 .intro-box {
     background-color: #FFFFFF;
     border: 1px solid #E2E8F0;
     border-left: 5px solid #0EA5A8;
     border-radius: 14px;
-    padding: 22px 24px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+    padding: 25px 28px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0px 4px 14px rgba(15, 23, 42, 0.05);
 }
 
-/* Footer */
+.intro-box h3 {
+    margin-top: 0px;
+    color: #172033 !important;
+}
+
+.intro-box p {
+    color: #475569;
+    line-height: 1.7;
+}
+
+
+/* ==========================================================
+   APPLICATION MODULE CARDS
+========================================================== */
+
+.module-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 18px;
+    box-shadow: 0px 4px 14px rgba(15, 23, 42, 0.05);
+    min-height: 170px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Small professional hover effect */
+.module-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.module-card p {
+    line-height: 1.6;
+}
+
+
+/* ==========================================================
+   MODULE TITLES
+========================================================== */
+
+.accent-title {
+    color: #0EA5A8 !important;
+    font-weight: 700 !important;
+    margin-top: 0px;
+}
+
+
+/* ==========================================================
+   BUSINESS OBJECTIVE BOX
+========================================================== */
+
+.business-box {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 22px 25px;
+    box-shadow: 0px 4px 14px rgba(15, 23, 42, 0.05);
+}
+
+.business-flow {
+    color: #0F766E;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-top: 12px;
+}
+
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
 .footer-text {
     color: #94A3B8;
     font-size: 0.85rem;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
+    margin-bottom: 10px;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# --------------------------------------------------
-# HOME PAGE HERO
-# --------------------------------------------------
+
+# ==========================================================
+# HOME PAGE — HERO SECTION
+# ==========================================================
 
 st.markdown(
-    '<div class="hero-badge">Customer Analytics & Predictive Intelligence</div>',
+    """
+    <div class="hero-badge">
+        Customer Analytics & Predictive Intelligence
+    </div>
+    """,
     unsafe_allow_html=True
 )
 
 st.title("Telco Customer Churn Analytics")
 
+
 st.markdown("""
 <div class="intro-box">
 
-<h3 style="margin-top:0;">Customer Retention & Churn Intelligence</h3>
+    <h3>Customer Retention & Churn Intelligence</h3>
 
-<p>
-A complete analytics solution combining business intelligence,
-customer segmentation and machine-learning based churn prediction.
-</p>
+    <p>
+        A complete analytics solution combining business intelligence,
+        customer segmentation and machine-learning based churn prediction.
+    </p>
 
-<p>
-Explore customer behaviour, understand churn drivers, identify
-high-risk customers and support targeted retention decisions.
-</p>
+    <p>
+        Explore customer behaviour, understand churn drivers,
+        identify high-risk customers and support targeted
+        retention decisions.
+    </p>
 
 </div>
 """, unsafe_allow_html=True)
 
-# --------------------------------------------------
+
+# ==========================================================
 # PROJECT OVERVIEW
-# --------------------------------------------------
+# ==========================================================
 
 st.subheader("Project Overview")
 
 col1, col2, col3 = st.columns(3)
 
+
 with col1:
+
     st.metric(
         label="Business Analytics",
         value="Interactive"
     )
 
+
 with col2:
+
     st.metric(
         label="ML Model",
         value="Logistic Regression"
     )
 
+
 with col3:
+
     st.metric(
         label="Decision Threshold",
         value="0.62"
     )
 
+
 st.divider()
 
-# --------------------------------------------------
+
+# ==========================================================
 # APPLICATION MODULES
-# --------------------------------------------------
+# ==========================================================
 
 st.subheader("Application Modules")
 
 col1, col2 = st.columns(2)
 
+
+# ----------------------------------------------------------
+# LEFT COLUMN
+# ----------------------------------------------------------
+
 with col1:
 
     st.markdown("""
     <div class="module-card">
-        <h3 class="accent-title">Churn Prediction</h3>
+
+        <h3 class="accent-title">
+            Churn Prediction
+        </h3>
+
         <p>
-        Predict individual customer churn probability using the trained
-        machine-learning model and assign a customer risk level.
+            Predict individual customer churn probability using
+            the trained machine-learning model and assign each
+            customer a churn-risk level.
         </p>
+
     </div>
     """, unsafe_allow_html=True)
 
+
     st.markdown("""
     <div class="module-card">
-        <h3 class="accent-title">Customer Segment & Revenue</h3>
+
+        <h3 class="accent-title">
+            Customer Segment & Revenue
+        </h3>
+
         <p>
-        Analyze customer value, revenue patterns, payment behaviour,
-        tenure groups and customer segments.
+            Analyze customer value, revenue patterns,
+            payment behaviour, tenure groups and
+            important customer segments.
         </p>
+
     </div>
     """, unsafe_allow_html=True)
+
+
+# ----------------------------------------------------------
+# RIGHT COLUMN
+# ----------------------------------------------------------
 
 with col2:
 
     st.markdown("""
     <div class="module-card">
-        <h3 class="accent-title">Business Analytics</h3>
+
+        <h3 class="accent-title">
+            Business Analytics
+        </h3>
+
         <p>
-        Explore churn KPIs, customer behaviour, service patterns
-        and the major business drivers associated with churn.
+            Explore churn KPIs, customer behaviour,
+            service patterns and major business factors
+            associated with customer churn.
         </p>
+
     </div>
     """, unsafe_allow_html=True)
+
 
     st.markdown("""
     <div class="module-card">
-        <h3 class="accent-title">High-Risk Customers</h3>
+
+        <h3 class="accent-title">
+            High-Risk Customers
+        </h3>
+
         <p>
-        Identify customers requiring immediate retention attention
-        and review recommended retention actions.
+            Identify customers requiring immediate retention
+            attention and review recommended actions that
+            can support customer retention.
         </p>
+
     </div>
     """, unsafe_allow_html=True)
 
-# --------------------------------------------------
-# BUSINESS VALUE
-# --------------------------------------------------
+
+# ==========================================================
+# BUSINESS OBJECTIVE
+# ==========================================================
 
 st.divider()
 
 st.subheader("Business Objective")
 
+
 st.markdown("""
-The platform is designed to help a telecom business move from
-**descriptive analytics to proactive retention**:
+<div class="business-box">
 
-**Understand churn → Identify risk → Prioritize customers → Take action**
-""")
+    <p>
+        The objective of this platform is to help a telecom
+        business move beyond descriptive reporting toward
+        proactive and data-driven customer retention.
+    </p>
 
-# --------------------------------------------------
+    <div class="business-flow">
+        Understand Churn → Identify Risk → Prioritize Customers → Take Action
+    </div>
+
+</div>
+""", unsafe_allow_html=True)
+
+
+# ==========================================================
 # FOOTER
-# --------------------------------------------------
+# ==========================================================
 
 st.markdown("""
 <div class="footer-text">
-Telco Churn Intelligence Platform • Python • Streamlit •
-Machine Learning • Power BI • Business Analytics
+
+    Telco Churn Intelligence Platform
+    &nbsp; • &nbsp;
+    Python
+    &nbsp; • &nbsp;
+    Streamlit
+    &nbsp; • &nbsp;
+    Machine Learning
+    &nbsp; • &nbsp;
+    Power BI
+    &nbsp; • &nbsp;
+    Business Analytics
+
 </div>
 """, unsafe_allow_html=True)
