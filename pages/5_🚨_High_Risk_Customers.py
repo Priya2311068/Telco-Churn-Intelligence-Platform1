@@ -4,6 +4,7 @@ import numpy as np
 import plotly.graph_objects as go
 from pathlib import Path
 from textwrap import dedent
+from html import escape
 
 
 # ============================================================
@@ -19,7 +20,7 @@ st.set_page_config(
 
 
 # ============================================================
-# COLORS — PROFESSIONAL LIGHT THEME
+# COLORS
 # ============================================================
 
 BG = "#F7F9FC"
@@ -76,6 +77,11 @@ html(
         color-scheme: light !important;
     }}
 
+
+    /* ======================================================
+       MAIN APP
+    ====================================================== */
+
     html,
     body,
     [data-testid="stAppViewContainer"],
@@ -85,10 +91,6 @@ html(
         color: {TEXT} !important;
     }}
 
-
-    /* ======================================================
-       MAIN PAGE
-    ====================================================== */
 
     .block-container {{
         max-width: 1650px !important;
@@ -130,7 +132,6 @@ html(
         padding: 5px 12px;
 
         display: flex;
-
         align-items: center;
 
         border: 1px solid {BORDER};
@@ -154,9 +155,7 @@ html(
         min-width: 33px;
 
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
         margin-right: 10px;
@@ -197,12 +196,11 @@ html(
 
 
     /* ======================================================
-       SECTION TITLE
+       SECTION TITLES
     ====================================================== */
 
     .section-title {{
         margin-top: 3px;
-
         margin-bottom: 3px;
 
         font-size: 12px;
@@ -245,7 +243,6 @@ html(
 
     .kpi-top {{
         display: flex;
-
         align-items: center;
 
         gap: 9px;
@@ -254,15 +251,12 @@ html(
 
     .kpi-icon {{
         width: 25px;
-
         height: 25px;
 
         min-width: 25px;
 
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
         border-radius: 7px;
@@ -325,8 +319,7 @@ html(
 
     .watch-title {{
         margin-top: 3px;
-
-        margin-bottom: 4px;
+        margin-bottom: 5px;
 
         font-size: 12px;
 
@@ -337,165 +330,247 @@ html(
 
 
     /* ======================================================
-       WATCHLIST DATAFRAME — COMPLETE LIGHT THEME
+       LIGHT WATCHLIST TABLE
+       ONLY THIS SECTION IS DIFFERENT
     ====================================================== */
 
-    div[data-testid="stDataFrame"] {{
-        background: #FFFFFF !important;
+    .watchlist-shell {{
+        width: 100%;
 
-        border: 1px solid {BORDER} !important;
+        height: {WATCHLIST_HEIGHT}px;
 
-        border-radius: 10px !important;
+        overflow: auto;
 
-        overflow: hidden !important;
+        background: #FFFFFF;
+
+        border: 1px solid {BORDER};
+
+        border-radius: 10px;
 
         box-shadow:
             0 2px 8px
-            rgba(22,50,79,.06) !important;
-
-        color-scheme: light !important;
+            rgba(22,50,79,.06);
     }}
 
 
-    /* Outer dataframe wrapper */
+    .watchlist-table {{
+        width: 100%;
 
-    div[data-testid="stDataFrame"] > div {{
-        background: #FFFFFF !important;
+        min-width: 1350px;
+
+        border-collapse: separate;
+        border-spacing: 0;
+
+        background: #FFFFFF;
+
+        color: {TEXT};
+
+        font-family:
+            Arial,
+            sans-serif;
+
+        font-size: 11.7px;
     }}
 
 
-    /* Internal dataframe areas */
+    .watchlist-table thead {{
+        position: sticky;
 
-    div[data-testid="stDataFrame"] div {{
-        color-scheme: light !important;
+        top: 0;
+
+        z-index: 10;
     }}
 
 
-    /* Toolbar */
+    .watchlist-table th {{
+        background: #F1F5F9;
 
-    div[data-testid="stDataFrame"]
-    [data-testid="stElementToolbar"] {{
-        background: #FFFFFF !important;
+        color: #334E68;
+
+        font-weight: 700;
+
+        text-align: left;
+
+        white-space: nowrap;
+
+        padding: 10px 9px;
+
+        border-bottom:
+            1px solid #D7E2EC;
+
+        border-right:
+            1px solid #E2E8F0;
     }}
 
 
-    /* Glide-data-grid canvas container */
-
-    div[data-testid="stDataFrame"]
-    [data-testid="stDataFrameResizable"] {{
-        background: #FFFFFF !important;
+    .watchlist-table th:first-child {{
+        padding-left: 12px;
     }}
 
 
-    /* Generic grid wrapper */
-
-    div[data-testid="stDataFrame"]
-    div[role="grid"] {{
-        background: #FFFFFF !important;
-
-        color: {TEXT} !important;
+    .watchlist-table th:last-child {{
+        border-right: none;
     }}
 
 
-    /* Grid column headers */
+    .watchlist-table td {{
+        color: {TEXT};
 
-    div[data-testid="stDataFrame"]
-    [role="columnheader"] {{
-        background: #F1F5F9 !important;
+        background: #FFFFFF;
 
-        color: {TEXT} !important;
+        padding: 9px;
 
-        border-color: #D7E2EC !important;
+        white-space: nowrap;
 
-        font-weight: 700 !important;
+        border-bottom:
+            1px solid #E8EEF4;
+
+        border-right:
+            1px solid #EEF2F6;
+
+        vertical-align: middle;
     }}
 
 
-    div[data-testid="stDataFrame"]
-    [role="columnheader"] * {{
-        color: {TEXT} !important;
+    .watchlist-table td:first-child {{
+        padding-left: 12px;
 
-        -webkit-text-fill-color:
-            {TEXT} !important;
+        font-weight: 650;
     }}
 
 
-    /* Grid cells */
-
-    div[data-testid="stDataFrame"]
-    [role="gridcell"] {{
-        background: #FFFFFF !important;
-
-        color: {TEXT} !important;
-
-        border-color: #E2E8F0 !important;
+    .watchlist-table td:last-child {{
+        border-right: none;
     }}
 
 
-    div[data-testid="stDataFrame"]
-    [role="gridcell"] * {{
-        color: {TEXT} !important;
-
-        -webkit-text-fill-color:
-            {TEXT} !important;
+    .watchlist-table tbody tr:nth-child(even) td {{
+        background: #F8FAFC;
     }}
 
 
-    /* Alternating rows where Streamlit exposes row indexes */
-
-    div[data-testid="stDataFrame"]
-    [role="row"]:nth-child(even)
-    [role="gridcell"] {{
-        background: #F8FAFC !important;
+    .watchlist-table tbody tr:hover td {{
+        background: #EEF6FC;
     }}
 
 
-    /* Hover */
+    /* High Risk badge */
 
-    div[data-testid="stDataFrame"]
-    [role="row"]:hover
-    [role="gridcell"] {{
-        background: #EEF6FC !important;
+    .risk-badge {{
+        display: inline-block;
+
+        padding: 3px 8px;
+
+        border-radius: 999px;
+
+        background: #FFF0F1;
+
+        color: #B42332;
+
+        border:
+            1px solid #F5CCD1;
+
+        font-size: 10.5px;
+
+        font-weight: 750;
     }}
 
 
-    /* Selection */
+    /* Probability wrapper */
 
-    div[data-testid="stDataFrame"]
-    [aria-selected="true"] {{
-        background: #DCEFFD !important;
+    .prob-wrap {{
+        display: flex;
 
-        color: {TEXT} !important;
+        align-items: center;
+
+        gap: 8px;
+
+        min-width: 165px;
     }}
 
 
-    /* Dataframe scrollbar */
+    .prob-track {{
+        width: 112px;
 
-    div[data-testid="stDataFrame"]
-    ::-webkit-scrollbar {{
-        width: 8px !important;
+        height: 8px;
 
-        height: 8px !important;
+        overflow: hidden;
+
+        border-radius: 999px;
+
+        background: #E5EAF0;
     }}
 
 
-    div[data-testid="stDataFrame"]
-    ::-webkit-scrollbar-track {{
-        background: #F1F5F9 !important;
+    .prob-fill {{
+        height: 100%;
+
+        border-radius: 999px;
+
+        background:
+            linear-gradient(
+                90deg,
+                #E0525E,
+                #EF6772
+            );
     }}
 
 
-    div[data-testid="stDataFrame"]
-    ::-webkit-scrollbar-thumb {{
-        background: #B8C7D9 !important;
+    .prob-text {{
+        min-width: 42px;
 
-        border-radius: 10px !important;
+        color: #B42332;
+
+        font-size: 11px;
+
+        font-weight: 750;
+
+        text-align: right;
     }}
 
 
-    div[data-testid="stDataFrame"]
-    ::-webkit-scrollbar-thumb:hover {{
-        background: #94A8BD !important;
+    .money-cell {{
+        font-weight: 650;
+
+        color: {NAVY};
+    }}
+
+
+    .action-cell {{
+        color: #334E68;
+
+        font-weight: 550;
+    }}
+
+
+    /* ======================================================
+       WATCHLIST SCROLLBARS
+    ====================================================== */
+
+    .watchlist-shell::-webkit-scrollbar {{
+        width: 8px;
+        height: 8px;
+    }}
+
+
+    .watchlist-shell::-webkit-scrollbar-track {{
+        background: #F1F5F9;
+
+        border-radius: 10px;
+    }}
+
+
+    .watchlist-shell::-webkit-scrollbar-thumb {{
+        background: #B7C6D5;
+
+        border-radius: 10px;
+
+        border: 2px solid #F1F5F9;
+    }}
+
+
+    .watchlist-shell::-webkit-scrollbar-thumb:hover {{
+        background: #91A7BB;
     }}
 
 
@@ -515,7 +590,6 @@ html(
 
     div[data-testid="column"] {{
         padding-left: 0 !important;
-
         padding-right: 0 !important;
     }}
 
@@ -529,7 +603,8 @@ html(
 
         background: #FFFFFF !important;
 
-        border-right: 1px solid {BORDER};
+        border-right:
+            1px solid {BORDER};
     }}
 
 
@@ -564,12 +639,13 @@ html(
 
 
     /* ======================================================
-       SIDEBAR SELECTBOXES
+       LIGHT SIDEBAR FILTERS
     ====================================================== */
 
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"] {{
-        background: transparent !important;
+        background:
+            transparent !important;
     }}
 
 
@@ -600,7 +676,8 @@ html(
 
         background: #FFFFFF !important;
 
-        background-color: #FFFFFF !important;
+        background-color:
+            #FFFFFF !important;
 
         color: {TEXT} !important;
 
@@ -612,7 +689,8 @@ html(
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div {{
-        min-height: 30px !important;
+        min-height:
+            30px !important;
 
         border:
             1px solid #B8C7D9 !important;
@@ -648,14 +726,16 @@ html(
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div:hover {{
-        border-color: {CYAN} !important;
+        border-color:
+            {CYAN} !important;
     }}
 
 
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div:focus-within {{
-        border-color: {CYAN} !important;
+        border-color:
+            {CYAN} !important;
 
         box-shadow:
             0 0 0 1px
@@ -664,7 +744,7 @@ html(
 
 
     /* ======================================================
-       OPEN DROPDOWN
+       DROPDOWN MENU
     ====================================================== */
 
     div[data-baseweb="popover"],
@@ -674,30 +754,17 @@ html(
 
         background: #FFFFFF !important;
 
-        background-color: #FFFFFF !important;
-
         color: {TEXT} !important;
-    }}
-
-
-    ul[role="listbox"] {{
-        border:
-            1px solid {BORDER} !important;
-
-        border-radius:
-            8px !important;
-
-        box-shadow:
-            0 6px 18px
-            rgba(22,50,79,.12) !important;
     }}
 
 
     li[role="option"],
     li[role="option"] * {{
-        background: #FFFFFF !important;
+        background:
+            #FFFFFF !important;
 
-        color: {TEXT} !important;
+        color:
+            {TEXT} !important;
 
         -webkit-text-fill-color:
             {TEXT} !important;
@@ -705,45 +772,19 @@ html(
 
 
     li[role="option"]:hover {{
-        background: #EAF4FB !important;
-
-        color: {TEAL} !important;
-
-        -webkit-text-fill-color:
-            {TEAL} !important;
+        background:
+            #EAF4FB !important;
     }}
 
 
     li[role="option"][aria-selected="true"] {{
-        background: #DCEFFD !important;
+        background:
+            #DCEFFD !important;
 
-        color: {TEAL} !important;
-
-        -webkit-text-fill-color:
+        color:
             {TEAL} !important;
     }}
 
-
-    ul[role="listbox"]::-webkit-scrollbar {{
-        width: 7px;
-    }}
-
-
-    ul[role="listbox"]::-webkit-scrollbar-track {{
-        background: #F1F5F9;
-    }}
-
-
-    ul[role="listbox"]::-webkit-scrollbar-thumb {{
-        background: #B8C7D9;
-
-        border-radius: 10px;
-    }}
-
-
-    /* ======================================================
-       REMOVE DEFAULT STREAMLIT ELEMENTS
-    ====================================================== */
 
     #MainMenu {{
         visibility: hidden;
@@ -767,7 +808,10 @@ html(
 def load_risk_data():
 
     possible_paths = [
-        Path("telco_customer_churn_risk.csv"),
+
+        Path(
+            "telco_customer_churn_risk.csv"
+        ),
 
         Path(
             "Telco_Churn_Project/"
@@ -777,7 +821,7 @@ def load_risk_data():
         Path(
             "data/"
             "telco_customer_churn_risk.csv"
-        ),
+        )
     ]
 
 
@@ -955,11 +999,13 @@ online_security_col = find_column(
 # ============================================================
 
 for col in [
+
     probability_col,
     monthly_col,
     tenure_col,
     cltv_col,
     revenue_col
+
 ]:
 
     if col:
@@ -1016,7 +1062,7 @@ else:
 
 
 # ============================================================
-# CREATE RISK LEVEL IF REQUIRED
+# CREATE RISK LEVEL IF NEEDED
 # ============================================================
 
 if risk_col is None:
@@ -1043,13 +1089,14 @@ if risk_col is None:
         ]
     )
 
+
     risk_col = (
         "Generated Risk Level"
     )
 
 
 # ============================================================
-# CREATE ACTION IF REQUIRED
+# CREATE ACTION IF NEEDED
 # ============================================================
 
 if action_col is None:
@@ -1172,17 +1219,16 @@ def sidebar_filter(
     )
 
 
-    selected = (
-        st.sidebar.selectbox(
-            label,
-            ["All"] + values
-        )
+    selected = st.sidebar.selectbox(
+        label,
+        ["All"] + values
     )
 
 
     if selected != "All":
 
         data = data[
+
             data[
                 column
             ]
@@ -1223,7 +1269,7 @@ filtered_df = sidebar_filter(
 
 
 # ============================================================
-# HIGH-RISK DATA
+# HIGH RISK DATA
 # ============================================================
 
 high_risk_mask = (
@@ -1251,10 +1297,8 @@ high_risk_df = (
 # KPI CALCULATIONS
 # ============================================================
 
-high_risk_count = (
-    len(
-        high_risk_df
-    )
+high_risk_count = len(
+    high_risk_df
 )
 
 
@@ -1276,6 +1320,7 @@ if revenue_col:
         .sum()
     )
 
+
 elif monthly_col:
 
     revenue_at_risk = (
@@ -1285,6 +1330,7 @@ elif monthly_col:
         .fillna(0)
         .sum()
     )
+
 
 else:
 
@@ -1349,11 +1395,9 @@ html(
 )
 
 
-k1, k2, k3, k4 = (
-    st.columns(
-        4,
-        gap="medium"
-    )
+k1, k2, k3, k4 = st.columns(
+    4,
+    gap="medium"
 )
 
 
@@ -1369,6 +1413,7 @@ with k1:
 with k2:
 
     probability_text = (
+
         f"{avg_probability:.1f}%"
 
         if pd.notna(
@@ -1388,20 +1433,14 @@ with k2:
 
 with k3:
 
-    if (
-        revenue_at_risk
-        >= 1_000_000
-    ):
+    if revenue_at_risk >= 1_000_000:
 
         revenue_text = (
             f"{revenue_at_risk / 1_000_000:.2f}M"
         )
 
 
-    elif (
-        revenue_at_risk
-        >= 1000
-    ):
+    elif revenue_at_risk >= 1000:
 
         revenue_text = (
             f"{revenue_at_risk / 1000:.1f}K"
@@ -1571,17 +1610,15 @@ html(
 
 
 # ============================================================
-# ROW 1
+# CHART ROW 1
 # ============================================================
 
-top_left, top_right = (
-    st.columns(
-        [
-            1.3,
-            1
-        ],
-        gap="medium"
-    )
+top_left, top_right = st.columns(
+    [
+        1.3,
+        1
+    ],
+    gap="medium"
 )
 
 
@@ -1598,11 +1635,14 @@ with top_left:
 
         top_risk = (
             high_risk_df
+
             .sort_values(
                 "Probability_Display",
                 ascending=False
             )
+
             .head(5)
+
             .sort_values(
                 "Probability_Display",
                 ascending=True
@@ -1710,6 +1750,7 @@ with top_right:
     ):
 
         CONTRACT_ORDER = [
+
             "Month-to-month",
             "One year",
             "Two year"
@@ -1718,16 +1759,20 @@ with top_right:
 
         contract_risk = (
             high_risk_df
+
             .groupby(
                 contract_col
             )[
                 value_col
             ]
+
             .sum()
+
             .reindex(
                 CONTRACT_ORDER,
                 fill_value=0
             )
+
             .reset_index()
         )
 
@@ -1777,6 +1822,7 @@ with top_right:
 
 
             label = (
+
                 f"{value / 1000:.1f}K"
 
                 if value >= 1000
@@ -1848,7 +1894,7 @@ with top_right:
 
 
 # ============================================================
-# ROW 2
+# CHART ROW 2
 # ============================================================
 
 html(
@@ -1856,14 +1902,12 @@ html(
 )
 
 
-bottom_left, bottom_right = (
-    st.columns(
-        [
-            1.1,
-            1
-        ],
-        gap="medium"
-    )
+bottom_left, bottom_right = st.columns(
+    [
+        1.1,
+        1
+    ],
+    gap="medium"
 )
 
 
@@ -1877,11 +1921,15 @@ with bottom_left:
         filtered_df[
             action_col
         ]
+
         .fillna(
             "No Action Assigned"
         )
+
         .value_counts()
+
         .head(6)
+
         .sort_values()
     )
 
@@ -1904,6 +1952,7 @@ with bottom_left:
 
 
     max_action = (
+
         action_summary.max()
 
         if len(
@@ -1917,6 +1966,7 @@ with bottom_left:
     for (
         action_name,
         value
+
     ) in action_summary.items():
 
         fig.add_annotation(
@@ -1991,19 +2041,24 @@ with bottom_right:
         filtered_df[
             risk_col
         ]
+
         .astype(str)
+
         .value_counts()
+
         .reset_index()
     )
 
 
     risk_summary.columns = [
+
         "Risk",
         "Customers"
     ]
 
 
     RISK_ORDER = [
+
         "Low Risk",
         "Medium Risk",
         "High Risk"
@@ -2012,18 +2067,21 @@ with bottom_right:
 
     risk_summary = (
         risk_summary
+
         .set_index(
             "Risk"
         )
+
         .reindex(
             RISK_ORDER,
             fill_value=0
         )
+
         .reset_index()
     )
 
 
-    color_map = {
+    color_map = {{
 
         "Low Risk":
             GREEN,
@@ -2033,6 +2091,14 @@ with bottom_right:
 
         "High Risk":
             ORANGE
+    }}
+
+
+    # Correct dict syntax outside f-string
+    color_map = {
+        "Low Risk": GREEN,
+        "Medium Risk": PURPLE,
+        "High Risk": ORANGE
     }
 
 
@@ -2098,6 +2164,7 @@ with bottom_right:
                 row[
                     "Customers"
                 ]
+
                 + max_customers
                 * 0.035
             ),
@@ -2349,9 +2416,6 @@ if (
             "CLTV"
         ]
         .round(0)
-        .astype(
-            "Int64"
-        )
     )
 
 
@@ -2367,9 +2431,6 @@ if (
             "Tenure"
         ]
         .round(0)
-        .astype(
-            "Int64"
-        )
     )
 
 
@@ -2384,231 +2445,263 @@ if (
 
     watch_df = (
         watch_df
+
         .sort_values(
             "Churn Probability",
             ascending=False
         )
-    )
 
-
-# ============================================================
-# COLUMN CONFIG
-# ============================================================
-
-column_config = {}
-
-
-if (
-    "Customer ID"
-    in watch_df.columns
-):
-
-    column_config[
-        "Customer ID"
-    ] = (
-        st.column_config
-        .TextColumn(
-            "Customer ID",
-            width="small"
-        )
-    )
-
-
-if (
-    "Risk Level"
-    in watch_df.columns
-):
-
-    column_config[
-        "Risk Level"
-    ] = (
-        st.column_config
-        .TextColumn(
-            "Risk Level",
-            width="small"
-        )
-    )
-
-
-if (
-    "Churn Probability"
-    in watch_df.columns
-):
-
-    column_config[
-        "Churn Probability"
-    ] = (
-        st.column_config
-        .ProgressColumn(
-
-            "Churn Probability",
-
-            min_value=0,
-
-            max_value=100,
-
-            format="%.1f%%",
-
-            width="medium"
-        )
-    )
-
-
-if (
-    "Contract"
-    in watch_df.columns
-):
-
-    column_config[
-        "Contract"
-    ] = (
-        st.column_config
-        .TextColumn(
-            "Contract",
-            width="small"
-        )
-    )
-
-
-if (
-    "Internet Service"
-    in watch_df.columns
-):
-
-    column_config[
-        "Internet Service"
-    ] = (
-        st.column_config
-        .TextColumn(
-            "Internet Service",
-            width="small"
-        )
-    )
-
-
-if (
-    "Payment Method"
-    in watch_df.columns
-):
-
-    column_config[
-        "Payment Method"
-    ] = (
-        st.column_config
-        .TextColumn(
-            "Payment Method",
-            width="medium"
-        )
-    )
-
-
-if (
-    "Monthly Charges"
-    in watch_df.columns
-):
-
-    column_config[
-        "Monthly Charges"
-    ] = (
-        st.column_config
-        .NumberColumn(
-
-            "Monthly Charges",
-
-            format="$%.2f",
-
-            width="small"
-        )
-    )
-
-
-if (
-    "Tenure"
-    in watch_df.columns
-):
-
-    column_config[
-        "Tenure"
-    ] = (
-        st.column_config
-        .NumberColumn(
-            "Tenure",
-            width="small"
-        )
-    )
-
-
-if (
-    "CLTV"
-    in watch_df.columns
-):
-
-    column_config[
-        "CLTV"
-    ] = (
-        st.column_config
-        .NumberColumn(
-
-            "CLTV",
-
-            format="%d",
-
-            width="small"
-        )
-    )
-
-
-if (
-    "Online Security"
-    in watch_df.columns
-):
-
-    column_config[
-        "Online Security"
-    ] = (
-        st.column_config
-        .TextColumn(
-
-            "Online Security",
-
-            width="small"
-        )
-    )
-
-
-if (
-    "Recommended Action"
-    in watch_df.columns
-):
-
-    column_config[
-        "Recommended Action"
-    ] = (
-        st.column_config
-        .TextColumn(
-
-            "Recommended Action",
-
-            width="large"
+        .reset_index(
+            drop=True
         )
     )
 
 
 # ============================================================
-# DISPLAY WATCHLIST
+# FORMAT HELPER
 # ============================================================
 
-st.dataframe(
+def safe_text(value):
 
-    watch_df,
+    if pd.isna(value):
+        return ""
 
-    width="stretch",
+    return escape(
+        str(value)
+    )
 
-    height=
-        WATCHLIST_HEIGHT,
 
-    hide_index=True,
+# ============================================================
+# BUILD LIGHT HTML WATCHLIST
+# ============================================================
 
-    column_config=
-        column_config
+table_html = """
+<div class="watchlist-shell">
+
+<table class="watchlist-table">
+
+<thead>
+
+<tr>
+"""
+
+
+# ============================================================
+# HEADERS
+# ============================================================
+
+for column in watch_df.columns:
+
+    table_html += (
+        f"<th>{escape(str(column))}</th>"
+    )
+
+
+table_html += """
+</tr>
+
+</thead>
+
+<tbody>
+"""
+
+
+# ============================================================
+# ROWS
+# ============================================================
+
+for _, row in watch_df.iterrows():
+
+    table_html += "<tr>"
+
+
+    for column in watch_df.columns:
+
+        value = row[column]
+
+
+        # ----------------------------------------------------
+        # RISK LEVEL
+        # ----------------------------------------------------
+
+        if column == "Risk Level":
+
+            table_html += (
+                '<td>'
+                '<span class="risk-badge">'
+                f'{safe_text(value)}'
+                '</span>'
+                '</td>'
+            )
+
+
+        # ----------------------------------------------------
+        # CHURN PROBABILITY
+        # ----------------------------------------------------
+
+        elif column == "Churn Probability":
+
+            if pd.isna(value):
+
+                probability = 0.0
+
+            else:
+
+                probability = float(value)
+
+
+            probability = max(
+                0,
+                min(
+                    probability,
+                    100
+                )
+            )
+
+
+            table_html += f"""
+            <td>
+
+                <div class="prob-wrap">
+
+                    <div class="prob-track">
+
+                        <div
+                            class="prob-fill"
+                            style="width:{probability:.1f}%;">
+                        </div>
+
+                    </div>
+
+                    <div class="prob-text">
+                        {probability:.1f}%
+                    </div>
+
+                </div>
+
+            </td>
+            """
+
+
+        # ----------------------------------------------------
+        # MONTHLY CHARGES
+        # ----------------------------------------------------
+
+        elif column == "Monthly Charges":
+
+            if pd.isna(value):
+
+                display_value = ""
+
+            else:
+
+                display_value = (
+                    f"${float(value):,.2f}"
+                )
+
+
+            table_html += (
+                '<td class="money-cell">'
+                f'{display_value}'
+                '</td>'
+            )
+
+
+        # ----------------------------------------------------
+        # CLTV
+        # ----------------------------------------------------
+
+        elif column == "CLTV":
+
+            if pd.isna(value):
+
+                display_value = ""
+
+            else:
+
+                display_value = (
+                    f"{float(value):,.0f}"
+                )
+
+
+            table_html += (
+                '<td>'
+                f'{display_value}'
+                '</td>'
+            )
+
+
+        # ----------------------------------------------------
+        # TENURE
+        # ----------------------------------------------------
+
+        elif column == "Tenure":
+
+            if pd.isna(value):
+
+                display_value = ""
+
+            else:
+
+                display_value = (
+                    f"{float(value):.0f}"
+                )
+
+
+            table_html += (
+                '<td>'
+                f'{display_value}'
+                '</td>'
+            )
+
+
+        # ----------------------------------------------------
+        # RECOMMENDED ACTION
+        # ----------------------------------------------------
+
+        elif column == "Recommended Action":
+
+            table_html += (
+                '<td class="action-cell">'
+                f'{safe_text(value)}'
+                '</td>'
+            )
+
+
+        # ----------------------------------------------------
+        # NORMAL TEXT
+        # ----------------------------------------------------
+
+        else:
+
+            table_html += (
+                '<td>'
+                f'{safe_text(value)}'
+                '</td>'
+            )
+
+
+    table_html += "</tr>"
+
+
+# ============================================================
+# CLOSE TABLE
+# ============================================================
+
+table_html += """
+
+</tbody>
+
+</table>
+
+</div>
+"""
+
+
+# ============================================================
+# DISPLAY LIGHT WATCHLIST
+# ============================================================
+
+html(
+    table_html
 )
