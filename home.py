@@ -5,7 +5,7 @@ import streamlit as st
 # ==========================================================
 
 st.set_page_config(
-    page_title="Telco Churn Intelligence",
+    page_title="📡Telco Churn Intelligence",
     page_icon="📡",
     layout="wide",
     initial_sidebar_state="expanded"
