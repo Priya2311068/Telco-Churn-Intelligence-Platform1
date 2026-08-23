@@ -41,14 +41,8 @@ def load_model_components():
         )
 
     model = joblib.load(MODEL_PATH)
-
-    preprocessor = joblib.load(
-        PREPROCESSOR_PATH
-    )
-
-    threshold = joblib.load(
-        THRESHOLD_PATH
-    )
+    preprocessor = joblib.load(PREPROCESSOR_PATH)
+    threshold = joblib.load(THRESHOLD_PATH)
 
     threshold = float(
         np.asarray(threshold).squeeze()
@@ -58,10 +52,7 @@ def load_model_components():
 
 
 try:
-
-    model, preprocessor, threshold = (
-        load_model_components()
-    )
+    model, preprocessor, threshold = load_model_components()
 
 except Exception as e:
 
@@ -70,38 +61,44 @@ except Exception as e:
     )
 
     st.exception(e)
-
     st.stop()
 
 
 # ============================================================
-# PAGE THEME
+# PROFESSIONAL LIGHT THEME
 # ============================================================
 
-st.markdown("""
+st.markdown(
+    """
 <style>
 
-/* =========================================================
-   MAIN PAGE
-========================================================= */
+/* ==========================================================
+   MAIN APPLICATION
+========================================================== */
 
 .stApp {
-    background-color: #F8FAFC;
+    background-color: #F7F9FC;
     color: #16324F;
 }
 
+.block-container {
+    padding-top: 1.5rem !important;
+    padding-bottom: 3rem !important;
+    max-width: 1200px;
+}
 
-/* =========================================================
-   REMOVE STREAMLIT TOP BAR
-========================================================= */
+
+/* ==========================================================
+   REMOVE STREAMLIT TOP HEADER / TOOLBAR
+========================================================== */
 
 header[data-testid="stHeader"] {
-    background-color: transparent !important;
+    background: transparent !important;
 }
 
 div[data-testid="stToolbar"] {
     visibility: hidden !important;
-    height: 0px !important;
+    height: 0 !important;
 }
 
 div[data-testid="stDecoration"] {
@@ -113,24 +110,13 @@ div[data-testid="stStatusWidget"] {
 }
 
 
-/* =========================================================
-   PAGE WIDTH
-========================================================= */
-
-.block-container {
-    padding-top: 1.6rem !important;
-    padding-bottom: 3rem !important;
-    max-width: 1200px;
-}
-
-
-/* =========================================================
+/* ==========================================================
    SIDEBAR
-========================================================= */
+========================================================== */
 
 section[data-testid="stSidebar"] {
     background-color: #FFFFFF !important;
-    border-right: 1px solid #DCE6F0;
+    border-right: 1px solid #DCE5EE;
 }
 
 section[data-testid="stSidebar"] * {
@@ -138,20 +124,20 @@ section[data-testid="stSidebar"] * {
 }
 
 
-/* =========================================================
+/* ==========================================================
    TITLES
-========================================================= */
+========================================================== */
 
 h1 {
-    color: #0F2F4F !important;
+    color: #103A5E !important;
     font-weight: 750 !important;
-    letter-spacing: -0.6px;
+    letter-spacing: -0.5px;
 }
 
 h2,
 h3 {
-    color: #16324F !important;
-    font-weight: 650 !important;
+    color: #103A5E !important;
+    font-weight: 700 !important;
 }
 
 p {
@@ -159,173 +145,56 @@ p {
 }
 
 
-/* =========================================================
-   DIVIDER
-========================================================= */
+/* ==========================================================
+   SECTION LABEL
+========================================================== */
 
-hr {
-    border-color: #DCE6F0 !important;
+.section-label {
+    color: #168CE3;
+    font-size: 0.76rem;
+    font-weight: 750;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 12px;
+    margin-bottom: 3px;
 }
 
 
-/* =========================================================
-   INPUT LABELS
-========================================================= */
+/* ==========================================================
+   INTRO BADGE
+========================================================== */
 
-label {
-    color: #24445F !important;
-    font-weight: 600 !important;
+.prediction-badge {
+
+    display: inline-block;
+
+    background-color: #EAF5FD;
+
+    color: #12558D;
+
+    border: 1px solid #CDE6FA;
+
+    padding: 6px 14px;
+
+    border-radius: 999px;
+
+    font-size: 0.84rem;
+
+    font-weight: 650;
+
+    margin-bottom: 10px;
 }
 
 
-/* =========================================================
-   TEXT / NUMBER INPUTS
-========================================================= */
-
-div[data-baseweb="input"] {
-    background-color: #FFFFFF !important;
-    border-radius: 8px !important;
-}
-
-div[data-testid="stNumberInput"] input,
-div[data-testid="stTextInput"] input {
-    background-color: #FFFFFF !important;
-    color: #16324F !important;
-    border: 1px solid #CAD8E5 !important;
-}
-
-
-/* =========================================================
-   SELECT BOXES
-========================================================= */
-
-div[data-baseweb="select"] > div {
-    background-color: #FFFFFF !important;
-    border: 1px solid #CAD8E5 !important;
-    border-radius: 8px !important;
-    color: #16324F !important;
-}
-
-
-/* =========================================================
-   SELECT DROPDOWN TEXT
-========================================================= */
-
-div[data-baseweb="select"] span {
-    color: #16324F !important;
-}
-
-
-/* =========================================================
-   METRIC CARDS
-========================================================= */
-
-div[data-testid="stMetric"] {
-
-    background-color: #FFFFFF;
-
-    border: 1px solid #D7E2EC;
-
-    border-radius: 10px;
-
-    padding: 20px 22px;
-
-    box-shadow:
-        0px 5px 14px
-        rgba(15, 47, 79, 0.10);
-}
-
-
-/* Metric labels */
-div[data-testid="stMetricLabel"] {
-    color: #526579 !important;
-    font-weight: 600 !important;
-}
-
-
-/* Metric values */
-div[data-testid="stMetricValue"] {
-    color: #124F86 !important;
-    font-weight: 750 !important;
-}
-
-
-/* =========================================================
-   PREDICT BUTTON
-========================================================= */
-
-div.stButton > button {
-
-    background-color: #12558D !important;
-
-    color: #FFFFFF !important;
-
-    border: none !important;
-
-    border-radius: 8px !important;
-
-    font-weight: 650 !important;
-
-    min-height: 48px;
-
-    box-shadow:
-        0px 4px 10px
-        rgba(18, 85, 141, 0.20);
-
-    transition: 0.2s ease;
-}
-
-
-div.stButton > button:hover {
-
-    background-color: #0C4778 !important;
-
-    box-shadow:
-        0px 7px 16px
-        rgba(18, 85, 141, 0.25);
-
-    transform: translateY(-1px);
-}
-
-
-/* =========================================================
-   DATAFRAME
-========================================================= */
-
-div[data-testid="stDataFrame"] {
-
-    background-color: #FFFFFF;
-
-    border: 1px solid #D7E2EC;
-
-    border-radius: 10px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0px 4px 12px
-        rgba(15, 47, 79, 0.07);
-}
-
-
-/* =========================================================
-   INFO BOX
-========================================================= */
-
-div[data-testid="stAlert"] {
-    border-radius: 8px;
-}
-
-
-/* =========================================================
-   CUSTOM INTRO CARD
-========================================================= */
+/* ==========================================================
+   INTRO CARD
+========================================================== */
 
 .prediction-intro {
 
     background-color: #FFFFFF;
 
-    border: 1px solid #D7E2EC;
+    border: 1px solid #D8E2EC;
 
     border-left: 5px solid #168CE3;
 
@@ -338,158 +207,407 @@ div[data-testid="stAlert"] {
     margin-bottom: 28px;
 
     box-shadow:
-        0px 5px 14px
+        0 5px 15px
         rgba(15, 47, 79, 0.07);
 }
 
-
 .prediction-intro p {
-
     color: #526579;
-
     margin: 0;
-
     line-height: 1.7;
 }
 
 
-/* =========================================================
-   SMALL PAGE BADGE
-========================================================= */
+/* ==========================================================
+   ALL INPUT LABELS
+========================================================== */
 
-.prediction-badge {
+label,
+div[data-testid="stWidgetLabel"] p {
 
-    display: inline-block;
+    color: #526579 !important;
 
-    background-color: #E9F4FD;
+    font-weight: 600 !important;
 
-    color: #12558D;
-
-    border: 1px solid #CDE6FA;
-
-    padding: 6px 13px;
-
-    border-radius: 999px;
-
-    font-size: 0.84rem;
-
-    font-weight: 650;
-
-    margin-bottom: 10px;
+    font-size: 0.92rem !important;
 }
 
 
-/* =========================================================
-   SECTION LABEL
-========================================================= */
+/* ==========================================================
+   SELECTBOXES
+   WHITE BACKGROUND FOR ALL FILTER VALUES
+========================================================== */
 
-.section-label {
+div[data-baseweb="select"] > div {
 
-    color: #168CE3;
+    background-color: #FFFFFF !important;
 
-    font-size: 0.76rem;
+    border: 1px solid #AEBECC !important;
 
-    font-weight: 750;
+    border-radius: 8px !important;
 
-    text-transform: uppercase;
+    min-height: 44px !important;
 
-    letter-spacing: 0.08em;
-
-    margin-bottom: 2px;
+    box-shadow: none !important;
 }
 
 
-/* =========================================================
-   SECTION CARD LOOK
-========================================================= */
+/* Selectbox selected value */
 
-.section-note {
+div[data-baseweb="select"] span {
+
+    color: #16324F !important;
+
+    font-weight: 500 !important;
+}
+
+
+/* Selectbox arrow */
+
+div[data-baseweb="select"] svg {
+
+    fill: #526579 !important;
+
+    color: #526579 !important;
+}
+
+
+/* Selectbox focus */
+
+div[data-baseweb="select"] > div:focus-within {
+
+    border-color: #168CE3 !important;
+
+    box-shadow:
+        0 0 0 1px #168CE3 !important;
+}
+
+
+/* ==========================================================
+   SELECTBOX DROPDOWN MENU
+========================================================== */
+
+div[data-baseweb="popover"] {
+
+    background-color: #FFFFFF !important;
+}
+
+div[data-baseweb="popover"] ul {
+
+    background-color: #FFFFFF !important;
+}
+
+div[data-baseweb="popover"] li {
+
+    background-color: #FFFFFF !important;
+
+    color: #16324F !important;
+}
+
+div[data-baseweb="popover"] li:hover {
+
+    background-color: #EAF5FD !important;
+
+    color: #12558D !important;
+}
+
+
+/* ==========================================================
+   TEXT INPUT
+========================================================== */
+
+div[data-testid="stTextInput"] input {
+
+    background-color: #FFFFFF !important;
+
+    color: #16324F !important;
+
+    border: 1px solid #AEBECC !important;
+
+    border-radius: 8px !important;
+
+    min-height: 44px !important;
+
+    box-shadow: none !important;
+}
+
+div[data-testid="stTextInput"] input:focus {
+
+    border-color: #168CE3 !important;
+
+    box-shadow:
+        0 0 0 1px #168CE3 !important;
+}
+
+
+/* ==========================================================
+   NUMBER INPUT
+========================================================== */
+
+div[data-testid="stNumberInput"] input {
+
+    background-color: #FFFFFF !important;
+
+    color: #16324F !important;
+
+    border-top: 1px solid #AEBECC !important;
+
+    border-bottom: 1px solid #AEBECC !important;
+
+    min-height: 44px !important;
+}
+
+
+/* Number input outer container */
+
+div[data-testid="stNumberInput"]
+div[data-baseweb="input"] {
+
+    background-color: #FFFFFF !important;
+
+    border-radius: 8px !important;
+}
+
+
+/* +/- BUTTONS */
+
+div[data-testid="stNumberInput"] button {
+
+    background-color: #12558D !important;
+
+    color: #FFFFFF !important;
+
+    border-color: #12558D !important;
+}
+
+
+/* +/- icons */
+
+div[data-testid="stNumberInput"] button svg {
+
+    fill: #FFFFFF !important;
+
+    color: #FFFFFF !important;
+}
+
+
+/* ==========================================================
+   DIVIDERS
+========================================================== */
+
+hr {
+
+    border-color: #DCE5EE !important;
+
+    margin-top: 1.8rem !important;
+
+    margin-bottom: 1.8rem !important;
+}
+
+
+/* ==========================================================
+   PREDICT BUTTON
+========================================================== */
+
+div.stButton > button {
+
+    width: 100% !important;
+
+    min-height: 52px !important;
+
+    background-color: #125F98 !important;
+
+    border: 1px solid #125F98 !important;
+
+    border-radius: 8px !important;
+
+    box-shadow:
+        0 4px 12px
+        rgba(18, 95, 152, 0.20);
+
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* IMPORTANT:
+   FORCE BUTTON TEXT TO WHITE
+*/
+
+div.stButton > button,
+div.stButton > button p,
+div.stButton > button span {
+
+    color: #FFFFFF !important;
+
+    font-weight: 700 !important;
+}
+
+
+/* Button hover */
+
+div.stButton > button:hover {
+
+    background-color: #0E4E80 !important;
+
+    border-color: #0E4E80 !important;
+
+    box-shadow:
+        0 6px 16px
+        rgba(18, 95, 152, 0.27);
+
+    transform: translateY(-1px);
+}
+
+
+/* Keep white text on hover */
+
+div.stButton > button:hover p,
+div.stButton > button:hover span {
+
+    color: #FFFFFF !important;
+}
+
+
+/* Button active */
+
+div.stButton > button:active {
+
+    background-color: #0A416D !important;
+
+    color: #FFFFFF !important;
+
+    transform: translateY(0);
+}
+
+
+/* ==========================================================
+   METRIC CARDS
+========================================================== */
+
+div[data-testid="stMetric"] {
 
     background-color: #FFFFFF;
 
-    border: 1px solid #DCE6F0;
+    border: 1px solid #D8E2EC;
 
     border-radius: 10px;
 
-    padding: 10px 14px;
+    padding: 20px 22px;
 
-    margin-bottom: 12px;
+    min-height: 120px;
+
+    box-shadow:
+        0 5px 14px
+        rgba(15, 47, 79, 0.08);
 }
 
 
-/* =========================================================
-   HIGH-RISK RESULT
-========================================================= */
+div[data-testid="stMetricLabel"] {
+
+    color: #526579 !important;
+
+    font-weight: 600 !important;
+}
+
+
+div[data-testid="stMetricValue"] {
+
+    color: #12558D !important;
+
+    font-weight: 750 !important;
+}
+
+
+/* ==========================================================
+   HIGH RISK
+========================================================== */
 
 .high-risk-box {
 
     background-color: #FFF1F2;
 
+    border: 1px solid #F5C2C7;
+
     border-left: 5px solid #D94452;
 
-    color: #991B1B;
+    color: #9F1D2B;
 
-    padding: 15px 18px;
+    padding: 16px 18px;
 
     border-radius: 8px;
 
     font-weight: 650;
 
     margin-top: 15px;
+
+    margin-bottom: 20px;
 }
 
 
-/* =========================================================
-   MEDIUM RISK RESULT
-========================================================= */
+/* ==========================================================
+   MEDIUM RISK
+========================================================== */
 
 .medium-risk-box {
 
     background-color: #FFF7E6;
 
+    border: 1px solid #F7D89A;
+
     border-left: 5px solid #F59E0B;
 
     color: #92400E;
 
-    padding: 15px 18px;
+    padding: 16px 18px;
 
     border-radius: 8px;
 
     font-weight: 650;
 
     margin-top: 15px;
+
+    margin-bottom: 20px;
 }
 
 
-/* =========================================================
-   LOW RISK RESULT
-========================================================= */
+/* ==========================================================
+   LOW RISK
+========================================================== */
 
 .low-risk-box {
 
     background-color: #ECFDF5;
 
+    border: 1px solid #B7E8D2;
+
     border-left: 5px solid #10B981;
 
-    color: #065F46;
+    color: #066045;
 
-    padding: 15px 18px;
+    padding: 16px 18px;
 
     border-radius: 8px;
 
     font-weight: 650;
 
     margin-top: 15px;
+
+    margin-bottom: 20px;
 }
 
 
-/* =========================================================
+/* ==========================================================
    RECOMMENDATION CARD
-========================================================= */
+========================================================== */
 
 .recommendation-box {
 
     background-color: #EDF6FD;
+
+    border: 1px solid #CDE4F5;
 
     border-left: 5px solid #12558D;
 
@@ -501,31 +619,57 @@ div[data-testid="stAlert"] {
 
     margin-top: 8px;
 
-    margin-bottom: 20px;
+    margin-bottom: 22px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(15, 47, 79, 0.05);
 }
 
 
-/* =========================================================
+/* ==========================================================
+   DATAFRAME
+========================================================== */
+
+div[data-testid="stDataFrame"] {
+
+    background-color: #FFFFFF;
+
+    border: 1px solid #D8E2EC;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 12px
+        rgba(15, 47, 79, 0.07);
+}
+
+
+/* ==========================================================
    FOOTER
-========================================================= */
+========================================================== */
 
 .footer-text {
 
     text-align: center;
 
-    color: #8A9AAC;
+    color: #8797A8;
 
-    font-size: 0.83rem;
+    font-size: 0.82rem;
 
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True
+)
 
 
 # ============================================================
-# TITLE
+# PAGE TITLE
 # ============================================================
 
 st.markdown(
@@ -544,12 +688,14 @@ st.title(
 st.markdown(
     """
 <div class="prediction-intro">
+
 <p>
 Predict customer churn probability using the trained
 <strong>Logistic Regression model</strong>. Enter customer
-demographic, account and service details to estimate churn
-risk and generate an appropriate retention recommendation.
+demographic, account and service information to estimate
+churn risk and generate a targeted retention recommendation.
 </p>
+
 </div>
 """,
     unsafe_allow_html=True
@@ -557,7 +703,7 @@ risk and generate an appropriate retention recommendation.
 
 
 # ============================================================
-# CUSTOMER INPUT
+# CUSTOMER INFORMATION
 # ============================================================
 
 st.markdown(
@@ -571,10 +717,6 @@ st.subheader(
 
 col1, col2, col3 = st.columns(3)
 
-
-# ------------------------------------------------------------
-# COLUMN 1
-# ------------------------------------------------------------
 
 with col1:
 
@@ -603,10 +745,6 @@ with col1:
         value=4500.0
     )
 
-
-# ------------------------------------------------------------
-# COLUMN 2
-# ------------------------------------------------------------
 
 with col2:
 
@@ -642,10 +780,6 @@ with col2:
         ]
     )
 
-
-# ------------------------------------------------------------
-# COLUMN 3
-# ------------------------------------------------------------
 
 with col3:
 
@@ -702,10 +836,6 @@ st.subheader(
 col1, col2, col3 = st.columns(3)
 
 
-# ------------------------------------------------------------
-# COLUMN 1
-# ------------------------------------------------------------
-
 with col1:
 
     phone_service = st.selectbox(
@@ -725,10 +855,6 @@ with col1:
         ]
     )
 
-
-# ------------------------------------------------------------
-# COLUMN 2
-# ------------------------------------------------------------
 
 with col2:
 
@@ -750,10 +876,6 @@ with col2:
         ]
     )
 
-
-# ------------------------------------------------------------
-# COLUMN 3
-# ------------------------------------------------------------
 
 with col3:
 
@@ -886,101 +1008,40 @@ if predict_button:
 
     input_data = pd.DataFrame(
         {
-            "Latitude": [
-                latitude
-            ],
+            "Latitude": [latitude],
+            "Longitude": [longitude],
 
-            "Longitude": [
-                longitude
-            ],
+            "Country": [country],
+            "State": [state],
 
-            "Country": [
-                country
-            ],
+            "Gender": [gender],
+            "Senior Citizen": [senior_citizen],
+            "Partner": [partner],
+            "Dependents": [dependents],
 
-            "State": [
-                state
-            ],
+            "Tenure Months": [tenure],
 
-            "Gender": [
-                gender
-            ],
+            "Phone Service": [phone_service],
+            "Multiple Lines": [multiple_lines],
 
-            "Senior Citizen": [
-                senior_citizen
-            ],
+            "Internet Service": [internet_service],
 
-            "Partner": [
-                partner
-            ],
+            "Online Security": [online_security],
+            "Online Backup": [online_backup],
+            "Device Protection": [device_protection],
+            "Tech Support": [tech_support],
 
-            "Dependents": [
-                dependents
-            ],
+            "Streaming TV": [streaming_tv],
+            "Streaming Movies": [streaming_movies],
 
-            "Tenure Months": [
-                tenure
-            ],
+            "Contract": [contract],
+            "Paperless Billing": [paperless_billing],
+            "Payment Method": [payment_method],
 
-            "Phone Service": [
-                phone_service
-            ],
+            "Monthly Charges": [monthly_charges],
+            "Total Charges": [total_charges],
 
-            "Multiple Lines": [
-                multiple_lines
-            ],
-
-            "Internet Service": [
-                internet_service
-            ],
-
-            "Online Security": [
-                online_security
-            ],
-
-            "Online Backup": [
-                online_backup
-            ],
-
-            "Device Protection": [
-                device_protection
-            ],
-
-            "Tech Support": [
-                tech_support
-            ],
-
-            "Streaming TV": [
-                streaming_tv
-            ],
-
-            "Streaming Movies": [
-                streaming_movies
-            ],
-
-            "Contract": [
-                contract
-            ],
-
-            "Paperless Billing": [
-                paperless_billing
-            ],
-
-            "Payment Method": [
-                payment_method
-            ],
-
-            "Monthly Charges": [
-                monthly_charges
-            ],
-
-            "Total Charges": [
-                total_charges
-            ],
-
-            "CLTV": [
-                cltv
-            ]
+            "CLTV": [cltv]
         }
     )
 
@@ -991,17 +1052,13 @@ if predict_button:
 
     try:
 
-        X_processed = (
-            preprocessor.transform(
-                input_data
-            )
+        X_processed = preprocessor.transform(
+            input_data
         )
 
-        churn_probability = (
-            model.predict_proba(
-                X_processed
-            )[0][1]
-        )
+        churn_probability = model.predict_proba(
+            X_processed
+        )[0][1]
 
     except Exception as e:
 
@@ -1015,7 +1072,7 @@ if predict_button:
 
 
     # ========================================================
-    # APPLY THRESHOLD
+    # THRESHOLD
     # ========================================================
 
     prediction = int(
@@ -1027,12 +1084,11 @@ if predict_button:
     )
 
 
+    # ========================================================
+    # PREDICTION RESULT
+    # ========================================================
+
     st.divider()
-
-
-    # ========================================================
-    # RESULT
-    # ========================================================
 
     st.markdown(
         '<div class="section-label">Model Output</div>',
@@ -1082,7 +1138,7 @@ if predict_button:
 
 
     # ========================================================
-    # RISK LEVEL
+    # RISK SEGMENTATION
     # ========================================================
 
     if probability_percent >= 70:
@@ -1097,7 +1153,7 @@ if predict_button:
         st.markdown(
             """
 <div class="high-risk-box">
-High Risk — Immediate retention action recommended.
+🔴 High Risk — Immediate retention action recommended.
 </div>
 """,
             unsafe_allow_html=True
@@ -1116,7 +1172,7 @@ High Risk — Immediate retention action recommended.
         st.markdown(
             """
 <div class="medium-risk-box">
-Medium Risk — Customer should be monitored closely.
+🟠 Medium Risk — Customer should be monitored closely.
 </div>
 """,
             unsafe_allow_html=True
@@ -1127,14 +1183,12 @@ Medium Risk — Customer should be monitored closely.
 
         risk_level = "Low Risk"
 
-        recommendation = (
-            "Monitor"
-        )
+        recommendation = "Monitor"
 
         st.markdown(
             """
 <div class="low-risk-box">
-Low Risk — No immediate retention action required.
+🟢 Low Risk — No immediate retention action required.
 </div>
 """,
             unsafe_allow_html=True
@@ -1146,7 +1200,7 @@ Low Risk — No immediate retention action required.
     # ========================================================
 
     st.subheader(
-        "Recommended Action"
+        "💡 Recommended Action"
     )
 
     st.markdown(
@@ -1164,7 +1218,7 @@ Low Risk — No immediate retention action required.
     # ========================================================
 
     st.subheader(
-        "Customer Summary"
+        "📋 Customer Summary"
     )
 
     summary = pd.DataFrame(
@@ -1193,12 +1247,9 @@ Low Risk — No immediate retention action required.
         }
     )
 
-
     summary["Value"] = (
-        summary["Value"]
-        .astype(str)
+        summary["Value"].astype(str)
     )
-
 
     st.dataframe(
         summary,
@@ -1218,11 +1269,13 @@ st.markdown(
 <div class="footer-text">
 Telco Churn Intelligence Platform
 &nbsp; • &nbsp;
-Predictive Analytics
+Python
+&nbsp; • &nbsp;
+Streamlit
 &nbsp; • &nbsp;
 Logistic Regression
 &nbsp; • &nbsp;
-Customer Retention
+Predictive Analytics
 </div>
 """,
     unsafe_allow_html=True
