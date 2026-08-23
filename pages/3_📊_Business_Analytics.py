@@ -22,19 +22,19 @@ st.set_page_config(
 # THEME
 # ============================================================
 
-BG = "#050E19"
-CARD = "#0E1E34"
-CARD_2 = "#142A46"
-BORDER = "#274361"
+BG = "#F7F9FC"
+CARD = "#FFFFFF"
+CARD_2 = "#F1F5F9"
+BORDER = "#D7E2EC"
 
-CYAN = "#43D4E0"
-TEAL = "#58AAB2"
-PURPLE = "#9364E7"
-ORANGE = "#F47A48"
-GREEN = "#43D29C"
+CYAN = "#168CE3"
+TEAL = "#145B8F"
+PURPLE = "#6D28D9"
+ORANGE = "#E0525E"
+GREEN = "#2A9D8F"
 
-TEXT = "#F8FAFC"
-MUTED = "#A8B6C9"
+TEXT = "#16324F"
+MUTED = "#64748B"
 
 # ============================================================
 # CONSISTENT VISUAL FONT SIZES
@@ -64,13 +64,7 @@ html(
     <style>
 
     .stApp {{
-        background:
-            radial-gradient(
-                circle at 10% 0%,
-                #12314E 0%,
-                {BG} 32%,
-                #020810 100%
-            );
+        background: {BG};
         color: {TEXT};
     }}
 
@@ -96,8 +90,8 @@ html(
         background:
             linear-gradient(
                 120deg,
-                #122844,
-                #09182A
+                #FFFFFF,
+                #F5F9FD
             );
 
         border: 1px solid {BORDER};
@@ -129,8 +123,8 @@ html(
         background:
             linear-gradient(
                 135deg,
-                rgba(67,212,224,.24),
-                rgba(147,100,231,.23)
+                rgba(22,140,227,.14),
+                rgba(109,40,217,.10)
             );
 
         margin-right: 11px;
@@ -184,9 +178,10 @@ html(
         background:
             linear-gradient(
                 145deg,
-                #11253F,
-                #09192B
+                #FFFFFF,
+                #F8FBFE
             );
+        box-shadow: 0 5px 14px rgba(15,47,79,.08);
     }}
 
     .kpi-icon {{
@@ -238,9 +233,10 @@ html(
         background:
             linear-gradient(
                 145deg,
-                #102138,
-                #091728
+                #FFFFFF,
+                #F8FBFE
             );
+        box-shadow: 0 4px 12px rgba(15,47,79,.07);
 
         padding: 10px 11px;
     }}
@@ -270,14 +266,14 @@ html(
         background:
             linear-gradient(
                 145deg,
-                #0F2139,
-                #081729
+                #FFFFFF,
+                #F8FBFE
             );
 
         overflow: hidden;
 
         box-shadow:
-            0px 4px 12px rgba(0,0,0,.14);
+            0px 4px 12px rgba(15,47,79,.08);
     }}
 
 
@@ -304,18 +300,14 @@ html(
     ====================================================== */
 
     section[data-testid="stSidebar"] {{
-        background:
-            linear-gradient(
-                180deg,
-                #0D1D31,
-                #06111F
-            );
+        background: #FFFFFF;
 
         border-right: 1px solid {BORDER};
     }}
 
     div[data-baseweb="select"] > div {{
-        background: #0B1727;
+        background: #FFFFFF;
+        color: {TEXT};
         border: 1px solid {BORDER};
         min-height: 34px;
         border-radius: 8px;
@@ -328,6 +320,55 @@ html(
     footer {{
         visibility: hidden;
     }}
+
+
+    /* ======================================================
+       LIGHT THEME CONSISTENCY OVERRIDES
+    ====================================================== */
+
+    html, body, [data-testid="stAppViewContainer"] {
+        background: #F7F9FC !important;
+        color: #16324F !important;
+    }
+
+    section[data-testid="stSidebar"] * {
+        color: #16324F !important;
+    }
+
+    section[data-testid="stSidebar"] div[data-baseweb="select"] > div,
+    div[data-baseweb="select"] > div {
+        background: #FFFFFF !important;
+        color: #16324F !important;
+        border: 1px solid #C9D6E2 !important;
+    }
+
+    div[data-baseweb="select"] span,
+    div[data-baseweb="select"] svg {
+        color: #16324F !important;
+        fill: #64748B !important;
+    }
+
+    div[data-baseweb="popover"],
+    div[data-baseweb="menu"],
+    ul[role="listbox"],
+    li[role="option"] {
+        background: #FFFFFF !important;
+        color: #16324F !important;
+    }
+
+    li[role="option"]:hover {
+        background: #EAF5FD !important;
+        color: #145B8F !important;
+    }
+
+    .hero, .kpi, .recommend,
+    div[data-testid="stPlotlyChart"] {
+        color: #16324F !important;
+    }
+
+    header[data-testid="stHeader"] {
+        background: transparent !important;
+    }
 
     </style>
     """
@@ -582,15 +623,15 @@ html(
 
                 Telco
 
-                <span style="color:#43D4E0;">
+                <span style="color:#168CE3;">
                     Customer
                 </span>
 
-                <span style="color:#F47A48;">
+                <span style="color:#E0525E;">
                     Churn
                 </span>
 
-                <span style="color:#9364E7;">
+                <span style="color:#6D28D9;">
                     Analytics
                 </span>
 
