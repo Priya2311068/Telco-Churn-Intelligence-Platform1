@@ -35,7 +35,7 @@ RED = "#E6535D"
 GREEN = "#1697A6"
 
 TEXT = "#102A43"
-MUTED = "#627D98"
+MUTED = "#486581"
 
 
 # ============================================================
@@ -45,12 +45,12 @@ MUTED = "#627D98"
 KPI_HEIGHT = 68
 CHART_HEIGHT = 158
 
-CHART_TITLE_SIZE = 14
+CHART_TITLE_SIZE = 14.5
 
 # Consistent readable labels across ALL bar charts
 DATA_LABEL_SIZE = 13
-CATEGORY_LABEL_SIZE = 11.2
-AXIS_TITLE_SIZE = 11.5
+CATEGORY_LABEL_SIZE = 11.5
+AXIS_TITLE_SIZE = 12
 
 WATCHLIST_HEIGHT = 220
 ROW_GAP = 5
@@ -147,9 +147,9 @@ html(
     }}
 
     .section-title {{
-        margin-top: 3px;
-        margin-bottom: 3px;
-        font-size: 12px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 12.5px;
         font-weight: 850;
         line-height: 1;
         color: {TEXT};
@@ -197,7 +197,7 @@ html(
     }}
 
     .kpi-value {{
-        font-size: 20px;
+        font-size: 21px;
         font-weight: 850;
         line-height: 1;
         color: {TEXT};
@@ -220,7 +220,7 @@ html(
                 #F7FAFC
             );
         overflow: hidden;
-        box-shadow: 0px 2px 8px rgba(0,0,0,.10);
+        box-shadow: 0 2px 8px rgba(16,42,67,.07);
     }}
 
     .watch-title {{
@@ -261,11 +261,73 @@ html(
         border-right: 1px solid {BORDER};
     }}
 
+    /* Force all sidebar/navigation content to remain readable on light background */
+    section[data-testid="stSidebar"],
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] span,
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3,
+    section[data-testid="stSidebar"] div {{
+        color: #102A43 !important;
+    }}
+
+    section[data-testid="stSidebar"] a {{
+        color: #102A43 !important;
+    }}
+
+    section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"] {{
+        color: #102A43 !important;
+        border-radius: 8px !important;
+    }}
+
+    section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"]:hover {{
+        background: #E4EEF2 !important;
+    }}
+
+    section[data-testid="stSidebar"] [aria-current="page"] {{
+        background: #DCE8ED !important;
+        color: #0B6670 !important;
+        font-weight: 700 !important;
+    }}
+
+    section[data-testid="stSidebar"] [aria-current="page"] * {{
+        color: #0B6670 !important;
+    }}
+
+    section[data-testid="stSidebar"] div[data-baseweb="select"] > div,
+    section[data-testid="stSidebar"] div[data-baseweb="select"] span {{
+        color: #102A43 !important;
+    }}
+
+    section[data-testid="stSidebar"] svg {{
+        fill: #486581 !important;
+    }}
+
     div[data-baseweb="select"] > div {{
-        min-height: 30px !important;
-        background: #FFFFFF;
-        border: 1px solid {BORDER};
-        border-radius: 8px;
+        min-height: 34px !important;
+        background: #FFFFFF !important;
+        color: #102A43 !important;
+        border: 1px solid #C7D6DE !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+    }}
+
+    div[data-baseweb="select"] > div:hover {{
+        border-color: #1697A6 !important;
+    }}
+
+
+    div[data-testid="stDataFrame"] {{
+        border: 1px solid #D3E0E7 !important;
+        border-radius: 10px !important;
+        background: #FFFFFF !important;
+        box-shadow: 0 2px 8px rgba(16,42,67,.06) !important;
+    }}
+
+    div[data-testid="stDataFrame"] > div {{
+        border-radius: 10px !important;
     }}
 
     #MainMenu {{
@@ -823,7 +885,7 @@ def chart_style(
             text=title,
             x=0.5,
             xanchor="center",
-            y=0.96,
+            y=0.97,
             font=dict(
                 size=CHART_TITLE_SIZE,
                 color=TEXT
@@ -873,7 +935,7 @@ def chart_style(
         ),
 
         title_font=dict(
-            color=MUTED,
+            color="#486581",
             size=AXIS_TITLE_SIZE
         )
     )
@@ -888,7 +950,7 @@ def chart_style(
         ),
 
         title_font=dict(
-            color=MUTED,
+            color="#486581",
             size=AXIS_TITLE_SIZE
         )
     )
