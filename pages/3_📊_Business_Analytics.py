@@ -28,13 +28,21 @@ CARD_2 = "#F1F5F9"
 BORDER = "#D7E2EC"
 
 CYAN = "#168CE3"
+
+# Main professional chart color
 TEAL = "#145B8F"
+
+# Accent line color
 PURPLE = "#6D28D9"
+
+# Use red/coral ONLY for churned state
 ORANGE = "#E0525E"
+
 GREEN = "#2A9D8F"
 
 TEXT = "#16324F"
 MUTED = "#64748B"
+
 
 # ============================================================
 # CONSISTENT VISUAL FONT SIZES
@@ -181,6 +189,7 @@ html(
                 #FFFFFF,
                 #F8FBFE
             );
+
         box-shadow: 0 5px 14px rgba(15,47,79,.08);
     }}
 
@@ -236,6 +245,7 @@ html(
                 #FFFFFF,
                 #F8FBFE
             );
+
         box-shadow: 0 4px 12px rgba(15,47,79,.07);
 
         padding: 10px 11px;
@@ -302,7 +312,6 @@ html(
     section[data-testid="stSidebar"] {{
         color-scheme: light !important;
         background: #FFFFFF;
-
         border-right: 1px solid {BORDER};
     }}
 
@@ -327,7 +336,9 @@ html(
        LIGHT THEME CONSISTENCY OVERRIDES
     ====================================================== */
 
-    html, body, [data-testid="stAppViewContainer"] {{
+    html,
+    body,
+    [data-testid="stAppViewContainer"] {{
         background: #E9EFF5 !important;
         color: #16324F !important;
     }}
@@ -336,7 +347,8 @@ html(
         color: #16324F !important;
     }}
 
-    section[data-testid="stSidebar"] div[data-baseweb="select"] > div,
+    section[data-testid="stSidebar"]
+    div[data-baseweb="select"] > div,
     div[data-baseweb="select"] > div {{
         background: #FFFFFF !important;
         color: #16324F !important;
@@ -362,7 +374,9 @@ html(
         color: #145B8F !important;
     }}
 
-    .hero, .kpi, .recommend,
+    .hero,
+    .kpi,
+    .recommend,
     div[data-testid="stPlotlyChart"] {{
         color: #16324F !important;
     }}
@@ -395,7 +409,8 @@ html(
         -webkit-text-fill-color: #16324F !important;
     }}
 
-    section[data-testid="stSidebar"] [data-testid="stSelectbox"]
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div {{
         color-scheme: light !important;
         background: #FFFFFF !important;
@@ -406,20 +421,27 @@ html(
         box-shadow: 0 2px 6px rgba(15,47,79,.04) !important;
     }}
 
-    section[data-testid="stSidebar"] [data-testid="stSelectbox"]
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div * {{
         background: transparent !important;
         color: #16324F !important;
         -webkit-text-fill-color: #16324F !important;
     }}
 
-    section[data-testid="stSidebar"] [data-testid="stSelectbox"] svg {{
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"] svg {{
         color: #64748B !important;
         fill: #64748B !important;
     }}
 
-    section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"],
-    section[data-testid="stSidebar"] [data-testid="stSelectbox"] [aria-haspopup="listbox"] {{
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
+    [role="combobox"],
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
+    [aria-haspopup="listbox"] {{
         color-scheme: light !important;
         background: #FFFFFF !important;
         background-color: #FFFFFF !important;
@@ -427,19 +449,26 @@ html(
         -webkit-text-fill-color: #16324F !important;
     }}
 
-    section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"] *,
-    section[data-testid="stSidebar"] [data-testid="stSelectbox"] [aria-haspopup="listbox"] * {{
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
+    [role="combobox"] *,
+
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
+    [aria-haspopup="listbox"] * {{
         background: transparent !important;
         color: #16324F !important;
         -webkit-text-fill-color: #16324F !important;
     }}
 
-    section[data-testid="stSidebar"] [data-testid="stSelectbox"]
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div:hover {{
         border-color: #94B4CE !important;
     }}
 
-    section[data-testid="stSidebar"] [data-testid="stSelectbox"]
+    section[data-testid="stSidebar"]
+    [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div:focus-within {{
         border-color: #168CE3 !important;
         box-shadow: 0 0 0 1px #168CE3 !important;
@@ -548,45 +577,54 @@ churn_col = find_column([
     "Customer Status"
 ])
 
+
 tenure_col = find_column([
     "Tenure",
     "tenure",
     "Tenure Months"
 ])
 
+
 monthly_col = find_column([
     "MonthlyCharges",
     "Monthly Charges"
 ])
+
 
 total_col = find_column([
     "TotalCharges",
     "Total Charges"
 ])
 
+
 contract_col = find_column([
     "Contract"
 ])
+
 
 internet_col = find_column([
     "InternetService",
     "Internet Service"
 ])
 
+
 payment_col = find_column([
     "PaymentMethod",
     "Payment Method"
 ])
+
 
 gender_col = find_column([
     "Gender",
     "gender"
 ])
 
+
 security_col = find_column([
     "OnlineSecurity",
     "Online Security"
 ])
+
 
 reason_col = find_column([
     "Churn Reason",
@@ -693,17 +731,20 @@ filtered_df = add_filter(
     "📡 Internet Service"
 )
 
+
 filtered_df = add_filter(
     filtered_df,
     contract_col,
     "📄 Contract"
 )
 
+
 filtered_df = add_filter(
     filtered_df,
     payment_col,
     "💳 Payment Method"
 )
+
 
 filtered_df = add_filter(
     filtered_df,
@@ -865,6 +906,7 @@ k1, k2, k3, k4, k5, k6 = st.columns(
 
 
 with k1:
+
     kpi(
         "👥",
         f"{total_customers:,}",
@@ -873,6 +915,7 @@ with k1:
 
 
 with k2:
+
     kpi(
         "🚪",
         f"{churned_customers:,}",
@@ -881,6 +924,7 @@ with k2:
 
 
 with k3:
+
     kpi(
         "📉",
         f"{churn_rate:.2f}%",
@@ -889,6 +933,7 @@ with k3:
 
 
 with k4:
+
     kpi(
         "💸",
         f"{monthly_loss / 1000:.2f}K",
@@ -897,6 +942,7 @@ with k4:
 
 
 with k5:
+
     kpi(
         "💰",
         f"{total_loss / 1_000_000:.2f}M",
@@ -905,6 +951,7 @@ with k5:
 
 
 with k6:
+
     kpi(
         "⏳",
         f"{avg_tenure:.2f}",
@@ -943,7 +990,6 @@ def style_chart(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
 
-        # SAME VISUAL PADDING
         margin=dict(
             l=42,
             r=32,
@@ -967,7 +1013,6 @@ def style_chart(
             font_size=12
         ),
 
-        # Helps prevent Plotly shrinking trace text
         uniformtext=dict(
             minsize=DATA_LABEL_SIZE,
             mode="show"
@@ -1087,7 +1132,7 @@ with internet_box:
 
             width=0.38,
 
-            marker_color=ORANGE,
+            marker_color=TEAL,
 
             text=[
                 f"{v:.1f}%"
@@ -1126,6 +1171,7 @@ with internet_box:
 
 
         fig.update_xaxes(
+
             tickfont=dict(
                 size=CATEGORY_LABEL_SIZE,
                 color=TEXT
@@ -1297,7 +1343,7 @@ with tenure_box:
 
                 fill="tozeroy",
 
-                fillcolor="rgba(147,100,231,.10)",
+                fillcolor="rgba(109,40,217,.10)",
 
                 hovertemplate=(
                     "<b>"
@@ -1311,7 +1357,6 @@ with tenure_box:
         )
 
 
-        # Peak value uses SAME LABEL SIZE
         fig.add_trace(
 
             go.Scatter(
@@ -1469,7 +1514,7 @@ with contract_box:
 
             width=0.38,
 
-            marker_color=ORANGE,
+            marker_color=TEAL,
 
             text=[
                 f"{v:.1f}%"
@@ -1617,7 +1662,6 @@ with cohort_box:
         fig = go.Figure()
 
 
-        # Bars do NOT use trace text
         fig.add_bar(
 
             x=cohort_data[
@@ -1630,7 +1674,7 @@ with cohort_box:
 
             width=0.38,
 
-            marker_color=ORANGE,
+            marker_color=TEAL,
 
             hovertemplate=(
                 "<b>%{x} months</b>"
@@ -1641,7 +1685,6 @@ with cohort_box:
         )
 
 
-        # Fixed annotations with SAME DATA LABEL SIZE
         for _, row in cohort_data.iterrows():
 
             fig.add_annotation(
@@ -1810,7 +1853,7 @@ with reasons_box:
 
             width=0.38,
 
-            marker_color=ORANGE,
+            marker_color=TEAL,
 
             hovertemplate=(
                 "<b>%{y}</b>"
@@ -1828,7 +1871,6 @@ with reasons_box:
         )
 
 
-        # Fixed annotations using SAME DATA LABEL SIZE
         for _, row in reason_df.iterrows():
 
             fig.add_annotation(
@@ -1943,7 +1985,7 @@ with security_box:
 
             width=0.38,
 
-            marker_color=ORANGE,
+            marker_color=TEAL,
 
             text=[
                 f"{v:.1f}%"
@@ -2047,6 +2089,8 @@ with charges_box:
         fig = go.Figure()
 
 
+        # Retained = Teal
+        # Churned = Red
         fig.add_bar(
 
             x=charge_data[
@@ -2060,11 +2104,10 @@ with charges_box:
             width=0.38,
 
             marker_color=[
-                TEAL,
-                ORANGE
-            ][:len(
-                charge_data
-            )],
+                TEAL if status == "Retained"
+                else ORANGE
+                for status in charge_data["Status"]
+            ],
 
             text=[
                 f"${v:.2f}"
@@ -2138,8 +2181,6 @@ with charges_box:
 # GAP BEFORE RECOMMENDATIONS
 # ============================================================
 
-# 7px instead of the global 10px gap:
-# moves only the recommendation section upward by 3px.
 html(
     '<div style="height:7px;"></div>'
 )
