@@ -1,11 +1,22 @@
-# 📊 Telco Churn Intelligence Platform
+# 📊 Telco Customer Churn Intelligence Platform
 
-An end-to-end **Customer Churn Analytics & Retention Intelligence Platform** built using **Python, Machine Learning, Streamlit, Power BI, Pandas, and Plotly**.
+An end-to-end customer churn analytics and prediction platform built using Power BI, Python, Machine Learning, and Streamlit.
 
-The application combines business analytics with machine learning to help telecom businesses understand customer churn, identify high-risk customers, analyze revenue exposure, and support targeted customer-retention decisions.
+## 🚀 Live Application
 
----
+👉 **[Open Live Streamlit Application](https://telco-churn-intelligence-priya.streamlit.app/)**
 
+## 🛠️ Technologies Used
+
+- Power BI
+- Python
+- Pandas
+- Scikit-learn
+- Logistic Regression
+- Streamlit
+- SQL
+- Data Visualization
+- Machine Learning
 ## 🚀 Project Overview
 
 Customer churn is a major challenge for telecom companies because losing existing customers directly impacts recurring revenue and customer lifetime value.
