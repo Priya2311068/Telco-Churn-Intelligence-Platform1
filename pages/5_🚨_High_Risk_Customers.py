@@ -22,20 +22,20 @@ st.set_page_config(
 # COLORS
 # ============================================================
 
-BG = "#050E19"
-CARD = "#0E1E34"
-CARD_2 = "#142A46"
-BORDER = "#274361"
+BG = "#E8F0F5"
+CARD = "#F8FBFD"
+CARD_2 = "#EEF5F7"
+BORDER = "#D3E0E7"
 
-CYAN = "#43D4E0"
-TEAL = "#58AAB2"
-PURPLE = "#9364E7"
-ORANGE = "#F47A48"
-RED = "#FF6464"
-GREEN = "#43D29C"
+CYAN = "#1697A6"
+TEAL = "#1697A6"
+PURPLE = "#1697A6"
+ORANGE = "#1697A6"
+RED = "#E6535D"
+GREEN = "#1697A6"
 
-TEXT = "#F8FAFC"
-MUTED = "#A8B6C9"
+TEXT = "#102A43"
+MUTED = "#627D98"
 
 
 # ============================================================
@@ -45,12 +45,12 @@ MUTED = "#A8B6C9"
 KPI_HEIGHT = 68
 CHART_HEIGHT = 158
 
-CHART_TITLE_SIZE = 12.5
+CHART_TITLE_SIZE = 14
 
 # Consistent readable labels across ALL bar charts
-DATA_LABEL_SIZE = 12.5
-CATEGORY_LABEL_SIZE = 10.2
-AXIS_TITLE_SIZE = 10.5
+DATA_LABEL_SIZE = 13
+CATEGORY_LABEL_SIZE = 11.2
+AXIS_TITLE_SIZE = 11.5
 
 WATCHLIST_HEIGHT = 220
 ROW_GAP = 5
@@ -76,9 +76,9 @@ html(
         background:
             radial-gradient(
                 circle at 10% 0%,
-                #12314E 0%,
+                #F1F6F9 0%,
                 {BG} 32%,
-                #020810 100%
+                #DDE8EE 100%
             );
         color: {TEXT};
     }}
@@ -108,8 +108,8 @@ html(
         background:
             linear-gradient(
                 120deg,
-                #142A46,
-                #081725
+                #FFFFFF,
+                #F4F8FA
             );
         margin-bottom: 3px;
     }}
@@ -127,13 +127,13 @@ html(
         background:
             linear-gradient(
                 135deg,
-                rgba(255,100,100,.22),
-                rgba(244,122,72,.20)
+                rgba(22,151,166,.14),
+                rgba(230,83,93,.12)
             );
     }}
 
     .hero-title {{
-        font-size: 20px;
+        font-size: 21px;
         font-weight: 850;
         line-height: 1;
         color: {TEXT};
@@ -168,8 +168,8 @@ html(
         background:
             linear-gradient(
                 145deg,
-                #11253F,
-                #09192B
+                #FFFFFF,
+                #F6F9FB
             );
     }}
 
@@ -191,8 +191,8 @@ html(
         background:
             linear-gradient(
                 135deg,
-                rgba(255,100,100,.18),
-                rgba(147,100,231,.20)
+                rgba(22,151,166,.13),
+                rgba(22,151,166,.09)
             );
     }}
 
@@ -216,8 +216,8 @@ html(
         background:
             linear-gradient(
                 145deg,
-                #0F2139,
-                #081729
+                #FFFFFF,
+                #F7FAFC
             );
         overflow: hidden;
         box-shadow: 0px 2px 8px rgba(0,0,0,.10);
@@ -235,7 +235,7 @@ html(
         border: 1px solid {BORDER};
         border-radius: 10px;
         overflow: hidden;
-        background: #0B1320;
+        background: #FFFFFF;
     }}
 
     div[data-testid="stVerticalBlock"] {{
@@ -255,15 +255,15 @@ html(
         background:
             linear-gradient(
                 180deg,
-                #0D1D31,
-                #06111F
+                #F8FBFD,
+                #EEF4F7
             );
         border-right: 1px solid {BORDER};
     }}
 
     div[data-baseweb="select"] > div {{
         min-height: 30px !important;
-        background: #0B1727;
+        background: #FFFFFF;
         border: 1px solid {BORDER};
         border-radius: 8px;
     }}
@@ -524,7 +524,7 @@ html(
 
                 High Risk Customer
 
-                <span style="color:#FF6464;">
+                <span style="color:#1697A6;">
                     Retention Center
                 </span>
 
@@ -844,7 +844,7 @@ def chart_style(
 
         font=dict(
             family="Arial",
-            size=10,
+            size=11,
             color=TEXT
         ),
 
@@ -857,9 +857,9 @@ def chart_style(
         ),
 
         hoverlabel=dict(
-            bgcolor=CARD_2,
+            bgcolor="#FFFFFF",
             font_color=TEXT,
-            font_size=10
+            font_size=11
         )
     )
 
@@ -960,7 +960,7 @@ with top_left:
             # Thicker, evenly spaced bars
             width=0.58,
 
-            marker_color=ORANGE,
+            marker_color=TEAL,
 
             # Put labels inside bars so they never overlap outside
             text=[
@@ -1201,7 +1201,7 @@ with bottom_left:
         y=action_summary.index,
         orientation="h",
         width=0.45,
-        marker_color=CYAN,
+        marker_color=TEAL,
         hovertemplate=(
             "<b>%{y}</b>"
             "<br>Customers: %{x}"
@@ -1303,10 +1303,12 @@ with bottom_right:
         .reset_index()
     )
 
+    # Consistent dashboard palette:
+    # teal for normal portfolio categories; red only for genuine high-risk emphasis.
     color_map = {
-        "Low Risk": GREEN,
-        "Medium Risk": PURPLE,
-        "High Risk": ORANGE
+        "Low Risk": TEAL,
+        "Medium Risk": TEAL,
+        "High Risk": RED
     }
 
     colors = [
