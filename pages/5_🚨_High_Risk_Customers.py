@@ -4,7 +4,6 @@ import numpy as np
 import plotly.graph_objects as go
 from pathlib import Path
 from textwrap import dedent
-from html import escape
 
 
 # ============================================================
@@ -12,8 +11,8 @@ from html import escape
 # ============================================================
 
 st.set_page_config(
-    page_title="High Risk Customer Retention Center",
-    page_icon="🚨",
+    page_title="Customer Segment & Revenue Analysis",
+    page_icon="💰",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -23,37 +22,38 @@ st.set_page_config(
 # COLORS
 # ============================================================
 
-BG = "#F7F9FC"
+BG = "#E9EFF5"
 CARD = "#FFFFFF"
 CARD_2 = "#F1F5F9"
 BORDER = "#D7E2EC"
 
-CYAN = "#168CE3"
+CYAN = "#145B8F"
 TEAL = "#145B8F"
-PURPLE = "#6D28D9"
+PURPLE = "#145B8F"
 ORANGE = "#E0525E"
-RED = "#E0525E"
-GREEN = "#2A9D8F"
+GREEN = "#145B8F"
 
 TEXT = "#16324F"
 MUTED = "#64748B"
 
 
 # ============================================================
-# ORIGINAL DASHBOARD SETTINGS
-# KEEP THESE VALUES FOR YOUR EARLIER TEXT / LAYOUT STYLE
+# VISUAL SETTINGS
 # ============================================================
 
-KPI_HEIGHT = 68
-CHART_HEIGHT = 158
+DATA_LABEL_SIZE = 13
+CATEGORY_LABEL_SIZE = 11.5
+AXIS_TITLE_SIZE = 11
+CHART_TITLE_SIZE = 14
 
-CHART_TITLE_SIZE = 12.5
-DATA_LABEL_SIZE = 12.5
-CATEGORY_LABEL_SIZE = 10.2
-AXIS_TITLE_SIZE = 10.5
+KPI_HEIGHT = 72
+MINI_HEIGHT = 128
+MAIN_HEIGHT = 158
+MATRIX_HEIGHT = 172
+BOTTOM_HEIGHT = 104
 
-WATCHLIST_HEIGHT = 220
-ROW_GAP = 5
+MINI_BAR_WIDTH = 0.24
+ROW_GAP = 6
 
 
 # ============================================================
@@ -61,9 +61,7 @@ ROW_GAP = 5
 # ============================================================
 
 def html(content):
-    st.html(
-        dedent(content).strip()
-    )
+    st.html(dedent(content).strip())
 
 
 # ============================================================
@@ -74,110 +72,92 @@ html(
     f"""
     <style>
 
-    :root {{
-        color-scheme: light !important;
+    /* ======================================================
+       MAIN APP
+    ====================================================== */
+
+    .stApp {{
+        background: {BG};
+        color: {TEXT};
     }}
 
 
     /* ======================================================
-       MAIN APPLICATION
+       PRESERVE ORIGINAL PAGE LAYOUT
     ====================================================== */
-
-    html,
-    body,
-    [data-testid="stAppViewContainer"],
-    .stApp {{
-        color-scheme: light !important;
-        background: {BG} !important;
-        color: {TEXT} !important;
-    }}
-
 
     .block-container {{
         max-width: 1650px !important;
-
-        padding-top: 0.02rem !important;
-        padding-bottom: 0.02rem !important;
-        padding-left: 0.45rem !important;
-        padding-right: 0.45rem !important;
-    }}
-
-
-    header[data-testid="stHeader"] {{
-        height: 18px !important;
-        min-height: 18px !important;
-
-        background: transparent !important;
-    }}
-
-
-    div[data-testid="stToolbar"] {{
-        background: transparent !important;
-    }}
-
-
-    div[data-testid="stDecoration"] {{
-        display: none !important;
+        padding-top: 0.04rem !important;
+        padding-bottom: 0.03rem !important;
+        padding-left: 0.42rem !important;
+        padding-right: 0.42rem !important;
     }}
 
 
     /* ======================================================
-       HERO
+       STREAMLIT HEADER
+    ====================================================== */
+
+    header[data-testid="stHeader"] {{
+        height: 20px !important;
+        min-height: 20px !important;
+        background: transparent !important;
+    }}
+
+
+    /* ======================================================
+       DASHBOARD HERO
     ====================================================== */
 
     .hero {{
         height: 50px;
-
         box-sizing: border-box;
-
         padding: 5px 12px;
 
         display: flex;
         align-items: center;
 
         border: 1px solid {BORDER};
-
         border-radius: 11px;
 
         background: #FFFFFF;
 
         box-shadow:
-            0 2px 8px
+            0px 2px 8px
             rgba(22,50,79,.06);
 
-        margin-bottom: 3px;
+        margin-bottom: 2px;
     }}
 
 
     .hero-icon {{
-        width: 33px;
-        height: 33px;
-        min-width: 33px;
+        height: 32px;
+        width: 32px;
+        min-width: 32px;
+
+        margin-right: 9px;
 
         display: flex;
         align-items: center;
         justify-content: center;
 
-        margin-right: 10px;
+        border-radius: 8px;
 
-        border-radius: 9px;
-
-        font-size: 18px;
+        font-size: 16px;
 
         background:
             linear-gradient(
                 135deg,
-                rgba(224,82,94,.14),
-                rgba(109,40,217,.10)
+                rgba(20,91,143,.12),
+                rgba(20,91,143,.08)
             );
     }}
 
 
     .hero-title {{
         font-size: 20px;
-
         font-weight: 850;
-
         line-height: 1;
 
         color: {TEXT};
@@ -185,10 +165,9 @@ html(
 
 
     .hero-subtitle {{
-        margin-top: 4px;
+        margin-top: 3px;
 
-        font-size: 7.4px;
-
+        font-size: 7.2px;
         letter-spacing: .65px;
 
         color: {MUTED};
@@ -196,20 +175,18 @@ html(
 
 
     /* ======================================================
-       SECTION TITLES
+       SECTION TITLE
     ====================================================== */
 
     .section-title {{
-        margin-top: 3px;
-        margin-bottom: 3px;
+        color: {TEAL};
 
-        font-size: 12px;
-
-        font-weight: 850;
-
+        font-size: 11.5px;
+        font-weight: 800;
         line-height: 1;
 
-        color: {TEXT};
+        margin-top: 2px;
+        margin-bottom: 2px;
     }}
 
 
@@ -230,13 +207,12 @@ html(
         padding: 7px 11px;
 
         border: 1px solid {BORDER};
-
         border-radius: 10px;
 
         background: #FFFFFF;
 
         box-shadow:
-            0 2px 8px
+            0px 2px 8px
             rgba(22,50,79,.06);
     }}
 
@@ -265,17 +241,15 @@ html(
         background:
             linear-gradient(
                 135deg,
-                rgba(224,82,94,.12),
-                rgba(109,40,217,.10)
+                rgba(20,91,143,.12),
+                rgba(20,91,143,.08)
             );
     }}
 
 
     .kpi-value {{
-        font-size: 20px;
-
+        font-size: 19px;
         font-weight: 850;
-
         line-height: 1;
 
         color: {TEXT};
@@ -283,23 +257,72 @@ html(
 
 
     .kpi-label {{
-        margin-top: 6px;
+        margin-top: 7px;
 
         font-size: 9.4px;
-
-        font-weight: 500;
 
         color: {MUTED};
     }}
 
 
     /* ======================================================
-       PLOTLY CHARTS
+       BOTTOM CARDS
+    ====================================================== */
+
+    .bottom-card {{
+        height: {BOTTOM_HEIGHT}px;
+
+        box-sizing: border-box;
+
+        padding: 9px 13px;
+
+        border: 1px solid {BORDER};
+        border-radius: 10px;
+
+        background: #FFFFFF;
+
+        box-shadow:
+            0px 2px 8px
+            rgba(22,50,79,.06);
+
+        overflow: hidden;
+    }}
+
+
+    .bottom-heading {{
+        margin-bottom: 5px;
+
+        font-size: 11.7px;
+        font-weight: 850;
+    }}
+
+
+    .bottom-text {{
+        font-size: 12px;
+        line-height: 1.20;
+
+        color: {TEXT};
+    }}
+
+
+    .insight-line {{
+        margin-bottom: 3px;
+    }}
+
+
+    .highlight {{
+        color: {TEAL};
+
+        font-weight: 850;
+    }}
+
+
+    /* ======================================================
+       PLOTLY CHART CARDS
     ====================================================== */
 
     div[data-testid="stPlotlyChart"] {{
         border: 1px solid {BORDER};
-
         border-radius: 10px;
 
         background: #FFFFFF;
@@ -307,275 +330,13 @@ html(
         overflow: hidden;
 
         box-shadow:
-            0 2px 8px
+            0px 2px 8px
             rgba(22,50,79,.06);
     }}
 
 
     /* ======================================================
-       WATCHLIST TITLE
-    ====================================================== */
-
-    .watch-title {{
-        margin-top: 3px;
-        margin-bottom: 5px;
-
-        font-size: 12px;
-
-        font-weight: 850;
-
-        color: {TEXT};
-    }}
-
-
-    /* ======================================================
-       LIGHT WATCHLIST
-       ONLY THE TABLE THEME IS CHANGED
-    ====================================================== */
-
-    .watchlist-shell {{
-        width: 100%;
-
-        height: {WATCHLIST_HEIGHT}px;
-
-        overflow-x: auto;
-        overflow-y: auto;
-
-        background: #FFFFFF;
-
-        border: 1px solid {BORDER};
-
-        border-radius: 10px;
-
-        box-shadow:
-            0 2px 8px
-            rgba(22,50,79,.06);
-    }}
-
-
-    .watchlist-table {{
-        width: 100%;
-
-        min-width: 1380px;
-
-        border-collapse: separate;
-        border-spacing: 0;
-
-        background: #FFFFFF;
-
-        color: {TEXT};
-
-        font-family: Arial, sans-serif;
-
-        /*
-        This stays close to the original dataframe
-        text size/readability.
-        */
-        font-size: 11.5px;
-    }}
-
-
-    .watchlist-table thead {{
-        position: sticky;
-
-        top: 0;
-
-        z-index: 20;
-    }}
-
-
-    .watchlist-table th {{
-        background: #F1F5F9;
-
-        color: #4B5F73;
-
-        font-size: 11.2px;
-
-        font-weight: 600;
-
-        text-align: left;
-
-        white-space: nowrap;
-
-        padding: 9px 9px;
-
-        border-bottom:
-            1px solid #D7E2EC;
-
-        border-right:
-            1px solid #E2E8F0;
-    }}
-
-
-    .watchlist-table th:first-child {{
-        padding-left: 11px;
-    }}
-
-
-    .watchlist-table th:last-child {{
-        border-right: none;
-    }}
-
-
-    .watchlist-table td {{
-        background: #FFFFFF;
-
-        color: {TEXT};
-
-        font-size: 11.5px;
-
-        font-weight: 500;
-
-        white-space: nowrap;
-
-        vertical-align: middle;
-
-        padding: 8px 9px;
-
-        border-bottom:
-            1px solid #E8EEF4;
-
-        border-right:
-            1px solid #EEF2F6;
-    }}
-
-
-    .watchlist-table td:first-child {{
-        padding-left: 11px;
-
-        font-weight: 600;
-    }}
-
-
-    .watchlist-table td:last-child {{
-        border-right: none;
-    }}
-
-
-    /* Alternate row — very subtle */
-
-    .watchlist-table tbody tr:nth-child(even) td {{
-        background: #F8FAFC;
-    }}
-
-
-    /* Row hover */
-
-    .watchlist-table tbody tr:hover td {{
-        background: #EEF6FC;
-    }}
-
-
-    /* ======================================================
-       HIGH-RISK TEXT
-    ====================================================== */
-
-    .risk-text {{
-        color: #B42332;
-
-        font-weight: 650;
-    }}
-
-
-    /* ======================================================
-       CHURN PROBABILITY BAR
-    ====================================================== */
-
-    .probability-wrap {{
-        display: flex;
-
-        align-items: center;
-
-        gap: 7px;
-
-        width: 175px;
-    }}
-
-
-    .probability-track {{
-        width: 118px;
-
-        height: 7px;
-
-        border-radius: 999px;
-
-        overflow: hidden;
-
-        background: #E5EAF0;
-    }}
-
-
-    .probability-fill {{
-        height: 100%;
-
-        border-radius: 999px;
-
-        background: #E0525E;
-    }}
-
-
-    .probability-text {{
-        width: 43px;
-
-        color: {TEXT};
-
-        font-size: 11.3px;
-
-        font-weight: 600;
-
-        text-align: right;
-    }}
-
-
-    /* ======================================================
-       MONEY / ACTION CELLS
-    ====================================================== */
-
-    .money-cell {{
-        color: {TEAL};
-
-        font-weight: 600;
-    }}
-
-
-    .action-cell {{
-        color: {TEXT};
-
-        font-weight: 500;
-    }}
-
-
-    /* ======================================================
-       LIGHT TABLE SCROLLBARS
-    ====================================================== */
-
-    .watchlist-shell::-webkit-scrollbar {{
-        width: 8px;
-        height: 8px;
-    }}
-
-
-    .watchlist-shell::-webkit-scrollbar-track {{
-        background: #F1F5F9;
-
-        border-radius: 10px;
-    }}
-
-
-    .watchlist-shell::-webkit-scrollbar-thumb {{
-        background: #B7C6D5;
-
-        border-radius: 10px;
-    }}
-
-
-    .watchlist-shell::-webkit-scrollbar-thumb:hover {{
-        background: #91A7BB;
-    }}
-
-
-    /* ======================================================
-       ORIGINAL PAGE SPACING
+       PRESERVE EXISTING SPACING
     ====================================================== */
 
     div[data-testid="stVerticalBlock"] {{
@@ -584,13 +345,13 @@ html(
 
 
     div[data-testid="stHorizontalBlock"] {{
-        gap: 0.62rem !important;
+        gap: 0.65rem !important;
     }}
 
 
     div[data-testid="column"] {{
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
     }}
 
 
@@ -599,8 +360,6 @@ html(
     ====================================================== */
 
     section[data-testid="stSidebar"] {{
-        color-scheme: light !important;
-
         background: #FFFFFF !important;
 
         border-right:
@@ -619,78 +378,29 @@ html(
     section[data-testid="stSidebar"] p,
     section[data-testid="stSidebar"] label,
     section[data-testid="stSidebar"] span {{
+
         color: {TEXT} !important;
 
         -webkit-text-fill-color:
             {TEXT} !important;
-    }}
-
-
-    section[data-testid="stSidebar"] a {{
-        color: {TEXT} !important;
-    }}
-
-
-    section[data-testid="stSidebar"] a:hover {{
-        background: #F1F5F9 !important;
-
-        border-radius: 8px !important;
     }}
 
 
     /* ======================================================
-       SIDEBAR SELECTBOX
+       FILTER SELECTBOXES
     ====================================================== */
 
     section[data-testid="stSidebar"]
-    [data-testid="stSelectbox"] {{
-        background:
-            transparent !important;
-    }}
-
-
-    section[data-testid="stSidebar"]
-    [data-testid="stSelectbox"]
-    div[data-baseweb="select"],
-
-    section[data-testid="stSidebar"]
-    [data-testid="stSelectbox"]
-    div[data-baseweb="select"] > div,
-
-    section[data-testid="stSidebar"]
-    [data-testid="stSelectbox"]
-    div[data-baseweb="select"] > div > div,
-
-    section[data-testid="stSidebar"]
-    [data-testid="stSelectbox"]
-    div[data-baseweb="select"] > div > div > div,
-
-    section[data-testid="stSidebar"]
-    [data-testid="stSelectbox"]
-    [role="combobox"],
-
-    section[data-testid="stSidebar"]
-    [data-testid="stSelectbox"]
-    [aria-haspopup="listbox"] {{
-        color-scheme: light !important;
-
-        background: #FFFFFF !important;
-
-        background-color:
-            #FFFFFF !important;
-
-        color: {TEXT} !important;
-
-        -webkit-text-fill-color:
-            {TEXT} !important;
-    }}
-
-
-    section[data-testid="stSidebar"]
-    [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div {{
+
         min-height:
             30px !important;
+
+        background:
+            #FFFFFF !important;
+
+        color:
+            {TEXT} !important;
 
         border:
             1px solid #B8C7D9 !important;
@@ -704,11 +414,13 @@ html(
 
 
     section[data-testid="stSidebar"]
-    [data-testid="stSelectbox"] span,
+    [role="combobox"] {{
 
-    section[data-testid="stSidebar"]
-    [data-testid="stSelectbox"] p {{
-        color: {TEXT} !important;
+        background:
+            #FFFFFF !important;
+
+        color:
+            {TEXT} !important;
 
         -webkit-text-fill-color:
             {TEXT} !important;
@@ -716,24 +428,38 @@ html(
 
 
     section[data-testid="stSidebar"]
-    [data-testid="stSelectbox"] svg {{
-        fill: {MUTED} !important;
+    div[data-baseweb="select"] span {{
 
-        color: {MUTED} !important;
+        color:
+            {TEXT} !important;
+
+        -webkit-text-fill-color:
+            {TEXT} !important;
     }}
 
 
     section[data-testid="stSidebar"]
-    [data-testid="stSelectbox"]
+    div[data-baseweb="select"] svg {{
+
+        fill:
+            {MUTED} !important;
+
+        color:
+            {MUTED} !important;
+    }}
+
+
+    section[data-testid="stSidebar"]
     div[data-baseweb="select"] > div:hover {{
+
         border-color:
             {CYAN} !important;
     }}
 
 
     section[data-testid="stSidebar"]
-    [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div:focus-within {{
+
         border-color:
             {CYAN} !important;
 
@@ -744,22 +470,24 @@ html(
 
 
     /* ======================================================
-       OPEN SELECT DROPDOWN
+       OPEN FILTER DROPDOWN
     ====================================================== */
 
     div[data-baseweb="popover"],
     div[data-baseweb="menu"],
     ul[role="listbox"] {{
-        color-scheme: light !important;
 
-        background: #FFFFFF !important;
+        background:
+            #FFFFFF !important;
 
-        color: {TEXT} !important;
+        color:
+            {TEXT} !important;
     }}
 
 
     li[role="option"],
     li[role="option"] * {{
+
         background:
             #FFFFFF !important;
 
@@ -772,19 +500,28 @@ html(
 
 
     li[role="option"]:hover {{
+
         background:
             #EAF4FB !important;
-    }}
-
-
-    li[role="option"][aria-selected="true"] {{
-        background:
-            #DCEFFD !important;
 
         color:
             {TEAL} !important;
     }}
 
+
+    li[role="option"][aria-selected="true"] {{
+
+        background:
+            #EAF4FB !important;
+
+        color:
+            {TEAL} !important;
+    }}
+
+
+    /* ======================================================
+       HIDE DEFAULT STREAMLIT ELEMENTS
+    ====================================================== */
 
     #MainMenu {{
         visibility: hidden;
@@ -794,6 +531,7 @@ html(
     footer {{
         visibility: hidden;
     }}
+
 
     </style>
     """
@@ -805,27 +543,21 @@ html(
 # ============================================================
 
 @st.cache_data
-def load_risk_data():
+def load_data():
 
-    possible_paths = [
-
-        Path(
-            "telco_customer_churn_risk.csv"
-        ),
-
+    paths = [
+        Path("telco_customer_churn.csv"),
         Path(
             "Telco_Churn_Project/"
-            "telco_customer_churn_risk.csv"
+            "telco_customer_churn.csv"
         ),
-
         Path(
             "data/"
-            "telco_customer_churn_risk.csv"
-        )
+            "telco_customer_churn.csv"
+        ),
     ]
 
-
-    for path in possible_paths:
+    for path in paths:
 
         if path.exists():
 
@@ -833,17 +565,17 @@ def load_risk_data():
                 path
             )
 
-
     return None
 
 
-df = load_risk_data()
+df = load_data()
 
 
 if df is None:
 
     st.error(
-        "Could not find telco_customer_churn_risk.csv"
+        "Could not find "
+        "telco_customer_churn.csv"
     )
 
     st.stop()
@@ -865,8 +597,7 @@ def find_column(names):
 
         col.lower()
         .replace("_", "")
-        .replace(" ", "")
-        .replace("%", ""):
+        .replace(" ", ""):
         col
 
         for col in df.columns
@@ -879,7 +610,6 @@ def find_column(names):
             name.lower()
             .replace("_", "")
             .replace(" ", "")
-            .replace("%", "")
         )
 
 
@@ -891,32 +621,44 @@ def find_column(names):
     return None
 
 
-# ============================================================
-# COLUMN DETECTION
-# ============================================================
-
-customer_col = find_column(
+churn_col = find_column(
     [
-        "CustomerID",
-        "Customer ID"
+        "Churn",
+        "Churn Label",
+        "Churn Value",
+        "Customer Status"
     ]
 )
 
 
-risk_col = find_column(
+monthly_col = find_column(
     [
-        "Risk Level",
-        "RiskLevel"
+        "MonthlyCharges",
+        "Monthly Charges"
     ]
 )
 
 
-probability_col = find_column(
+total_col = find_column(
     [
-        "Churn Probability",
-        "Churn Probability %",
-        "Probability",
-        "ChurnProbability"
+        "TotalCharges",
+        "Total Charges"
+    ]
+)
+
+
+cltv_col = find_column(
+    [
+        "CLTV",
+        "Customer Lifetime Value"
+    ]
+)
+
+
+payment_col = find_column(
+    [
+        "PaymentMethod",
+        "Payment Method"
     ]
 )
 
@@ -930,65 +672,39 @@ contract_col = find_column(
 
 internet_col = find_column(
     [
-        "Internet Service",
-        "InternetService"
+        "InternetService",
+        "Internet Service"
     ]
 )
 
 
-payment_col = find_column(
+gender_col = find_column(
     [
-        "Payment Method",
-        "PaymentMethod"
-    ]
-)
-
-
-monthly_col = find_column(
-    [
-        "Monthly Charges",
-        "MonthlyCharges"
+        "Gender"
     ]
 )
 
 
 tenure_col = find_column(
     [
-        "Tenure Months",
-        "Tenure"
+        "Tenure",
+        "Tenure Months"
     ]
 )
 
 
-cltv_col = find_column(
+dependents_col = find_column(
     [
-        "CLTV",
-        "Customer Lifetime Value"
+        "Dependents"
     ]
 )
 
 
-revenue_col = find_column(
+senior_col = find_column(
     [
-        "Total Charges",
-        "TotalCharges",
-        "Revenue"
-    ]
-)
-
-
-action_col = find_column(
-    [
-        "Recommended Action",
-        "RecommendedAction"
-    ]
-)
-
-
-online_security_col = find_column(
-    [
-        "Online Security",
-        "OnlineSecurity"
+        "Senior Citizen",
+        "SeniorCitizen",
+        "Senior Citizen Status"
     ]
 )
 
@@ -999,11 +715,10 @@ online_security_col = find_column(
 
 for col in [
 
-    probability_col,
     monthly_col,
-    tenure_col,
+    total_col,
     cltv_col,
-    revenue_col
+    tenure_col
 
 ]:
 
@@ -1016,129 +731,139 @@ for col in [
 
 
 # ============================================================
-# PROBABILITY DISPLAY
+# CHURN FLAG
 # ============================================================
 
-if probability_col:
+def create_churn_flag(data):
 
-    max_probability = (
-        df[
-            probability_col
-        ]
-        .max()
-    )
+    if churn_col is None:
 
-
-    if (
-        pd.notna(max_probability)
-        and max_probability <= 1
-    ):
-
-        df[
-            "Probability_Display"
-        ] = (
-            df[
-                probability_col
-            ]
-            * 100
+        return pd.Series(
+            0,
+            index=data.index
         )
 
-    else:
 
-        df[
-            "Probability_Display"
-        ] = (
-            df[
-                probability_col
-            ]
-        )
+    values = (
 
-else:
+        data[churn_col]
 
-    df[
-        "Probability_Display"
-    ] = np.nan
+        .astype(str)
+
+        .str.lower()
+
+        .str.strip()
+    )
 
 
-# ============================================================
-# CREATE RISK LEVEL IF NEEDED
-# ============================================================
-
-if risk_col is None:
-
-    df[
-        "Generated Risk Level"
-    ] = pd.cut(
-
-        df[
-            "Probability_Display"
-        ],
-
-        bins=[
-            -np.inf,
-            40,
-            62,
-            np.inf
-        ],
-
-        labels=[
-            "Low Risk",
-            "Medium Risk",
-            "High Risk"
+    return values.isin(
+        [
+            "yes",
+            "churned",
+            "1",
+            "true"
         ]
-    )
+    ).astype(int)
 
 
-    risk_col = (
-        "Generated Risk Level"
-    )
+df["Churn_Flag"] = (
+    create_churn_flag(df)
+)
 
 
 # ============================================================
-# CREATE ACTION IF NEEDED
+# SIDEBAR FILTERS
 # ============================================================
 
-if action_col is None:
+st.sidebar.markdown(
+    "## 🔎 Filters"
+)
 
-    df[
-        "Generated Action"
-    ] = np.select(
 
-        [
-            df[
-                risk_col
-            ]
-            .astype(str)
-            .str.contains(
-                "High",
-                case=False,
-                na=False
-            ),
+st.sidebar.caption(
+    "Explore customer segments and revenue interactively."
+)
 
-            df[
-                risk_col
-            ]
-            .astype(str)
-            .str.contains(
-                "Medium",
-                case=False,
-                na=False
-            )
-        ],
 
-        [
-            "Immediate retention outreach",
-            "Targeted retention offer"
-        ],
+filtered_df = df.copy()
 
-        default=
-            "Standard engagement"
+
+def add_filter(
+    data,
+    column,
+    label
+):
+
+    if column is None:
+
+        return data
+
+
+    options = (
+
+        data[column]
+
+        .dropna()
+
+        .astype(str)
+
+        .sort_values()
+
+        .unique()
+
+        .tolist()
     )
 
 
-    action_col = (
-        "Generated Action"
+    selected = (
+        st.sidebar.selectbox(
+            label,
+            ["All"] + options
+        )
     )
+
+
+    if selected != "All":
+
+        data = data[
+
+            data[column]
+
+            .astype(str)
+
+            .eq(selected)
+        ]
+
+
+    return data
+
+
+filtered_df = add_filter(
+    filtered_df,
+    internet_col,
+    "📡 Internet Service"
+)
+
+
+filtered_df = add_filter(
+    filtered_df,
+    payment_col,
+    "💳 Payment Method"
+)
+
+
+filtered_df = add_filter(
+    filtered_df,
+    contract_col,
+    "📄 Contract"
+)
+
+
+filtered_df = add_filter(
+    filtered_df,
+    gender_col,
+    "👤 Gender"
+)
 
 
 # ============================================================
@@ -1150,27 +875,27 @@ html(
     <div class="hero">
 
         <div class="hero-icon">
-            🚨
+            💰
         </div>
 
         <div>
 
             <div class="hero-title">
 
-                High Risk Customer
+                Telco Customer
 
-                <span style="color:#E0525E;">
-                    Retention Center
+                <span style="color:#145B8F;">
+                    Segment & Revenue Analysis
                 </span>
 
             </div>
 
             <div class="hero-subtitle">
 
-                CUSTOMER RISK PRIORITIZATION
-                • REVENUE PROTECTION
-                • RETENTION ACTIONS
-                • CUSTOMER-LEVEL DECISION SUPPORT
+                CUSTOMER CHARACTERISTICS
+                • REVENUE BEHAVIOR
+                • VALUE SEGMENTATION
+                • RETENTION OPPORTUNITIES
 
             </div>
 
@@ -1182,166 +907,59 @@ html(
 
 
 # ============================================================
-# SIDEBAR FILTERS
+# KPI VALUES
 # ============================================================
 
-st.sidebar.markdown(
-    "## 🎯 Risk Filters"
-)
+total_revenue = (
 
-
-filtered_df = (
-    df.copy()
-)
-
-
-def sidebar_filter(
-    data,
-    column,
-    label
-):
-
-    if column is None:
-
-        return data
-
-
-    values = (
-        data[
-            column
-        ]
-        .dropna()
-        .astype(str)
-        .sort_values()
-        .unique()
-        .tolist()
-    )
-
-
-    selected = (
-        st.sidebar.selectbox(
-            label,
-            ["All"] + values
-        )
-    )
-
-
-    if selected != "All":
-
-        data = data[
-
-            data[
-                column
-            ]
-            .astype(str)
-            .eq(selected)
-        ]
-
-
-    return data
-
-
-filtered_df = sidebar_filter(
-    filtered_df,
-    risk_col,
-    "🚦 Risk Level"
-)
-
-
-filtered_df = sidebar_filter(
-    filtered_df,
-    contract_col,
-    "📄 Contract"
-)
-
-
-filtered_df = sidebar_filter(
-    filtered_df,
-    internet_col,
-    "📡 Internet Service"
-)
-
-
-filtered_df = sidebar_filter(
-    filtered_df,
-    payment_col,
-    "💳 Payment Method"
-)
-
-
-# ============================================================
-# HIGH RISK DATA
-# ============================================================
-
-high_risk_mask = (
     filtered_df[
-        risk_col
+        total_col
     ]
-    .astype(str)
-    .str.contains(
-        "High",
-        case=False,
-        na=False
-    )
+
+    .fillna(0)
+
+    .sum()
+
+    if total_col
+
+    else 0
 )
 
 
-high_risk_df = (
+avg_total_charges = (
+
     filtered_df[
-        high_risk_mask
+        total_col
     ]
-    .copy()
-)
 
-
-# ============================================================
-# KPI CALCULATIONS
-# ============================================================
-
-high_risk_count = len(
-    high_risk_df
-)
-
-
-avg_probability = (
-    high_risk_df[
-        "Probability_Display"
-    ]
     .mean()
+
+    if total_col
+
+    else 0
 )
 
 
-if revenue_col:
+avg_monthly_charges = (
 
-    revenue_at_risk = (
-        high_risk_df[
-            revenue_col
-        ]
-        .fillna(0)
-        .sum()
-    )
+    filtered_df[
+        monthly_col
+    ]
 
+    .mean()
 
-elif monthly_col:
+    if monthly_col
 
-    revenue_at_risk = (
-        high_risk_df[
-            monthly_col
-        ]
-        .fillna(0)
-        .sum()
-    )
+    else 0
+)
 
 
-else:
+avg_cltv = (
 
-    revenue_at_risk = 0
-
-
-avg_cltv_at_risk = (
-    high_risk_df[
+    filtered_df[
         cltv_col
     ]
+
     .mean()
 
     if cltv_col
@@ -1386,127 +1004,19 @@ def kpi(
 
 
 # ============================================================
-# KPI ROW
+# STANDARD CHART STYLE
 # ============================================================
 
-html(
-    '<div class="section-title">'
-    '🚨 High Risk Portfolio'
-    '</div>'
-)
-
-
-k1, k2, k3, k4 = (
-    st.columns(
-        4,
-        gap="medium"
-    )
-)
-
-
-with k1:
-
-    kpi(
-        "👥",
-        f"{high_risk_count:,}",
-        "High Risk Customers"
-    )
-
-
-with k2:
-
-    probability_text = (
-
-        f"{avg_probability:.1f}%"
-
-        if pd.notna(
-            avg_probability
-        )
-
-        else "N/A"
-    )
-
-
-    kpi(
-        "🎯",
-        probability_text,
-        "Avg Churn Probability"
-    )
-
-
-with k3:
-
-    if (
-        revenue_at_risk
-        >= 1_000_000
-    ):
-
-        revenue_text = (
-            f"{revenue_at_risk / 1_000_000:.2f}M"
-        )
-
-
-    elif (
-        revenue_at_risk
-        >= 1000
-    ):
-
-        revenue_text = (
-            f"{revenue_at_risk / 1000:.1f}K"
-        )
-
-
-    else:
-
-        revenue_text = (
-            f"{revenue_at_risk:.0f}"
-        )
-
-
-    kpi(
-        "💸",
-        revenue_text,
-        "Revenue at Risk"
-    )
-
-
-with k4:
-
-    if (
-        pd.notna(
-            avg_cltv_at_risk
-        )
-        and avg_cltv_at_risk > 0
-    ):
-
-        cltv_text = (
-            f"{avg_cltv_at_risk / 1000:.2f}K"
-        )
-
-    else:
-
-        cltv_text = "N/A"
-
-
-    kpi(
-        "💎",
-        cltv_text,
-        "Avg CLTV at Risk"
-    )
-
-
-# ============================================================
-# CHART STYLE
-# ============================================================
-
-def chart_style(
+def style_chart(
     fig,
     title,
-    height=CHART_HEIGHT,
-    left=50,
-    right=35,
-    top=39,
-    bottom=23
+    height,
+    show_x=True,
+    show_y=True,
+    left=40,
+    right=28,
+    top=38,
+    bottom=15
 ):
 
     fig.update_layout(
@@ -1519,11 +1029,9 @@ def chart_style(
 
             xanchor="center",
 
-            y=0.96,
-
             font=dict(
                 size=CHART_TITLE_SIZE,
-                color=TEXT
+                color=TEAL
             )
         ),
 
@@ -1544,21 +1052,18 @@ def chart_style(
 
         font=dict(
             family="Arial",
-            size=10,
+            size=11,
             color=TEXT
         ),
 
         showlegend=False,
 
-        uniformtext=dict(
-            minsize=DATA_LABEL_SIZE,
-            mode="show"
-        ),
+        bargap=0.12,
 
         hoverlabel=dict(
             bgcolor=CARD_2,
             font_color=TEXT,
-            font_size=10
+            font_size=12
         )
     )
 
@@ -1569,14 +1074,12 @@ def chart_style(
 
         zeroline=False,
 
-        tickfont=dict(
-            color=TEXT,
-            size=CATEGORY_LABEL_SIZE
-        ),
+        showticklabels=
+            show_x,
 
-        title_font=dict(
-            color=MUTED,
-            size=AXIS_TITLE_SIZE
+        tickfont=dict(
+            size=CATEGORY_LABEL_SIZE,
+            color=TEXT
         )
     )
 
@@ -1587,14 +1090,12 @@ def chart_style(
 
         zeroline=False,
 
-        tickfont=dict(
-            color=TEXT,
-            size=CATEGORY_LABEL_SIZE
-        ),
+        showticklabels=
+            show_y,
 
-        title_font=dict(
-            color=MUTED,
-            size=AXIS_TITLE_SIZE
+        tickfont=dict(
+            size=CATEGORY_LABEL_SIZE,
+            color=TEXT
         )
     )
 
@@ -1603,7 +1104,62 @@ def chart_style(
 
 
 # ============================================================
-# RISK PRIORITIZATION
+# KPI ROW
+# ============================================================
+
+html(
+    '<div class="section-title">'
+    '💰 Revenue & Customer Value'
+    '</div>'
+)
+
+
+k1, k2, k3, k4 = (
+    st.columns(
+        4,
+        gap="medium"
+    )
+)
+
+
+with k1:
+
+    kpi(
+        "💰",
+        f"{total_revenue / 1_000_000:.2f}M",
+        "Total Revenue"
+    )
+
+
+with k2:
+
+    kpi(
+        "💳",
+        f"{avg_total_charges / 1000:.2f}K",
+        "Average Total Charges"
+    )
+
+
+with k3:
+
+    kpi(
+        "🧾",
+        f"${avg_monthly_charges:.2f}",
+        "Average Monthly Charges"
+    )
+
+
+with k4:
+
+    kpi(
+        "💎",
+        f"{avg_cltv / 1000:.2f}K",
+        "Average CLTV"
+    )
+
+
+# ============================================================
+# ROW 2
 # ============================================================
 
 html(
@@ -1611,52 +1167,49 @@ html(
 )
 
 
-html(
-    '<div class="section-title">'
-    '📊 Risk Prioritization'
-    '</div>'
-)
-
-
-# ============================================================
-# CHART ROW 1
-# ============================================================
-
-top_left, top_right = (
+revenue_box, dependent_box, senior_box = (
     st.columns(
-        [
-            1.3,
-            1
-        ],
+        3,
         gap="medium"
     )
 )
 
 
 # ============================================================
-# HIGHEST CHURN PROBABILITY
+# AVG REVENUE BY CHURN
 # ============================================================
 
-with top_left:
+with revenue_box:
 
-    if (
-        customer_col
-        and not high_risk_df.empty
-    ):
+    if total_col:
 
-        top_risk = (
-            high_risk_df
+        revenue_status = (
 
-            .sort_values(
-                "Probability_Display",
-                ascending=False
-            )
+            filtered_df
 
-            .head(5)
+            .groupby(
+                "Churn_Flag"
+            )[total_col]
 
-            .sort_values(
-                "Probability_Display",
-                ascending=True
+            .mean()
+
+            .reset_index()
+        )
+
+
+        revenue_status[
+            "Status"
+        ] = (
+
+            revenue_status[
+                "Churn_Flag"
+            ]
+
+            .map(
+                {
+                    0: "No",
+                    1: "Yes"
+                }
             )
         )
 
@@ -1666,72 +1219,69 @@ with top_left:
 
         fig.add_bar(
 
-            x=top_risk[
-                "Probability_Display"
+            x=revenue_status[
+                "Status"
             ],
 
-            y=top_risk[
-                customer_col
+            y=revenue_status[
+                total_col
             ],
 
-            orientation="h",
+            width=MINI_BAR_WIDTH,
 
-            width=0.58,
-
-            marker_color=ORANGE,
+            marker_color=[
+                ORANGE if status == "Yes" else TEAL
+                for status in revenue_status["Status"]
+            ],
 
             text=[
-                f"{value:.1f}%"
+                f"{x / 1000:.1f}K"
 
-                for value in
+                for x in
 
-                top_risk[
-                    "Probability_Display"
+                revenue_status[
+                    total_col
                 ]
             ],
 
-            textposition="inside",
-
-            insidetextanchor="end",
+            textposition=
+                "outside",
 
             textfont=dict(
-                size=11.5,
-                color="#FFFFFF",
-                family="Arial"
-            )
+                size=DATA_LABEL_SIZE,
+                color=TEXT
+            ),
+
+            cliponaxis=False
         )
 
 
-        fig = chart_style(
+        fig = style_chart(
 
             fig,
 
-            "🎯 Highest Churn Probability Customers",
+            "💵 Average Revenue by Churn Status",
 
-            left=105,
-            right=22,
-            top=40,
-            bottom=28
+            MINI_HEIGHT,
+
+            show_y=False,
+
+            left=25,
+            right=25,
+            top=45,
+            bottom=8
         )
 
 
-        fig.update_xaxes(
+        fig.update_yaxes(
 
             range=[
                 0,
-                100
-            ],
 
-            title=
-                "Churn Probability (%)",
-
-            tickvals=[
-                0,
-                20,
-                40,
-                60,
-                80,
-                100
+                revenue_status[
+                    total_col
+                ].max()
+                * 1.34
             ]
         )
 
@@ -1750,48 +1300,26 @@ with top_left:
 
 
 # ============================================================
-# REVENUE AT RISK BY CONTRACT
+# DEPENDENTS
 # ============================================================
 
-with top_right:
+with dependent_box:
 
-    value_col = (
-        revenue_col
+    if dependents_col:
 
-        if revenue_col
+        dep_data = (
 
-        else monthly_col
-    )
-
-
-    if (
-        contract_col
-        and value_col
-    ):
-
-        CONTRACT_ORDER = [
-
-            "Month-to-month",
-            "One year",
-            "Two year"
-        ]
-
-
-        contract_risk = (
-            high_risk_df
+            filtered_df
 
             .groupby(
-                contract_col
+                dependents_col
             )[
-                value_col
+                "Churn_Flag"
             ]
 
-            .sum()
+            .mean()
 
-            .reindex(
-                CONTRACT_ORDER,
-                fill_value=0
-            )
+            .mul(100)
 
             .reset_index()
         )
@@ -1802,117 +1330,71 @@ with top_right:
 
         fig.add_bar(
 
-            x=contract_risk[
-                contract_col
+            x=dep_data[
+                dependents_col
             ],
 
-            y=contract_risk[
-                value_col
+            y=dep_data[
+                "Churn_Flag"
             ],
 
-            width=0.38,
+            width=MINI_BAR_WIDTH,
 
-            marker_color=TEAL
-        )
+            marker_color=TEAL,
 
+            text=[
+                f"{x:.2f}%"
 
-        max_contract_value = (
-            contract_risk[
-                value_col
-            ]
-            .max()
-        )
+                for x in
 
-
-        if (
-            max_contract_value
-            <= 0
-        ):
-
-            max_contract_value = 1
-
-
-        for _, row in (
-            contract_risk
-            .iterrows()
-        ):
-
-            value = (
-                row[
-                    value_col
+                dep_data[
+                    "Churn_Flag"
                 ]
-            )
+            ],
+
+            textposition=
+                "outside",
+
+            textfont=dict(
+                size=DATA_LABEL_SIZE,
+                color=TEXT
+            ),
+
+            cliponaxis=False
+        )
 
 
-            label = (
-
-                f"{value / 1000:.1f}K"
-
-                if value >= 1000
-
-                else f"{value:.0f}"
-            )
-
-
-            fig.add_annotation(
-
-                x=row[
-                    contract_col
-                ],
-
-                y=(
-                    value
-
-                    + max_contract_value
-                    * 0.045
-                ),
-
-                text=
-                    f"<b>{label}</b>",
-
-                showarrow=False,
-
-                xanchor="center",
-
-                font=dict(
-                    size=DATA_LABEL_SIZE,
-                    color=TEXT
-                )
-            )
-
-
-        fig = chart_style(
+        fig = style_chart(
 
             fig,
 
-            "💸 Revenue at Risk by Contract",
+            "👨‍👩‍👧 Churn Rate by Dependents",
+
+            MINI_HEIGHT,
+
+            show_y=False,
 
             left=25,
             right=25,
-            top=40,
-            bottom=26
+            top=45,
+            bottom=8
         )
 
 
         fig.update_yaxes(
 
-            showticklabels=False,
-
             range=[
                 0,
 
-                max_contract_value
-                * 1.22
+                max(
+                    40,
+
+                    dep_data[
+                        "Churn_Flag"
+                    ].max()
+                    * 1.32
+                )
             ]
-        )
-
-
-        fig.update_xaxes(
-
-            categoryorder="array",
-
-            categoryarray=
-                CONTRACT_ORDER
         )
 
 
@@ -1930,7 +1412,140 @@ with top_right:
 
 
 # ============================================================
-# CHART ROW 2
+# SENIOR CITIZEN
+# ============================================================
+
+with senior_box:
+
+    if senior_col:
+
+        senior_data = (
+
+            filtered_df
+
+            .groupby(
+                senior_col
+            )[
+                "Churn_Flag"
+            ]
+
+            .mean()
+
+            .mul(100)
+
+            .reset_index()
+        )
+
+
+        senior_data[
+            "Status"
+        ] = (
+
+            senior_data[
+                senior_col
+            ]
+
+            .astype(str)
+
+            .replace(
+                {
+                    "1": "Yes",
+                    "0": "No",
+                    "1.0": "Yes",
+                    "0.0": "No"
+                }
+            )
+        )
+
+
+        fig = go.Figure()
+
+
+        fig.add_bar(
+
+            x=senior_data[
+                "Status"
+            ],
+
+            y=senior_data[
+                "Churn_Flag"
+            ],
+
+            width=MINI_BAR_WIDTH,
+
+            marker_color=TEAL,
+
+            text=[
+                f"{x:.2f}%"
+
+                for x in
+
+                senior_data[
+                    "Churn_Flag"
+                ]
+            ],
+
+            textposition=
+                "outside",
+
+            textfont=dict(
+                size=DATA_LABEL_SIZE,
+                color=TEXT
+            ),
+
+            cliponaxis=False
+        )
+
+
+        fig = style_chart(
+
+            fig,
+
+            "👴 Churn Rate by Senior Citizen",
+
+            MINI_HEIGHT,
+
+            show_y=False,
+
+            left=25,
+            right=25,
+            top=45,
+            bottom=8
+        )
+
+
+        fig.update_yaxes(
+
+            range=[
+                0,
+
+                max(
+                    55,
+
+                    senior_data[
+                        "Churn_Flag"
+                    ].max()
+                    * 1.30
+                )
+            ]
+        )
+
+
+        st.plotly_chart(
+
+            fig,
+
+            width="stretch",
+
+            config={
+                "displayModeBar":
+                    False
+            }
+        )
+
+
+# ============================================================
+# ROW 3
 # ============================================================
 
 html(
@@ -1938,10 +1553,10 @@ html(
 )
 
 
-bottom_left, bottom_right = (
+payment_box, cltv_box = (
     st.columns(
         [
-            1.1,
+            1.55,
             1
         ],
         gap="medium"
@@ -1950,325 +1565,312 @@ bottom_left, bottom_right = (
 
 
 # ============================================================
-# RETENTION ACTIONS
+# PAYMENT METHOD
 # ============================================================
 
-with bottom_left:
+with payment_box:
 
-    action_summary = (
-        filtered_df[
-            action_col
-        ]
+    if payment_col:
 
-        .fillna(
-            "No Action Assigned"
-        )
+        payment_data = (
 
-        .value_counts()
+            filtered_df
 
-        .head(6)
+            .groupby(
+                payment_col
+            )[
+                "Churn_Flag"
+            ]
 
-        .sort_values()
-    )
+            .mean()
 
+            .mul(100)
 
-    fig = go.Figure()
+            .reset_index()
 
-
-    fig.add_bar(
-
-        x=action_summary.values,
-
-        y=action_summary.index,
-
-        orientation="h",
-
-        width=0.45,
-
-        marker_color=CYAN
-    )
-
-
-    max_action = (
-
-        action_summary.max()
-
-        if len(
-            action_summary
-        )
-
-        else 1
-    )
-
-
-    for (
-        action_name,
-        value
-
-    ) in action_summary.items():
-
-        fig.add_annotation(
-
-            x=(
-                value
-
-                + max_action
-                * 0.012
-            ),
-
-            y=action_name,
-
-            text=
-                f"<b>{int(value):,}</b>",
-
-            showarrow=False,
-
-            xanchor="left",
-
-            font=dict(
-                size=DATA_LABEL_SIZE,
-                color=TEXT
+            .sort_values(
+                "Churn_Flag",
+                ascending=True
             )
         )
 
 
-    fig = chart_style(
-
-        fig,
-
-        "🛠 Recommended Retention Actions",
-
-        left=190,
-        right=55,
-        top=40,
-        bottom=12
-    )
+        fig = go.Figure()
 
 
-    fig.update_xaxes(
+        fig.add_bar(
 
-        showticklabels=False,
-
-        range=[
-            0,
-
-            max_action
-            * 1.13
-        ]
-    )
-
-
-    st.plotly_chart(
-
-        fig,
-
-        width="stretch",
-
-        config={
-            "displayModeBar":
-                False
-        }
-    )
-
-
-# ============================================================
-# RISK DISTRIBUTION
-# ============================================================
-
-with bottom_right:
-
-    risk_summary = (
-        filtered_df[
-            risk_col
-        ]
-
-        .astype(str)
-
-        .value_counts()
-
-        .reset_index()
-    )
-
-
-    risk_summary.columns = [
-
-        "Risk",
-        "Customers"
-    ]
-
-
-    RISK_ORDER = [
-
-        "Low Risk",
-        "Medium Risk",
-        "High Risk"
-    ]
-
-
-    risk_summary = (
-        risk_summary
-
-        .set_index(
-            "Risk"
-        )
-
-        .reindex(
-            RISK_ORDER,
-            fill_value=0
-        )
-
-        .reset_index()
-    )
-
-
-    color_map = {
-
-        "Low Risk":
-            GREEN,
-
-        "Medium Risk":
-            PURPLE,
-
-        "High Risk":
-            ORANGE
-    }
-
-
-    colors = [
-
-        color_map.get(
-            risk,
-            TEAL
-        )
-
-        for risk in
-
-        risk_summary[
-            "Risk"
-        ]
-    ]
-
-
-    fig = go.Figure()
-
-
-    fig.add_bar(
-
-        x=risk_summary[
-            "Risk"
-        ],
-
-        y=risk_summary[
-            "Customers"
-        ],
-
-        width=0.42,
-
-        marker_color=colors
-    )
-
-
-    max_customers = (
-        risk_summary[
-            "Customers"
-        ]
-        .max()
-    )
-
-
-    if (
-        max_customers
-        <= 0
-    ):
-
-        max_customers = 1
-
-
-    for _, row in (
-        risk_summary
-        .iterrows()
-    ):
-
-        fig.add_annotation(
-
-            x=row[
-                "Risk"
+            x=payment_data[
+                "Churn_Flag"
             ],
 
-            y=(
-                row[
-                    "Customers"
-                ]
+            y=payment_data[
+                payment_col
+            ],
 
-                + max_customers
-                * 0.035
-            ),
+            orientation="h",
 
-            text=(
-                f"<b>"
-                f"{int(row['Customers']):,}"
-                f"</b>"
-            ),
+            width=0.38,
 
-            showarrow=False,
+            marker_color=TEAL
+        )
 
-            font=dict(
-                size=DATA_LABEL_SIZE,
-                color=TEXT
+
+        max_payment = (
+
+            payment_data[
+                "Churn_Flag"
+            ]
+
+            .max()
+        )
+
+
+        for _, row in (
+            payment_data.iterrows()
+        ):
+
+            fig.add_annotation(
+
+                x=(
+                    row[
+                        "Churn_Flag"
+                    ]
+
+                    + max_payment
+                    * 0.018
+                ),
+
+                y=row[
+                    payment_col
+                ],
+
+                text=(
+                    f"<b>"
+                    f"{row['Churn_Flag']:.2f}%"
+                    f"</b>"
+                ),
+
+                showarrow=False,
+
+                xanchor="left",
+
+                font=dict(
+                    size=DATA_LABEL_SIZE,
+                    color=TEXT
+                )
+            )
+
+
+        fig = style_chart(
+
+            fig,
+
+            "💳 Churn Rate by Payment Method",
+
+            MAIN_HEIGHT,
+
+            show_x=False,
+
+            left=158,
+            right=45,
+            top=48,
+            bottom=6
+        )
+
+
+        fig.update_xaxes(
+
+            range=[
+                0,
+                max_payment
+                * 1.17
+            ]
+        )
+
+
+        st.plotly_chart(
+
+            fig,
+
+            width="stretch",
+
+            config={
+                "displayModeBar":
+                    False
+            }
+        )
+
+
+# ============================================================
+# CLTV
+# ============================================================
+
+with cltv_box:
+
+    if tenure_col and cltv_col:
+
+        temp = (
+            filtered_df.copy()
+        )
+
+
+        temp[
+            "Tenure Group"
+        ] = pd.cut(
+
+            temp[
+                tenure_col
+            ],
+
+            bins=[
+                -1,
+                12,
+                24,
+                48,
+                np.inf
+            ],
+
+            labels=[
+                "0–12 Months",
+                "13–24 Months",
+                "25–48 Months",
+                "49+ Months"
+            ]
+        )
+
+
+        cltv_data = (
+
+            temp
+
+            .groupby(
+                "Tenure Group",
+                observed=False
+            )[
+                cltv_col
+            ]
+
+            .mean()
+
+            .reset_index()
+
+            .sort_values(
+                cltv_col,
+                ascending=True
             )
         )
 
 
-    fig = chart_style(
-
-        fig,
-
-        "🚦 Customer Risk Distribution",
-
-        left=25,
-        right=25,
-        top=40,
-        bottom=22
-    )
+        fig = go.Figure()
 
 
-    fig.update_yaxes(
+        fig.add_bar(
 
-        showticklabels=False,
+            x=cltv_data[
+                cltv_col
+            ],
 
-        range=[
-            0,
+            y=cltv_data[
+                "Tenure Group"
+            ],
 
-            max_customers
-            * 1.18
-        ]
-    )
+            orientation="h",
 
+            width=0.38,
 
-    fig.update_xaxes(
-
-        categoryorder="array",
-
-        categoryarray=
-            RISK_ORDER
-    )
+            marker_color=TEAL
+        )
 
 
-    st.plotly_chart(
+        max_cltv = (
 
-        fig,
+            cltv_data[
+                cltv_col
+            ]
 
-        width="stretch",
+            .max()
+        )
 
-        config={
-            "displayModeBar":
-                False
-        }
-    )
+
+        for _, row in (
+            cltv_data.iterrows()
+        ):
+
+            fig.add_annotation(
+
+                x=(
+                    row[
+                        cltv_col
+                    ]
+
+                    + max_cltv
+                    * 0.018
+                ),
+
+                y=row[
+                    "Tenure Group"
+                ],
+
+                text=(
+                    f"<b>"
+                    f"{row[cltv_col] / 1000:.2f}K"
+                    f"</b>"
+                ),
+
+                showarrow=False,
+
+                xanchor="left",
+
+                font=dict(
+                    size=DATA_LABEL_SIZE,
+                    color=TEXT
+                )
+            )
+
+
+        fig = style_chart(
+
+            fig,
+
+            "⏳ Average CLTV by Tenure Group",
+
+            MAIN_HEIGHT,
+
+            show_x=False,
+
+            left=108,
+            right=45,
+            top=48,
+            bottom=6
+        )
+
+
+        fig.update_xaxes(
+
+            range=[
+                0,
+                max_cltv
+                * 1.17
+            ]
+        )
+
+
+        st.plotly_chart(
+
+            fig,
+
+            width="stretch",
+
+            config={
+                "displayModeBar":
+                    False
+            }
+        )
 
 
 # ============================================================
-# HIGH RISK CUSTOMER WATCHLIST
+# ROW 4 — FULL WIDTH MATRIX
 # ============================================================
 
 html(
@@ -2276,520 +1878,440 @@ html(
 )
 
 
-html(
-    """
-    <div class="watch-title">
-        📋 High Risk Customer Watchlist
-    </div>
-    """
-)
+if contract_col and payment_col:
+
+    matrix_data = (
+
+        filtered_df
+
+        .groupby(
+            [
+                contract_col,
+                payment_col
+            ]
+        )[
+            "Churn_Flag"
+        ]
+
+        .mean()
+
+        .mul(100)
+
+        .reset_index()
+    )
 
 
-# ============================================================
-# WATCHLIST COLUMNS
-# ============================================================
+    pivot = (
+        matrix_data.pivot(
+            index=contract_col,
+            columns=payment_col,
+            values="Churn_Flag"
+        )
+    )
 
-watch_columns = []
+
+    preferred_contract_order = [
+        "Month-to-month",
+        "One year",
+        "Two year"
+    ]
 
 
-for col in [
+    available = [
 
-    customer_col,
-    risk_col,
-    probability_col,
-    contract_col,
-    internet_col,
-    payment_col,
-    monthly_col,
-    tenure_col,
-    cltv_col,
-    online_security_col,
-    action_col
+        x
 
-]:
+        for x in
+        preferred_contract_order
 
-    if (
-        col is not None
-        and col not in watch_columns
-    ):
+        if x in
+        pivot.index
+    ]
 
-        watch_columns.append(
-            col
+
+    if available:
+
+        pivot = (
+            pivot.loc[
+                available
+            ]
         )
 
 
-watch_df = (
-    high_risk_df[
-        watch_columns
+    matrix_text = [
+
+        [
+
+            (
+                f"{value:.2f}%"
+
+                if pd.notna(value)
+
+                else ""
+            )
+
+            for value in row
+
+        ]
+
+        for row in
+        pivot.values
     ]
-    .copy()
-)
+
+
+    fig = go.Figure(
+
+        go.Heatmap(
+
+            z=pivot.values,
+
+            x=pivot.columns,
+
+            y=pivot.index,
+
+            text=matrix_text,
+
+            texttemplate=
+                "%{text}",
+
+            textfont=dict(
+                size=13,
+                color=TEXT
+            ),
+
+            colorscale=[
+                [
+                    0,
+                    "#EDF7FA"
+                ],
+                [
+                    0.50,
+                    "#7FB5C7"
+                ],
+                [
+                    1,
+                    TEAL
+                ]
+            ],
+
+            showscale=False,
+
+            xgap=2,
+            ygap=2,
+
+            hovertemplate=(
+                "<b>%{y}</b>"
+                "<br>"
+                "%{x}"
+                "<br>"
+                "Churn Rate: %{z:.2f}%"
+                "<extra></extra>"
+            )
+        )
+    )
+
+
+    fig = style_chart(
+
+        fig,
+
+        (
+            "🧩 Churn Rate by Contract "
+            "& Payment Method"
+        ),
+
+        MATRIX_HEIGHT,
+
+        left=105,
+        right=30,
+        top=46,
+        bottom=30
+    )
+
+
+    fig.update_xaxes(
+
+        side="bottom",
+
+        tickfont=dict(
+            size=11.5,
+            color=TEXT
+        ),
+
+        automargin=True
+    )
+
+
+    fig.update_yaxes(
+
+        autorange="reversed",
+
+        tickfont=dict(
+            size=11.5,
+            color=TEXT
+        ),
+
+        automargin=True
+    )
+
+
+    st.plotly_chart(
+
+        fig,
+
+        width="stretch",
+
+        config={
+            "displayModeBar":
+                False
+        }
+    )
 
 
 # ============================================================
-# RENAME WATCHLIST COLUMNS
+# INSIGHT CALCULATIONS
 # ============================================================
 
-rename_map = {}
+highest_payment_name = "N/A"
 
-
-if customer_col:
-
-    rename_map[
-        customer_col
-    ] = "Customer ID"
-
-
-if risk_col:
-
-    rename_map[
-        risk_col
-    ] = "Risk Level"
-
-
-if probability_col:
-
-    rename_map[
-        probability_col
-    ] = "Churn Probability"
-
-
-if contract_col:
-
-    rename_map[
-        contract_col
-    ] = "Contract"
-
-
-if internet_col:
-
-    rename_map[
-        internet_col
-    ] = "Internet Service"
+highest_payment_rate = 0
 
 
 if payment_col:
 
-    rename_map[
-        payment_col
-    ] = "Payment Method"
+    pay_summary = (
 
+        filtered_df
 
-if monthly_col:
-
-    rename_map[
-        monthly_col
-    ] = "Monthly Charges"
-
-
-if tenure_col:
-
-    rename_map[
-        tenure_col
-    ] = "Tenure"
-
-
-if cltv_col:
-
-    rename_map[
-        cltv_col
-    ] = "CLTV"
-
-
-if online_security_col:
-
-    rename_map[
-        online_security_col
-    ] = "Online Security"
-
-
-if action_col:
-
-    rename_map[
-        action_col
-    ] = "Recommended Action"
-
-
-watch_df = (
-    watch_df
-    .rename(
-        columns=rename_map
-    )
-)
-
-
-# ============================================================
-# REPLACE CHURN PROBABILITY WITH CORRECT DISPLAY VALUE
-# ============================================================
-
-if probability_col:
-
-    watch_df[
-        "Churn Probability"
-    ] = (
-        high_risk_df[
-            "Probability_Display"
+        .groupby(
+            payment_col
+        )[
+            "Churn_Flag"
         ]
-        .round(1)
+
+        .mean()
+
+        .mul(100)
     )
 
 
-# ============================================================
-# CLEAN NUMERIC COLUMNS
-# ============================================================
+    if not pay_summary.empty:
 
-if (
-    "Monthly Charges"
-    in watch_df.columns
-):
-
-    watch_df[
-        "Monthly Charges"
-    ] = (
-        pd.to_numeric(
-            watch_df[
-                "Monthly Charges"
-            ],
-            errors="coerce"
-        )
-        .round(2)
-    )
-
-
-if (
-    "CLTV"
-    in watch_df.columns
-):
-
-    watch_df[
-        "CLTV"
-    ] = (
-        pd.to_numeric(
-            watch_df[
-                "CLTV"
-            ],
-            errors="coerce"
-        )
-        .round(0)
-    )
-
-
-if (
-    "Tenure"
-    in watch_df.columns
-):
-
-    watch_df[
-        "Tenure"
-    ] = (
-        pd.to_numeric(
-            watch_df[
-                "Tenure"
-            ],
-            errors="coerce"
-        )
-        .round(0)
-    )
-
-
-# ============================================================
-# SORT WATCHLIST
-# ============================================================
-
-if (
-    "Churn Probability"
-    in watch_df.columns
-):
-
-    watch_df = (
-        watch_df
-
-        .sort_values(
-            "Churn Probability",
-            ascending=False
+        highest_payment_name = (
+            pay_summary.idxmax()
         )
 
-        .reset_index(
-            drop=True
+        highest_payment_rate = (
+            pay_summary.max()
         )
+
+
+best_cltv_group = "N/A"
+
+best_cltv_value = 0
+
+
+if tenure_col and cltv_col:
+
+    insight_temp = (
+        filtered_df.copy()
     )
 
 
-# ============================================================
-# SAFE TEXT HELPER
-# ============================================================
+    insight_temp[
+        "Tenure Group"
+    ] = pd.cut(
 
-def safe_text(value):
+        insight_temp[
+            tenure_col
+        ],
 
-    if pd.isna(value):
+        bins=[
+            -1,
+            12,
+            24,
+            48,
+            np.inf
+        ],
 
-        return ""
-
-    return escape(
-        str(value)
+        labels=[
+            "0–12 Months",
+            "13–24 Months",
+            "25–48 Months",
+            "49+ Months"
+        ]
     )
 
 
-# ============================================================
-# BUILD HTML WATCHLIST
-# ============================================================
+    cltv_summary = (
 
-table_html = """
+        insight_temp
 
-<div class="watchlist-shell">
+        .groupby(
+            "Tenure Group",
+            observed=False
+        )[
+            cltv_col
+        ]
 
-<table class="watchlist-table">
-
-<thead>
-
-<tr>
-
-"""
-
-
-# ============================================================
-# TABLE HEADER
-# ============================================================
-
-for column in watch_df.columns:
-
-    table_html += (
-        f"<th>{escape(str(column))}</th>"
+        .mean()
     )
 
 
-table_html += """
+    if not cltv_summary.empty:
 
-</tr>
+        best_cltv_group = str(
+            cltv_summary.idxmax()
+        )
 
-</thead>
-
-<tbody>
-
-"""
+        best_cltv_value = (
+            cltv_summary.max()
+        )
 
 
 # ============================================================
-# TABLE ROWS
-# ============================================================
-
-for _, row in watch_df.iterrows():
-
-    table_html += "<tr>"
-
-
-    for column in watch_df.columns:
-
-        value = row[column]
-
-
-        # ----------------------------------------------------
-        # RISK LEVEL
-        # ----------------------------------------------------
-
-        if (
-            column
-            == "Risk Level"
-        ):
-
-            table_html += (
-                '<td>'
-                '<span class="risk-text">'
-                f'{safe_text(value)}'
-                '</span>'
-                '</td>'
-            )
-
-
-        # ----------------------------------------------------
-        # CHURN PROBABILITY
-        # ----------------------------------------------------
-
-        elif (
-            column
-            == "Churn Probability"
-        ):
-
-            if pd.isna(value):
-
-                probability = 0.0
-
-            else:
-
-                probability = float(
-                    value
-                )
-
-
-            probability = max(
-                0,
-                min(
-                    probability,
-                    100
-                )
-            )
-
-
-            table_html += f"""
-
-            <td>
-
-                <div class="probability-wrap">
-
-                    <div class="probability-track">
-
-                        <div
-                            class="probability-fill"
-                            style="width:{probability:.1f}%;">
-                        </div>
-
-                    </div>
-
-                    <div class="probability-text">
-
-                        {probability:.1f}%
-
-                    </div>
-
-                </div>
-
-            </td>
-
-            """
-
-
-        # ----------------------------------------------------
-        # MONTHLY CHARGES
-        # ----------------------------------------------------
-
-        elif (
-            column
-            == "Monthly Charges"
-        ):
-
-            if pd.isna(value):
-
-                formatted_value = ""
-
-            else:
-
-                formatted_value = (
-                    f"${float(value):,.2f}"
-                )
-
-
-            table_html += (
-                '<td class="money-cell">'
-                f'{formatted_value}'
-                '</td>'
-            )
-
-
-        # ----------------------------------------------------
-        # CLTV
-        # ----------------------------------------------------
-
-        elif (
-            column
-            == "CLTV"
-        ):
-
-            if pd.isna(value):
-
-                formatted_value = ""
-
-            else:
-
-                formatted_value = (
-                    f"{float(value):,.0f}"
-                )
-
-
-            table_html += (
-                '<td>'
-                f'{formatted_value}'
-                '</td>'
-            )
-
-
-        # ----------------------------------------------------
-        # TENURE
-        # ----------------------------------------------------
-
-        elif (
-            column
-            == "Tenure"
-        ):
-
-            if pd.isna(value):
-
-                formatted_value = ""
-
-            else:
-
-                formatted_value = (
-                    f"{float(value):.0f}"
-                )
-
-
-            table_html += (
-                '<td>'
-                f'{formatted_value}'
-                '</td>'
-            )
-
-
-        # ----------------------------------------------------
-        # RECOMMENDED ACTION
-        # ----------------------------------------------------
-
-        elif (
-            column
-            == "Recommended Action"
-        ):
-
-            table_html += (
-                '<td class="action-cell">'
-                f'{safe_text(value)}'
-                '</td>'
-            )
-
-
-        # ----------------------------------------------------
-        # ALL OTHER COLUMNS
-        # ----------------------------------------------------
-
-        else:
-
-            table_html += (
-                '<td>'
-                f'{safe_text(value)}'
-                '</td>'
-            )
-
-
-    table_html += "</tr>"
-
-
-# ============================================================
-# CLOSE TABLE
-# ============================================================
-
-table_html += """
-
-</tbody>
-
-</table>
-
-</div>
-
-"""
-
-
-# ============================================================
-# DISPLAY WATCHLIST
+# BOTTOM ROW
 # ============================================================
 
 html(
-    table_html
+    '<div class="row-gap"></div>'
 )
+
+
+insight_box, recommendation_box = (
+    st.columns(
+        2,
+        gap="medium"
+    )
+)
+
+
+with insight_box:
+
+    html(
+        f"""
+        <div class="bottom-card">
+
+            <div
+                class="bottom-heading"
+                style="color:{TEAL};"
+            >
+
+                💡 KEY INSIGHTS
+
+            </div>
+
+            <div class="bottom-text">
+
+                <div class="insight-line">
+
+                    <span class="highlight">
+
+                        {highest_payment_rate:.2f}%
+
+                    </span>
+
+                    — <b>{highest_payment_name}</b>
+
+                    has the highest
+                    payment-method churn.
+
+                </div>
+
+
+                <div class="insight-line">
+
+                    <span class="highlight">
+
+                        {best_cltv_value / 1000:.2f}K
+
+                    </span>
+
+                    — <b>{best_cltv_group}</b>
+
+                    generates the highest
+                    average CLTV.
+
+                </div>
+
+
+                <div class="insight-line">
+
+                    Longer-tenure customers
+                    provide stronger lifetime
+                    value and retention
+                    opportunities.
+
+                </div>
+
+            </div>
+
+        </div>
+        """
+    )
+
+
+with recommendation_box:
+
+    html(
+        f"""
+        <div class="bottom-card">
+
+            <div
+                class="bottom-heading"
+                style="color:{TEAL};"
+            >
+
+                🎯 RECOMMENDATIONS
+
+            </div>
+
+            <div class="bottom-text">
+
+                <div class="insight-line">
+
+                    <b style="color:{TEAL};">
+
+                        RETAIN
+
+                    </b>
+
+                    — Target vulnerable
+                    high-value customers.
+
+                </div>
+
+
+                <div class="insight-line">
+
+                    <b style="color:{TEAL};">
+
+                        CONVERT
+
+                    </b>
+
+                    — Move high-risk
+                    month-to-month customers
+                    toward annual contracts.
+
+                </div>
+
+
+                <div class="insight-line">
+
+                    <b style="color:{TEAL};">
+
+                        GROW
+
+                    </b>
+
+                    — Use loyalty and tenure
+                    incentives to increase CLTV.
+
+                </div>
+
+            </div>
+
+        </div>
+        """
+    )
