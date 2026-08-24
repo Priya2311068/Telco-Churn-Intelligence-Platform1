@@ -78,23 +78,23 @@ except Exception as e:
 # COLOR SYSTEM
 # ============================================================
 
-BG = "#F7F9FC"
+BG = "#EDF4F7"
 
 CARD = "#FFFFFF"
 
-BORDER = "#D7E2EC"
+BORDER = "#D5E1E7"
 
-TEXT = "#16324F"
+TEXT = "#0F2942"
 
 MUTED = "#64748B"
 
-BLUE = "#168CE3"
+BLUE = "#1697A6"
 
-NAVY = "#145B8F"
+NAVY = "#147F8B"
 
-PURPLE = "#6D28D9"
+PURPLE = "#1697A6"
 
-CORAL = "#E0525E"
+CORAL = "#E6535F"
 
 GREEN = "#2A9D8F"
 
@@ -226,7 +226,7 @@ section[data-testid="stSidebar"] * {{
 
 h1 {{
 
-    color: #103A5E !important;
+    color: #0F2942 !important;
 
     font-weight: 750 !important;
 
@@ -238,7 +238,7 @@ h1 {{
 h2,
 h3 {{
 
-    color: #103A5E !important;
+    color: #0F2942 !important;
 
     font-weight: 700 !important;
 
@@ -283,11 +283,11 @@ p {{
 
     display: inline-block;
 
-    background: #EAF5FD;
+    background: #E7F5F6;
 
     color: {NAVY};
 
-    border: 1px solid #CDE6FA;
+    border: 1px solid #BFE3E7;
 
     padding: 6px 14px;
 
@@ -459,7 +459,7 @@ div[data-baseweb="input"] {{
 
 [data-testid="stNumberInput"] button:hover {{
 
-    background: #0E4E80 !important;
+    background: #106C76 !important;
 
 }}
 
@@ -694,7 +694,7 @@ li[role="option"] * {{
 
 li[role="option"]:hover {{
 
-    background: #EAF4FB !important;
+    background: #EAF7F8 !important;
 
     color: {NAVY} !important;
 
@@ -706,7 +706,7 @@ li[role="option"]:hover {{
 
 li[role="option"][aria-selected="true"] {{
 
-    background: #DCEFFD !important;
+    background: #D8F0F2 !important;
 
     color: {NAVY} !important;
 
@@ -864,7 +864,7 @@ div.stButton > button {{
 
     box-shadow:
         0 4px 12px
-        rgba(20,91,143,.20);
+        rgba(20,127,139,.20);
 
     transition:
         all .2s ease;
@@ -892,15 +892,15 @@ div.stButton > button * {{
 [data-testid="stButton"] > button:hover,
 div.stButton > button:hover {{
 
-    background: #0E4E80 !important;
+    background: #106C76 !important;
 
-    border-color: #0E4E80 !important;
+    border-color: #106C76 !important;
 
     transform: translateY(-1px);
 
     box-shadow:
         0 6px 16px
-        rgba(20,91,143,.28);
+        rgba(20,127,139,.28);
 
 }}
 
@@ -1027,11 +1027,11 @@ div.stButton > button:hover {{
 
 .recommendation-box {{
 
-    background: #EDF6FD;
+    background: #F2F9FA;
 
-    border: 1px solid #CDE4F5;
+    border: 1px solid #C7E3E6;
 
-    border-left: 5px solid {NAVY};
+    border-left: 5px solid {BLUE};
 
     color: {TEXT};
 
@@ -1102,6 +1102,69 @@ footer {{
     visibility: hidden;
 
 }}
+
+
+/* ==========================================================
+   PROFESSIONAL CUSTOMER SUMMARY TABLE
+========================================================== */
+
+.summary-table-wrap {
+    background: #FFFFFF;
+    border: 1px solid #D5E1E7;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(15,47,79,.07);
+    margin-top: 6px;
+    margin-bottom: 8px;
+}
+
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #FFFFFF;
+    color: #0F2942;
+    font-size: 0.96rem;
+}
+
+.summary-table thead th {
+    background: #E7F5F6;
+    color: #147F8B;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 750;
+    border-bottom: 1px solid #D5E1E7;
+}
+
+.summary-table tbody td {
+    background: #FFFFFF;
+    color: #0F2942;
+    padding: 11px 14px;
+    border-bottom: 1px solid #E6EDF2;
+}
+
+.summary-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.summary-table tbody tr:hover td {
+    background: #F5FAFB;
+}
+
+.summary-table tbody td:first-child {
+    width: 42%;
+    font-weight: 650;
+    color: #334E68;
+}
+
+/* Slightly more polished section headings */
+h2, h3 {
+    letter-spacing: -0.25px;
+}
+
+/* Keep risk red only where it communicates churn/high risk */
+.high-risk-box {
+    box-shadow: 0 3px 10px rgba(230,83,95,.08);
+}
 
 </style>
 """,
@@ -1847,10 +1910,30 @@ if predict_button:
     )
 
 
-    st.dataframe(
-        summary,
-        width="stretch",
-        hide_index=True
+    # Render as HTML instead of st.dataframe so the summary remains
+    # consistently light even when the browser/Streamlit theme is dark.
+    summary_rows = "".join(
+        f"<tr><td>{feature}</td><td>{value}</td></tr>"
+        for feature, value in zip(summary["Feature"], summary["Value"])
+    )
+
+    st.markdown(
+        f"""
+        <div class="summary-table-wrap">
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {summary_rows}
+                </tbody>
+            </table>
+        </div>
+        """,
+        unsafe_allow_html=True
     )
 
 
