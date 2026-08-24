@@ -4,6 +4,7 @@ import numpy as np
 import plotly.graph_objects as go
 from pathlib import Path
 from textwrap import dedent
+import html as html_lib
 
 
 # ============================================================
@@ -22,9 +23,9 @@ st.set_page_config(
 # COLORS
 # ============================================================
 
-BG = "#E8F0F5"
-CARD = "#F8FBFD"
-CARD_2 = "#EEF5F7"
+BG = "#E7EFF4"
+CARD = "#FFFFFF"
+CARD_2 = "#F4F8FA"
 BORDER = "#D3E0E7"
 
 CYAN = "#1697A6"
@@ -337,6 +338,200 @@ html(
     footer {{
         visibility: hidden;
     }}
+
+
+    /* ======================================================
+       FINAL SIDEBAR LIGHT-THEME FIX
+       These selectors target Streamlit/BaseWeb internals that can
+       otherwise inherit the app's dark theme.
+    ====================================================== */
+
+    section[data-testid="stSidebar"] {
+        background: #F8FBFD !important;
+        color: #102A43 !important;
+    }
+
+    section[data-testid="stSidebar"] > div {
+        background: #F8FBFD !important;
+    }
+
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] {
+        color-scheme: light !important;
+    }
+
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"],
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div,
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"],
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] [aria-haspopup="listbox"] {
+        background: #FFFFFF !important;
+        background-color: #FFFFFF !important;
+        color: #102A43 !important;
+        -webkit-text-fill-color: #102A43 !important;
+        border-color: #C7D6DE !important;
+        color-scheme: light !important;
+    }
+
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] *,
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"] *,
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] [aria-haspopup="listbox"] * {
+        color: #102A43 !important;
+        -webkit-text-fill-color: #102A43 !important;
+    }
+
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] svg {
+        color: #486581 !important;
+        fill: #486581 !important;
+    }
+
+    div[data-baseweb="popover"],
+    div[data-baseweb="menu"],
+    ul[role="listbox"] {
+        background: #FFFFFF !important;
+        color: #102A43 !important;
+        color-scheme: light !important;
+    }
+
+    li[role="option"],
+    li[role="option"] * {
+        background: #FFFFFF !important;
+        color: #102A43 !important;
+        -webkit-text-fill-color: #102A43 !important;
+    }
+
+    li[role="option"]:hover,
+    li[role="option"][aria-selected="true"] {
+        background: #E6F1F4 !important;
+        color: #0B6670 !important;
+        -webkit-text-fill-color: #0B6670 !important;
+    }
+
+    /* Navigation readability */
+    section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"],
+    section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"] * {
+        color: #102A43 !important;
+        -webkit-text-fill-color: #102A43 !important;
+    }
+
+    section[data-testid="stSidebar"] [aria-current="page"],
+    section[data-testid="stSidebar"] [aria-current="page"] * {
+        background: #DCECEF !important;
+        color: #0B6670 !important;
+        -webkit-text-fill-color: #0B6670 !important;
+        font-weight: 700 !important;
+    }
+
+    /* ======================================================
+       CUSTOM WATCHLIST TABLE
+    ====================================================== */
+
+    .watchlist-shell {
+        width: 100%;
+        max-height: 270px;
+        overflow: auto;
+        background: #FFFFFF;
+        border: 1px solid #D3E0E7;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(16,42,67,.06);
+    }
+
+    table.watchlist-table {
+        width: 100%;
+        min-width: 1220px;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: #FFFFFF;
+        color: #102A43;
+        font-size: 12px;
+    }
+
+    .watchlist-table thead th {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: #EAF2F5;
+        color: #102A43;
+        text-align: left;
+        font-weight: 800;
+        padding: 10px 10px;
+        border-bottom: 1px solid #CCDCE4;
+        white-space: nowrap;
+    }
+
+    .watchlist-table tbody td {
+        background: #FFFFFF;
+        color: #102A43;
+        padding: 9px 10px;
+        border-bottom: 1px solid #E4ECF1;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .watchlist-table tbody tr:nth-child(even) td {
+        background: #F8FBFC;
+    }
+
+    .watchlist-table tbody tr:hover td {
+        background: #EEF7F8;
+    }
+
+    .risk-badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 4px 8px;
+        font-weight: 800;
+        font-size: 11px;
+    }
+
+    .risk-high {
+        color: #B4232E;
+        background: #FDECEF;
+        border: 1px solid #F5C4C9;
+    }
+
+    .risk-medium {
+        color: #0B6670;
+        background: #E7F4F5;
+        border: 1px solid #C4E3E6;
+    }
+
+    .risk-low {
+        color: #0B6670;
+        background: #E7F4F5;
+        border: 1px solid #C4E3E6;
+    }
+
+    .probability-cell {
+        min-width: 175px;
+    }
+
+    .probability-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .probability-track {
+        flex: 1;
+        min-width: 95px;
+        height: 8px;
+        border-radius: 999px;
+        background: #E6EDF2;
+        overflow: hidden;
+    }
+
+    .probability-fill {
+        height: 100%;
+        border-radius: 999px;
+        background: #E6535D;
+    }
+
+    .probability-value {
+        min-width: 44px;
+        text-align: right;
+        font-weight: 800;
+        color: #102A43;
+    }
 
     </style>
     """
@@ -1065,8 +1260,19 @@ with top_left:
                 0,
                 100
             ],
-            title="Churn Probability (%)",
-            tickvals=[0, 20, 40, 60, 80, 100]
+            title=dict(
+                text="Churn Probability (%)",
+                font=dict(
+                    size=12,
+                    color="#486581"
+                ),
+                standoff=8
+            ),
+            tickvals=[0, 20, 40, 60, 80, 100],
+            tickfont=dict(
+                size=11.2,
+                color=TEXT
+            )
         )
 
         fig.update_yaxes(
@@ -1832,10 +2038,148 @@ if (
 # DISPLAY WATCHLIST
 # ============================================================
 
-st.dataframe(
-    watch_df,
-    width="stretch",
-    height=WATCHLIST_HEIGHT,
-    hide_index=True,
-    column_config=column_config
+def render_watchlist_table(dataframe):
+
+    if dataframe.empty:
+        html(
+            """
+            <div style="
+                background:#FFFFFF;
+                border:1px solid #D3E0E7;
+                border-radius:10px;
+                padding:18px;
+                color:#486581;
+                text-align:center;
+            ">
+                No high-risk customers match the selected filters.
+            </div>
+            """
+        )
+        return
+
+    display_df = dataframe.copy()
+
+    headers = "".join(
+        f"<th>{html_lib.escape(str(col))}</th>"
+        for col in display_df.columns
+    )
+
+    rows = []
+
+    for _, row in display_df.iterrows():
+
+        cells = []
+
+        for col in display_df.columns:
+
+            value = row[col]
+
+            if pd.isna(value):
+                value = ""
+
+            if col == "Risk Level":
+
+                risk_text = str(value)
+                risk_class = (
+                    "risk-high"
+                    if risk_text.lower().startswith("high")
+                    else "risk-medium"
+                    if risk_text.lower().startswith("medium")
+                    else "risk-low"
+                )
+
+                cell_html = (
+                    f'<span class="risk-badge {risk_class}">'
+                    f'{html_lib.escape(risk_text)}'
+                    f'</span>'
+                )
+
+            elif col == "Churn Probability":
+
+                try:
+                    probability = float(value)
+                except Exception:
+                    probability = 0.0
+
+                probability = max(
+                    0.0,
+                    min(
+                        100.0,
+                        probability
+                    )
+                )
+
+                cell_html = f"""
+                    <div class="probability-cell">
+                        <div class="probability-row">
+                            <div class="probability-track">
+                                <div
+                                    class="probability-fill"
+                                    style="width:{probability:.1f}%;">
+                                </div>
+                            </div>
+                            <div class="probability-value">
+                                {probability:.1f}%
+                            </div>
+                        </div>
+                    </div>
+                """
+
+            elif col == "Monthly Charges":
+
+                try:
+                    cell_html = f"${float(value):,.2f}"
+                except Exception:
+                    cell_html = html_lib.escape(str(value))
+
+            elif col == "CLTV":
+
+                try:
+                    cell_html = f"{int(float(value)):,}"
+                except Exception:
+                    cell_html = html_lib.escape(str(value))
+
+            elif col == "Tenure":
+
+                try:
+                    cell_html = f"{int(float(value))}"
+                except Exception:
+                    cell_html = html_lib.escape(str(value))
+
+            else:
+
+                cell_html = html_lib.escape(
+                    str(value)
+                )
+
+            cells.append(
+                f"<td>{cell_html}</td>"
+            )
+
+        rows.append(
+            "<tr>"
+            + "".join(cells)
+            + "</tr>"
+        )
+
+    table_html = f"""
+        <div class="watchlist-shell">
+            <table class="watchlist-table">
+                <thead>
+                    <tr>
+                        {headers}
+                    </tr>
+                </thead>
+                <tbody>
+                    {''.join(rows)}
+                </tbody>
+            </table>
+        </div>
+    """
+
+    html(table_html)
+
+
+render_watchlist_table(
+    watch_df
 )
