@@ -22,7 +22,7 @@ st.set_page_config(
 # THEME
 # ============================================================
 
-BG = "#F7F9FC"
+BG = "#E9EFF5"
 CARD = "#FFFFFF"
 CARD_2 = "#F1F5F9"
 BORDER = "#D7E2EC"
@@ -40,11 +40,11 @@ MUTED = "#64748B"
 # CONSISTENT VISUAL FONT SIZES
 # ============================================================
 
-DATA_LABEL_SIZE = 11.5
-AXIS_LABEL_SIZE = 9.5
-AXIS_TITLE_SIZE = 10
-CHART_TITLE_SIZE = 12.5
-CATEGORY_LABEL_SIZE = 10
+DATA_LABEL_SIZE = 13
+AXIS_LABEL_SIZE = 11
+AXIS_TITLE_SIZE = 11.5
+CHART_TITLE_SIZE = 14
+CATEGORY_LABEL_SIZE = 11.5
 
 
 # ============================================================
@@ -328,7 +328,7 @@ html(
     ====================================================== */
 
     html, body, [data-testid="stAppViewContainer"] {{
-        background: #F7F9FC !important;
+        background: #E9EFF5 !important;
         color: #16324F !important;
     }}
 
@@ -954,7 +954,7 @@ def style_chart(
         font=dict(
             family="Arial",
             color=TEXT,
-            size=9.2
+            size=10.5
         ),
 
         bargap=0.12,
@@ -964,7 +964,7 @@ def style_chart(
         hoverlabel=dict(
             bgcolor=CARD_2,
             font_color=TEXT,
-            font_size=11
+            font_size=12
         ),
 
         # Helps prevent Plotly shrinking trace text
@@ -1087,7 +1087,7 @@ with internet_box:
 
             width=0.38,
 
-            marker_color=CYAN,
+            marker_color=ORANGE,
 
             text=[
                 f"{v:.1f}%"
@@ -1469,7 +1469,7 @@ with contract_box:
 
             width=0.38,
 
-            marker_color=CYAN,
+            marker_color=ORANGE,
 
             text=[
                 f"{v:.1f}%"
@@ -1810,7 +1810,7 @@ with reasons_box:
 
             width=0.38,
 
-            marker_color=CYAN,
+            marker_color=ORANGE,
 
             hovertemplate=(
                 "<b>%{y}</b>"
@@ -1943,7 +1943,7 @@ with security_box:
 
             width=0.38,
 
-            marker_color=PURPLE,
+            marker_color=ORANGE,
 
             text=[
                 f"{v:.1f}%"
