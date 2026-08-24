@@ -27,18 +27,11 @@ CARD = "#FFFFFF"
 CARD_2 = "#F1F5F9"
 BORDER = "#D7E2EC"
 
-CYAN = "#168CE3"
-
-# Main professional chart color
+# Main professional dashboard color
 TEAL = "#145B8F"
 
-# Accent line color
-PURPLE = "#6D28D9"
-
-# Use red/coral ONLY for churned state
-ORANGE = "#E0525E"
-
-GREEN = "#2A9D8F"
+# Red only for churned state
+RED = "#E0525E"
 
 TEXT = "#16324F"
 MUTED = "#64748B"
@@ -128,12 +121,7 @@ html(
 
         font-size: 19px;
 
-        background:
-            linear-gradient(
-                135deg,
-                rgba(22,140,227,.14),
-                rgba(109,40,217,.10)
-            );
+        background: rgba(20,91,143,.12);
 
         margin-right: 11px;
     }}
@@ -158,7 +146,7 @@ html(
     ====================================================== */
 
     .section-title {{
-        color: {TEXT};
+        color: {TEAL};
         font-size: 12.5px;
         font-weight: 800;
         margin-top: 4px;
@@ -205,12 +193,7 @@ html(
 
         font-size: 13px;
 
-        background:
-            linear-gradient(
-                135deg,
-                rgba(67,212,224,.23),
-                rgba(147,100,231,.20)
-            );
+        background: rgba(20,91,143,.11);
     }}
 
     .kpi-value {{
@@ -252,7 +235,7 @@ html(
     }}
 
     .recommend-title {{
-        color: {PURPLE};
+        color: {TEAL};
         font-size: 13.7px;
         font-weight: 850;
     }}
@@ -371,7 +354,7 @@ html(
 
     li[role="option"]:hover {{
         background: #EAF5FD !important;
-        color: #145B8F !important;
+        color: {TEAL} !important;
     }}
 
     .hero,
@@ -387,7 +370,7 @@ html(
 
 
     /* ======================================================
-       SIDEBAR FILTERS — FULL LIGHT THEME
+       SIDEBAR FILTERS
     ====================================================== */
 
     section[data-testid="stSidebar"] {{
@@ -444,7 +427,6 @@ html(
     [aria-haspopup="listbox"] {{
         color-scheme: light !important;
         background: #FFFFFF !important;
-        background-color: #FFFFFF !important;
         color: #16324F !important;
         -webkit-text-fill-color: #16324F !important;
     }}
@@ -470,8 +452,8 @@ html(
     section[data-testid="stSidebar"]
     [data-testid="stSelectbox"]
     div[data-baseweb="select"] > div:focus-within {{
-        border-color: #168CE3 !important;
-        box-shadow: 0 0 0 1px #168CE3 !important;
+        border-color: {TEAL} !important;
+        box-shadow: 0 0 0 1px {TEAL} !important;
     }}
 
     div[data-baseweb="popover"],
@@ -496,14 +478,14 @@ html(
 
     li[role="option"]:hover {{
         background: #EAF5FD !important;
-        color: #145B8F !important;
-        -webkit-text-fill-color: #145B8F !important;
+        color: {TEAL} !important;
+        -webkit-text-fill-color: {TEAL} !important;
     }}
 
     li[role="option"][aria-selected="true"] {{
         background: #DCEFFD !important;
-        color: #145B8F !important;
-        -webkit-text-fill-color: #145B8F !important;
+        color: {TEAL} !important;
+        -webkit-text-fill-color: {TEAL} !important;
     }}
 
     </style>
@@ -758,7 +740,7 @@ filtered_df = add_filter(
 # ============================================================
 
 html(
-    """
+    f"""
     <div class="hero">
 
         <div class="hero-icon">
@@ -771,16 +753,8 @@ html(
 
                 Telco
 
-                <span style="color:#168CE3;">
-                    Customer
-                </span>
-
-                <span style="color:#E0525E;">
-                    Churn
-                </span>
-
-                <span style="color:#6D28D9;">
-                    Analytics
+                <span style="color:{TEAL};">
+                    Customer Churn Analytics
                 </span>
 
             </div>
@@ -981,7 +955,7 @@ def style_chart(
 
             font=dict(
                 size=CHART_TITLE_SIZE,
-                color=TEXT
+                color=TEAL
             )
         ),
 
@@ -1171,7 +1145,6 @@ with internet_box:
 
 
         fig.update_xaxes(
-
             tickfont=dict(
                 size=CATEGORY_LABEL_SIZE,
                 color=TEXT
@@ -1180,14 +1153,11 @@ with internet_box:
 
 
         fig.update_yaxes(
-
             range=[
                 0,
                 max(
                     55,
-                    internet_data[
-                        "rate"
-                    ].max() * 1.22
+                    internet_data["rate"].max() * 1.22
                 )
             ]
         )
@@ -1196,9 +1166,7 @@ with internet_box:
         st.plotly_chart(
             fig,
             width="stretch",
-            config={
-                "displayModeBar": False
-            }
+            config={"displayModeBar": False}
         )
 
 
@@ -1323,13 +1291,13 @@ with tenure_box:
                 mode="lines+markers+text",
 
                 line=dict(
-                    color=PURPLE,
+                    color=TEAL,
                     width=2.2
                 ),
 
                 marker=dict(
                     size=3.6,
-                    color=PURPLE
+                    color=TEAL
                 ),
 
                 text=labels,
@@ -1343,7 +1311,7 @@ with tenure_box:
 
                 fill="tozeroy",
 
-                fillcolor="rgba(109,40,217,.10)",
+                fillcolor="rgba(20,91,143,.10)",
 
                 hovertemplate=(
                     "<b>"
@@ -1369,7 +1337,7 @@ with tenure_box:
 
                 marker=dict(
                     size=7,
-                    color=PURPLE
+                    color=TEAL
                 ),
 
                 text=[
@@ -1457,9 +1425,7 @@ with tenure_box:
         st.plotly_chart(
             fig,
             width="stretch",
-            config={
-                "displayModeBar": False
-            }
+            config={"displayModeBar": False}
         )
 
 
@@ -1559,7 +1525,6 @@ with contract_box:
 
 
         fig.update_xaxes(
-
             range=[
                 0,
                 max_contract_rate * 1.24
@@ -1581,9 +1546,7 @@ with contract_box:
         st.plotly_chart(
             fig,
             width="stretch",
-            config={
-                "displayModeBar": False
-            }
+            config={"displayModeBar": False}
         )
 
 
@@ -1736,7 +1699,6 @@ with cohort_box:
 
 
         fig.update_yaxes(
-
             range=[
                 0,
                 max(
@@ -1748,7 +1710,6 @@ with cohort_box:
 
 
         fig.update_xaxes(
-
             tickfont=dict(
                 size=CATEGORY_LABEL_SIZE,
                 color=TEXT
@@ -1759,9 +1720,7 @@ with cohort_box:
         st.plotly_chart(
             fig,
             width="stretch",
-            config={
-                "displayModeBar": False
-            }
+            config={"displayModeBar": False}
         )
 
 
@@ -1916,7 +1875,6 @@ with reasons_box:
 
 
         fig.update_xaxes(
-
             range=[
                 0,
                 max_reason * 1.18
@@ -1938,9 +1896,7 @@ with reasons_box:
         st.plotly_chart(
             fig,
             width="stretch",
-            config={
-                "displayModeBar": False
-            }
+            config={"displayModeBar": False}
         )
 
 
@@ -2024,7 +1980,6 @@ with security_box:
 
 
         fig.update_xaxes(
-
             tickfont=dict(
                 size=CATEGORY_LABEL_SIZE,
                 color=TEXT
@@ -2033,14 +1988,11 @@ with security_box:
 
 
         fig.update_yaxes(
-
             range=[
                 0,
                 max(
                     55,
-                    security_data[
-                        "rate"
-                    ].max() * 1.22
+                    security_data["rate"].max() * 1.22
                 )
             ]
         )
@@ -2049,9 +2001,7 @@ with security_box:
         st.plotly_chart(
             fig,
             width="stretch",
-            config={
-                "displayModeBar": False
-            }
+            config={"displayModeBar": False}
         )
 
 
@@ -2089,8 +2039,6 @@ with charges_box:
         fig = go.Figure()
 
 
-        # Retained = Teal
-        # Churned = Red
         fig.add_bar(
 
             x=charge_data[
@@ -2104,9 +2052,12 @@ with charges_box:
             width=0.38,
 
             marker_color=[
-                TEAL if status == "Retained"
-                else ORANGE
-                for status in charge_data["Status"]
+                TEAL
+                if status == "Retained"
+                else RED
+                for status in charge_data[
+                    "Status"
+                ]
             ],
 
             text=[
@@ -2146,7 +2097,6 @@ with charges_box:
 
 
         fig.update_xaxes(
-
             tickfont=dict(
                 size=CATEGORY_LABEL_SIZE,
                 color=TEXT
@@ -2155,7 +2105,6 @@ with charges_box:
 
 
         fig.update_yaxes(
-
             range=[
                 0,
                 max(
@@ -2171,9 +2120,7 @@ with charges_box:
         st.plotly_chart(
             fig,
             width="stretch",
-            config={
-                "displayModeBar": False
-            }
+            config={"displayModeBar": False}
         )
 
 
