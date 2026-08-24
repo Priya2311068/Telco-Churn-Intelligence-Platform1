@@ -1108,7 +1108,7 @@ footer {{
    PROFESSIONAL CUSTOMER SUMMARY TABLE
 ========================================================== */
 
-.summary-table-wrap {
+.summary-table-wrap {{
     background: #FFFFFF;
     border: 1px solid #D5E1E7;
     border-radius: 10px;
@@ -1116,55 +1116,55 @@ footer {{
     box-shadow: 0 4px 12px rgba(15,47,79,.07);
     margin-top: 6px;
     margin-bottom: 8px;
-}
+}}
 
-.summary-table {
+.summary-table {{
     width: 100%;
     border-collapse: collapse;
     background: #FFFFFF;
     color: #0F2942;
     font-size: 0.96rem;
-}
+}}
 
-.summary-table thead th {
+.summary-table thead th {{
     background: #E7F5F6;
     color: #147F8B;
     text-align: left;
     padding: 12px 14px;
     font-weight: 750;
     border-bottom: 1px solid #D5E1E7;
-}
+}}
 
-.summary-table tbody td {
+.summary-table tbody td {{
     background: #FFFFFF;
     color: #0F2942;
     padding: 11px 14px;
     border-bottom: 1px solid #E6EDF2;
-}
+}}
 
-.summary-table tbody tr:last-child td {
+.summary-table tbody tr:last-child td {{
     border-bottom: none;
-}
+}}
 
-.summary-table tbody tr:hover td {
+.summary-table tbody tr:hover td {{
     background: #F5FAFB;
-}
+}}
 
-.summary-table tbody td:first-child {
+.summary-table tbody td:first-child {{
     width: 42%;
     font-weight: 650;
     color: #334E68;
-}
+}}
 
 /* Slightly more polished section headings */
-h2, h3 {
+h2, h3 {{
     letter-spacing: -0.25px;
-}
+}}
 
 /* Keep risk red only where it communicates churn/high risk */
-.high-risk-box {
+.high-risk-box {{
     box-shadow: 0 3px 10px rgba(230,83,95,.08);
-}
+}}
 
 </style>
 """,
