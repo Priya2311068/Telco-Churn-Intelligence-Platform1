@@ -19,24 +19,20 @@ st.set_page_config(
 
 
 # ============================================================
-# PROFESSIONAL COLOR SYSTEM
+# COLORS
 # ============================================================
 
-# Slightly darker page background
 BG = "#E9EFF5"
-
-# Cards
 CARD = "#FFFFFF"
 CARD_2 = "#F1F5F9"
 BORDER = "#D7E2EC"
 
-# Main dashboard accent
+CYAN = "#145B8F"
 TEAL = "#145B8F"
+PURPLE = "#145B8F"
+ORANGE = "#E0525E"
+GREEN = "#145B8F"
 
-# Red ONLY for churn / negative / high-risk state
-RED = "#E0525E"
-
-# Typography
 TEXT = "#16324F"
 MUTED = "#64748B"
 
@@ -45,20 +41,19 @@ MUTED = "#64748B"
 # VISUAL SETTINGS
 # ============================================================
 
-# Increased for readability
 DATA_LABEL_SIZE = 13
 CATEGORY_LABEL_SIZE = 11.5
 AXIS_TITLE_SIZE = 11
 CHART_TITLE_SIZE = 14
 
-KPI_HEIGHT = 78
-MINI_HEIGHT = 145
-MAIN_HEIGHT = 175
-MATRIX_HEIGHT = 190
-BOTTOM_HEIGHT = 112
+KPI_HEIGHT = 72
+MINI_HEIGHT = 128
+MAIN_HEIGHT = 158
+MATRIX_HEIGHT = 172
+BOTTOM_HEIGHT = 104
 
-MINI_BAR_WIDTH = 0.28
-ROW_GAP = 7
+MINI_BAR_WIDTH = 0.24
+ROW_GAP = 6
 
 
 # ============================================================
@@ -70,7 +65,7 @@ def html(content):
 
 
 # ============================================================
-# GLOBAL CSS
+# CSS
 # ============================================================
 
 html(
@@ -86,24 +81,17 @@ html(
         color: {TEXT};
     }}
 
-    html,
-    body,
-    [data-testid="stAppViewContainer"] {{
-        background: {BG} !important;
-        color: {TEXT} !important;
-    }}
-
 
     /* ======================================================
-       PAGE LAYOUT
+       PRESERVE ORIGINAL PAGE LAYOUT
     ====================================================== */
 
     .block-container {{
         max-width: 1650px !important;
-        padding-top: 0.10rem !important;
-        padding-bottom: 0.10rem !important;
-        padding-left: 0.50rem !important;
-        padding-right: 0.50rem !important;
+        padding-top: 0.04rem !important;
+        padding-bottom: 0.03rem !important;
+        padding-left: 0.42rem !important;
+        padding-right: 0.42rem !important;
     }}
 
 
@@ -112,65 +100,63 @@ html(
     ====================================================== */
 
     header[data-testid="stHeader"] {{
-        height: 22px !important;
-        min-height: 22px !important;
+        height: 20px !important;
+        min-height: 20px !important;
         background: transparent !important;
     }}
 
 
     /* ======================================================
-       HERO
+       DASHBOARD HERO
     ====================================================== */
 
     .hero {{
-        height: 58px;
+        height: 50px;
         box-sizing: border-box;
-
-        padding: 7px 13px;
+        padding: 5px 12px;
 
         display: flex;
         align-items: center;
 
         border: 1px solid {BORDER};
-        border-radius: 12px;
+        border-radius: 11px;
 
-        background:
-            linear-gradient(
-                120deg,
-                #FFFFFF,
-                #F5F9FD
-            );
+        background: #FFFFFF;
 
         box-shadow:
-            0px 4px 12px
-            rgba(15,47,79,.07);
+            0px 2px 8px
+            rgba(22,50,79,.06);
 
-        margin-bottom: 3px;
+        margin-bottom: 2px;
     }}
 
 
     .hero-icon {{
-        height: 36px;
-        width: 36px;
-        min-width: 36px;
+        height: 32px;
+        width: 32px;
+        min-width: 32px;
 
-        margin-right: 10px;
+        margin-right: 9px;
 
         display: flex;
         align-items: center;
         justify-content: center;
 
-        border-radius: 9px;
+        border-radius: 8px;
 
-        font-size: 18px;
+        font-size: 16px;
 
         background:
-            rgba(20,91,143,.12);
+            linear-gradient(
+                135deg,
+                rgba(20,91,143,.12),
+                rgba(20,91,143,.08)
+            );
     }}
 
 
     .hero-title {{
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 850;
         line-height: 1;
 
@@ -179,28 +165,28 @@ html(
 
 
     .hero-subtitle {{
-        margin-top: 4px;
+        margin-top: 3px;
 
-        font-size: 8px;
-        letter-spacing: .75px;
+        font-size: 7.2px;
+        letter-spacing: .65px;
 
         color: {MUTED};
     }}
 
 
     /* ======================================================
-       SECTION TITLES
+       SECTION TITLE
     ====================================================== */
 
     .section-title {{
         color: {TEAL};
 
-        font-size: 12.8px;
-        font-weight: 850;
+        font-size: 11.5px;
+        font-weight: 800;
         line-height: 1;
 
-        margin-top: 4px;
-        margin-bottom: 4px;
+        margin-top: 2px;
+        margin-bottom: 2px;
     }}
 
 
@@ -218,35 +204,31 @@ html(
 
         box-sizing: border-box;
 
-        padding: 8px 11px;
+        padding: 7px 11px;
 
         border: 1px solid {BORDER};
-        border-radius: 11px;
+        border-radius: 10px;
 
-        background:
-            linear-gradient(
-                145deg,
-                #FFFFFF,
-                #F8FBFE
-            );
+        background: #FFFFFF;
 
         box-shadow:
-            0px 4px 12px
-            rgba(15,47,79,.07);
+            0px 2px 8px
+            rgba(22,50,79,.06);
     }}
 
 
     .kpi-top {{
         display: flex;
         align-items: center;
+
         gap: 9px;
     }}
 
 
     .kpi-icon {{
-        width: 26px;
-        height: 26px;
-        min-width: 26px;
+        width: 25px;
+        height: 25px;
+        min-width: 25px;
 
         display: flex;
         align-items: center;
@@ -254,15 +236,19 @@ html(
 
         border-radius: 7px;
 
-        font-size: 14px;
+        font-size: 13px;
 
         background:
-            rgba(20,91,143,.11);
+            linear-gradient(
+                135deg,
+                rgba(20,91,143,.12),
+                rgba(20,91,143,.08)
+            );
     }}
 
 
     .kpi-value {{
-        font-size: 20px;
+        font-size: 19px;
         font-weight: 850;
         line-height: 1;
 
@@ -273,7 +259,7 @@ html(
     .kpi-label {{
         margin-top: 7px;
 
-        font-size: 10px;
+        font-size: 9.4px;
 
         color: {MUTED};
     }}
@@ -288,51 +274,45 @@ html(
 
         box-sizing: border-box;
 
-        padding: 10px 13px;
+        padding: 9px 13px;
 
         border: 1px solid {BORDER};
-        border-radius: 11px;
+        border-radius: 10px;
 
-        background:
-            linear-gradient(
-                145deg,
-                #FFFFFF,
-                #F8FBFE
-            );
+        background: #FFFFFF;
 
         box-shadow:
-            0px 4px 12px
-            rgba(15,47,79,.07);
+            0px 2px 8px
+            rgba(22,50,79,.06);
 
         overflow: hidden;
     }}
 
 
     .bottom-heading {{
-        margin-bottom: 6px;
+        margin-bottom: 5px;
 
-        font-size: 13px;
+        font-size: 11.7px;
         font-weight: 850;
-
-        color: {TEAL};
     }}
 
 
     .bottom-text {{
         font-size: 12px;
-        line-height: 1.30;
+        line-height: 1.20;
 
         color: {TEXT};
     }}
 
 
     .insight-line {{
-        margin-bottom: 4px;
+        margin-bottom: 3px;
     }}
 
 
     .highlight {{
         color: {TEAL};
+
         font-weight: 850;
     }}
 
@@ -343,29 +323,24 @@ html(
 
     div[data-testid="stPlotlyChart"] {{
         border: 1px solid {BORDER};
-        border-radius: 11px;
+        border-radius: 10px;
 
-        background:
-            linear-gradient(
-                145deg,
-                #FFFFFF,
-                #F8FBFE
-            );
+        background: #FFFFFF;
 
         overflow: hidden;
 
         box-shadow:
-            0px 4px 12px
-            rgba(15,47,79,.08);
+            0px 2px 8px
+            rgba(22,50,79,.06);
     }}
 
 
     /* ======================================================
-       SPACING
+       PRESERVE EXISTING SPACING
     ====================================================== */
 
     div[data-testid="stVerticalBlock"] {{
-        gap: 0.08rem !important;
+        gap: 0.03rem !important;
     }}
 
 
@@ -385,7 +360,6 @@ html(
     ====================================================== */
 
     section[data-testid="stSidebar"] {{
-        color-scheme: light !important;
         background: #FFFFFF !important;
 
         border-right:
@@ -419,7 +393,8 @@ html(
     section[data-testid="stSidebar"]
     div[data-baseweb="select"] > div {{
 
-        min-height: 38px !important;
+        min-height:
+            30px !important;
 
         background:
             #FFFFFF !important;
@@ -428,14 +403,13 @@ html(
             {TEXT} !important;
 
         border:
-            1px solid #C9D6E2 !important;
+            1px solid #B8C7D9 !important;
 
         border-radius:
             8px !important;
 
         box-shadow:
-            0 2px 6px
-            rgba(15,47,79,.04) !important;
+            none !important;
     }}
 
 
@@ -479,7 +453,7 @@ html(
     div[data-baseweb="select"] > div:hover {{
 
         border-color:
-            {TEAL} !important;
+            {CYAN} !important;
     }}
 
 
@@ -487,23 +461,21 @@ html(
     div[data-baseweb="select"] > div:focus-within {{
 
         border-color:
-            {TEAL} !important;
+            {CYAN} !important;
 
         box-shadow:
             0 0 0 1px
-            {TEAL} !important;
+            {CYAN} !important;
     }}
 
 
     /* ======================================================
-       DROPDOWN
+       OPEN FILTER DROPDOWN
     ====================================================== */
 
     div[data-baseweb="popover"],
     div[data-baseweb="menu"],
     ul[role="listbox"] {{
-
-        color-scheme: light !important;
 
         background:
             #FFFFFF !important;
@@ -530,7 +502,7 @@ html(
     li[role="option"]:hover {{
 
         background:
-            #EAF5FD !important;
+            #EAF4FB !important;
 
         color:
             {TEAL} !important;
@@ -540,7 +512,7 @@ html(
     li[role="option"][aria-selected="true"] {{
 
         background:
-            #DCEFFD !important;
+            #EAF4FB !important;
 
         color:
             {TEAL} !important;
@@ -548,7 +520,7 @@ html(
 
 
     /* ======================================================
-       HIDE STREAMLIT ELEMENTS
+       HIDE DEFAULT STREAMLIT ELEMENTS
     ====================================================== */
 
     #MainMenu {{
@@ -559,6 +531,7 @@ html(
     footer {{
         visibility: hidden;
     }}
+
 
     </style>
     """
@@ -573,22 +546,16 @@ html(
 def load_data():
 
     paths = [
-
-        Path(
-            "telco_customer_churn.csv"
-        ),
-
+        Path("telco_customer_churn.csv"),
         Path(
             "Telco_Churn_Project/"
             "telco_customer_churn.csv"
         ),
-
         Path(
             "data/"
             "telco_customer_churn.csv"
         ),
     ]
-
 
     for path in paths:
 
@@ -597,7 +564,6 @@ def load_data():
             return pd.read_csv(
                 path
             )
-
 
     return None
 
@@ -905,7 +871,7 @@ filtered_df = add_filter(
 # ============================================================
 
 html(
-    f"""
+    """
     <div class="hero">
 
         <div class="hero-icon">
@@ -918,7 +884,7 @@ html(
 
                 Telco Customer
 
-                <span style="color:{TEAL};">
+                <span style="color:#145B8F;">
                     Segment & Revenue Analysis
                 </span>
 
@@ -1049,8 +1015,8 @@ def style_chart(
     show_y=True,
     left=40,
     right=28,
-    top=43,
-    bottom=25
+    top=38,
+    bottom=15
 ):
 
     fig.update_layout(
@@ -1098,11 +1064,6 @@ def style_chart(
             bgcolor=CARD_2,
             font_color=TEXT,
             font_size=12
-        ),
-
-        uniformtext=dict(
-            minsize=DATA_LABEL_SIZE,
-            mode="show"
         )
     )
 
@@ -1256,18 +1217,6 @@ with revenue_box:
         fig = go.Figure()
 
 
-        # Red ONLY for churned Yes.
-        # Teal for retained No.
-        bar_colors = [
-
-            RED if status == "Yes"
-            else TEAL
-
-            for status in
-            revenue_status["Status"]
-        ]
-
-
         fig.add_bar(
 
             x=revenue_status[
@@ -1280,7 +1229,10 @@ with revenue_box:
 
             width=MINI_BAR_WIDTH,
 
-            marker_color=bar_colors,
+            marker_color=[
+                ORANGE if status == "Yes" else TEAL
+                for status in revenue_status["Status"]
+            ],
 
             text=[
                 f"{x / 1000:.1f}K"
@@ -1300,14 +1252,7 @@ with revenue_box:
                 color=TEXT
             ),
 
-            cliponaxis=False,
-
-            hovertemplate=(
-                "<b>Churn: %{x}</b>"
-                "<br>"
-                "Average Revenue: %{y:,.2f}"
-                "<extra></extra>"
-            )
+            cliponaxis=False
         )
 
 
@@ -1321,10 +1266,10 @@ with revenue_box:
 
             show_y=False,
 
-            left=30,
-            right=30,
-            top=48,
-            bottom=15
+            left=25,
+            right=25,
+            top=45,
+            bottom=8
         )
 
 
@@ -1415,14 +1360,7 @@ with dependent_box:
                 color=TEXT
             ),
 
-            cliponaxis=False,
-
-            hovertemplate=(
-                "<b>Dependents: %{x}</b>"
-                "<br>"
-                "Churn Rate: %{y:.2f}%"
-                "<extra></extra>"
-            )
+            cliponaxis=False
         )
 
 
@@ -1436,10 +1374,10 @@ with dependent_box:
 
             show_y=False,
 
-            left=30,
-            right=30,
-            top=48,
-            bottom=15
+            left=25,
+            right=25,
+            top=45,
+            bottom=8
         )
 
 
@@ -1535,7 +1473,6 @@ with senior_box:
 
             width=MINI_BAR_WIDTH,
 
-            # Changed from purple to teal
             marker_color=TEAL,
 
             text=[
@@ -1556,14 +1493,7 @@ with senior_box:
                 color=TEXT
             ),
 
-            cliponaxis=False,
-
-            hovertemplate=(
-                "<b>Senior Citizen: %{x}</b>"
-                "<br>"
-                "Churn Rate: %{y:.2f}%"
-                "<extra></extra>"
-            )
+            cliponaxis=False
         )
 
 
@@ -1577,10 +1507,10 @@ with senior_box:
 
             show_y=False,
 
-            left=30,
-            right=30,
-            top=48,
-            bottom=15
+            left=25,
+            right=25,
+            top=45,
+            bottom=8
         )
 
 
@@ -1682,14 +1612,7 @@ with payment_box:
 
             width=0.38,
 
-            marker_color=TEAL,
-
-            hovertemplate=(
-                "<b>%{y}</b>"
-                "<br>"
-                "Churn Rate: %{x:.2f}%"
-                "<extra></extra>"
-            )
+            marker_color=TEAL
         )
 
 
@@ -1749,10 +1672,10 @@ with payment_box:
 
             show_x=False,
 
-            left=170,
-            right=55,
-            top=50,
-            bottom=12
+            left=158,
+            right=45,
+            top=48,
+            bottom=6
         )
 
 
@@ -1761,19 +1684,8 @@ with payment_box:
             range=[
                 0,
                 max_payment
-                * 1.19
+                * 1.17
             ]
-        )
-
-
-        fig.update_yaxes(
-
-            tickfont=dict(
-                size=CATEGORY_LABEL_SIZE,
-                color=TEXT
-            ),
-
-            automargin=True
         )
 
 
@@ -1867,15 +1779,7 @@ with cltv_box:
 
             width=0.38,
 
-            # Changed from purple to teal
-            marker_color=TEAL,
-
-            hovertemplate=(
-                "<b>%{y}</b>"
-                "<br>"
-                "Average CLTV: %{x:,.2f}"
-                "<extra></extra>"
-            )
+            marker_color=TEAL
         )
 
 
@@ -1935,10 +1839,10 @@ with cltv_box:
 
             show_x=False,
 
-            left=120,
-            right=55,
-            top=50,
-            bottom=12
+            left=108,
+            right=45,
+            top=48,
+            bottom=6
         )
 
 
@@ -1947,19 +1851,8 @@ with cltv_box:
             range=[
                 0,
                 max_cltv
-                * 1.18
+                * 1.17
             ]
-        )
-
-
-        fig.update_yaxes(
-
-            tickfont=dict(
-                size=CATEGORY_LABEL_SIZE,
-                color=TEXT
-            ),
-
-            automargin=True
         )
 
 
@@ -2066,7 +1959,6 @@ if contract_col and payment_col:
     ]
 
 
-    # Teal-only gradient for professional consistency
     fig = go.Figure(
 
         go.Heatmap(
@@ -2130,10 +2022,10 @@ if contract_col and payment_col:
 
         MATRIX_HEIGHT,
 
-        left=115,
-        right=35,
-        top=50,
-        bottom=38
+        left=105,
+        right=30,
+        top=46,
+        bottom=30
     )
 
 
@@ -2142,7 +2034,7 @@ if contract_col and payment_col:
         side="bottom",
 
         tickfont=dict(
-            size=CATEGORY_LABEL_SIZE,
+            size=11.5,
             color=TEXT
         ),
 
@@ -2155,7 +2047,7 @@ if contract_col and payment_col:
         autorange="reversed",
 
         tickfont=dict(
-            size=CATEGORY_LABEL_SIZE,
+            size=11.5,
             color=TEXT
         ),
 
@@ -2294,17 +2186,16 @@ insight_box, recommendation_box = (
 )
 
 
-# ============================================================
-# KEY INSIGHTS
-# ============================================================
-
 with insight_box:
 
     html(
         f"""
         <div class="bottom-card">
 
-            <div class="bottom-heading">
+            <div
+                class="bottom-heading"
+                style="color:{TEAL};"
+            >
 
                 💡 KEY INSIGHTS
 
@@ -2360,17 +2251,16 @@ with insight_box:
     )
 
 
-# ============================================================
-# RECOMMENDATIONS
-# ============================================================
-
 with recommendation_box:
 
     html(
         f"""
         <div class="bottom-card">
 
-            <div class="bottom-heading">
+            <div
+                class="bottom-heading"
+                style="color:{TEAL};"
+            >
 
                 🎯 RECOMMENDATIONS
 
