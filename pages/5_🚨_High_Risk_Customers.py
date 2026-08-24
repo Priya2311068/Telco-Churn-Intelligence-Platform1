@@ -346,85 +346,85 @@ html(
        otherwise inherit the app's dark theme.
     ====================================================== */
 
-    section[data-testid="stSidebar"] {
+    section[data-testid="stSidebar"] {{
         background: #F8FBFD !important;
         color: #102A43 !important;
-    }
+    }}
 
-    section[data-testid="stSidebar"] > div {
+    section[data-testid="stSidebar"] > div {{
         background: #F8FBFD !important;
-    }
+    }}
 
-    section[data-testid="stSidebar"] [data-testid="stSelectbox"] {
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] {{
         color-scheme: light !important;
-    }
+    }}
 
     section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"],
     section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div,
     section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"],
-    section[data-testid="stSidebar"] [data-testid="stSelectbox"] [aria-haspopup="listbox"] {
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] [aria-haspopup="listbox"] {{
         background: #FFFFFF !important;
         background-color: #FFFFFF !important;
         color: #102A43 !important;
         -webkit-text-fill-color: #102A43 !important;
         border-color: #C7D6DE !important;
         color-scheme: light !important;
-    }
+    }}
 
     section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] *,
     section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"] *,
-    section[data-testid="stSidebar"] [data-testid="stSelectbox"] [aria-haspopup="listbox"] * {
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] [aria-haspopup="listbox"] * {{
         color: #102A43 !important;
         -webkit-text-fill-color: #102A43 !important;
-    }
+    }}
 
-    section[data-testid="stSidebar"] [data-testid="stSelectbox"] svg {
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] svg {{
         color: #486581 !important;
         fill: #486581 !important;
-    }
+    }}
 
     div[data-baseweb="popover"],
     div[data-baseweb="menu"],
-    ul[role="listbox"] {
+    ul[role="listbox"] {{
         background: #FFFFFF !important;
         color: #102A43 !important;
         color-scheme: light !important;
-    }
+    }}
 
     li[role="option"],
-    li[role="option"] * {
+    li[role="option"] * {{
         background: #FFFFFF !important;
         color: #102A43 !important;
         -webkit-text-fill-color: #102A43 !important;
-    }
+    }}
 
     li[role="option"]:hover,
-    li[role="option"][aria-selected="true"] {
+    li[role="option"][aria-selected="true"] {{
         background: #E6F1F4 !important;
         color: #0B6670 !important;
         -webkit-text-fill-color: #0B6670 !important;
-    }
+    }}
 
     /* Navigation readability */
     section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"],
-    section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"] * {
+    section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"] * {{
         color: #102A43 !important;
         -webkit-text-fill-color: #102A43 !important;
-    }
+    }}
 
     section[data-testid="stSidebar"] [aria-current="page"],
-    section[data-testid="stSidebar"] [aria-current="page"] * {
+    section[data-testid="stSidebar"] [aria-current="page"] * {{
         background: #DCECEF !important;
         color: #0B6670 !important;
         -webkit-text-fill-color: #0B6670 !important;
         font-weight: 700 !important;
-    }
+    }}
 
     /* ======================================================
        CUSTOM WATCHLIST TABLE
     ====================================================== */
 
-    .watchlist-shell {
+    .watchlist-shell {{
         width: 100%;
         max-height: 270px;
         overflow: auto;
@@ -432,9 +432,9 @@ html(
         border: 1px solid #D3E0E7;
         border-radius: 10px;
         box-shadow: 0 2px 8px rgba(16,42,67,.06);
-    }
+    }}
 
-    table.watchlist-table {
+    table.watchlist-table {{
         width: 100%;
         min-width: 1220px;
         border-collapse: separate;
@@ -442,9 +442,9 @@ html(
         background: #FFFFFF;
         color: #102A43;
         font-size: 12px;
-    }
+    }}
 
-    .watchlist-table thead th {
+    .watchlist-table thead th {{
         position: sticky;
         top: 0;
         z-index: 2;
@@ -455,83 +455,83 @@ html(
         padding: 10px 10px;
         border-bottom: 1px solid #CCDCE4;
         white-space: nowrap;
-    }
+    }}
 
-    .watchlist-table tbody td {
+    .watchlist-table tbody td {{
         background: #FFFFFF;
         color: #102A43;
         padding: 9px 10px;
         border-bottom: 1px solid #E4ECF1;
         white-space: nowrap;
         vertical-align: middle;
-    }
+    }}
 
-    .watchlist-table tbody tr:nth-child(even) td {
+    .watchlist-table tbody tr:nth-child(even) td {{
         background: #F8FBFC;
-    }
+    }}
 
-    .watchlist-table tbody tr:hover td {
+    .watchlist-table tbody tr:hover td {{
         background: #EEF7F8;
-    }
+    }}
 
-    .risk-badge {
+    .risk-badge {{
         display: inline-flex;
         align-items: center;
         border-radius: 999px;
         padding: 4px 8px;
         font-weight: 800;
         font-size: 11px;
-    }
+    }}
 
-    .risk-high {
+    .risk-high {{
         color: #B4232E;
         background: #FDECEF;
         border: 1px solid #F5C4C9;
-    }
+    }}
 
-    .risk-medium {
+    .risk-medium {{
         color: #0B6670;
         background: #E7F4F5;
         border: 1px solid #C4E3E6;
-    }
+    }}
 
-    .risk-low {
+    .risk-low {{
         color: #0B6670;
         background: #E7F4F5;
         border: 1px solid #C4E3E6;
-    }
+    }}
 
-    .probability-cell {
+    .probability-cell {{
         min-width: 175px;
-    }
+    }}
 
-    .probability-row {
+    .probability-row {{
         display: flex;
         align-items: center;
         gap: 8px;
-    }
+    }}
 
-    .probability-track {
+    .probability-track {{
         flex: 1;
         min-width: 95px;
         height: 8px;
         border-radius: 999px;
         background: #E6EDF2;
         overflow: hidden;
-    }
+    }}
 
-    .probability-fill {
+    .probability-fill {{
         height: 100%;
         border-radius: 999px;
         background: #E6535D;
-    }
+    }}
 
-    .probability-value {
+    .probability-value {{
         min-width: 44px;
         text-align: right;
         font-weight: 800;
         color: #102A43;
-    }
+    }}
 
     </style>
     """
